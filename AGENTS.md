@@ -1,0 +1,320 @@
+# FenUI – Agent Documentation
+
+Technical reference for AI agents modifying this UI library.
+
+## External References
+
+### Development Documentation
+
+- **[ADDON_DEV/AGENTS.md](../../ADDON_DEV/AGENTS.md)** – Library index, automation scripts, dependency chains
+- **[Addon Development Guide](../../ADDON_DEV/Addon_Dev_Guide/)** – Full documentation covering:
+  - Core principles, project structure, TOC best practices
+  - UI engineering, configuration UI, combat lockdown
+  - Performance optimization, API resilience
+  - Debugging, packaging/release workflow
+  - Midnight (12.0) compatibility and secret values
+
+### Blizzard UI Source Code
+
+- **[wow-ui-source-live](../../wow-ui-source-live/)** – Official Blizzard UI addon code
+  - Essential for understanding `NineSliceUtil`, `NineSliceLayouts`, and Atlas textures
+  - Reference for native frame templates and widget implementations
+  - Use when building new widgets or debugging layout issues
+
+### FenUI Documentation
+
+- **[Docs/DESIGN_PRINCIPLES.md](Docs/DESIGN_PRINCIPLES.md)** – Philosophy, guidelines, and patterns
+- **[IMPROVEMENTS.md](IMPROVEMENTS.md)** – Backlog of identified improvements
+- **[README.md](README.md)** – User-facing documentation and API reference
+
+---
+
+## Project Intent
+
+A Blizzard-first UI widget library for World of Warcraft addon development.
+
+- **Progressive enhancement layer** on native WoW UI APIs
+- **Design token system** for consistent theming
+- **Composable components** with familiar patterns (CSS Grid, slots)
+- **Graceful degradation** – addons work without FenUI installed
+
+## Constraints
+
+- Must work on Retail 11.0+
+- **Interface Version**: Currently targeting **120001** (Midnight expansion, due January 20th, 2026)
+- No external dependencies (standalone library)
+- Addons consuming FenUI must remain functional if FenUI is missing
+
+## File Structure
+
+```
+FenUI/
+├── Core/                    # Foundation layer
+│   ├── FenUI.lua           # Global namespace, version, debug, slash commands
+│   ├── Tokens.lua          # Three-tier design token system
+│   ├── BlizzardBridge.lua  # NineSlice layouts, Atlas helpers
+│   └── ThemeManager.lua    # Theme registration and application
+│
+├── Widgets/                 # UI components
+│   ├── Panel.lua           # Main window container with slots
+│   ├── Tabs.lua            # Tab groups with states and badges
+│   ├── Buttons.lua         # Standard, icon, and close buttons
+│   ├── Containers.lua      # Insets, scroll panels
+│   ├── Grid.lua            # CSS Grid-inspired layout
+│   ├── Toolbar.lua         # Horizontal slot-based layout
+│   └── EmptyState.lua      # Centered empty content overlay
+│
+├── Validation/
+│   └── DependencyChecker.lua  # API/layout validation for updates
+│
+├── Settings/
+│   └── ThemePicker.lua     # AceConfig integration, theme UI
+│
+├── Docs/
+│   └── DESIGN_PRINCIPLES.md # Philosophy and guidelines
+│
+├── FenUI.toc               # Addon manifest
+├── README.md               # User documentation
+├── IMPROVEMENTS.md         # Backlog
+└── LICENSE                 # GPL-3.0
+```
+
+## Architecture
+
+### Token System
+
+FenUI uses a three-tier design token hierarchy:
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  COMPONENT (optional per-widget overrides)              │
+├─────────────────────────────────────────────────────────┤
+│  SEMANTIC (purpose-based, theme-overridable)            │
+│  surfacePanel, textHeading, interactiveHover, etc.      │
+├─────────────────────────────────────────────────────────┤
+│  PRIMITIVE (raw values, never change)                   │
+│  gold500, gray900, spacing.md, etc.                     │
+└─────────────────────────────────────────────────────────┘
+```
+
+**Token Resolution:**
+1. Check `currentOverrides` (from active theme)
+2. Fall back to `semantic` tokens
+3. Resolve to `primitive` values
+
+**Key APIs:**
+```lua
+FenUI:GetColor(semanticToken)        -- Returns r, g, b, a
+FenUI:GetColorRGB(semanticToken)     -- Returns r, g, b (no alpha)
+FenUI:GetColorTableRGB(semanticToken)-- Returns {r, g, b}
+FenUI:GetSpacing(semanticToken)      -- Returns pixels
+FenUI:GetLayout(layoutName)          -- Returns layout constant
+FenUI:GetFont(semanticToken)         -- Returns font object name
+```
+
+### Widget Creation Pattern
+
+All widgets follow this structure:
+
+```lua
+-- 1. Define a mixin with methods
+local WidgetMixin = {}
+function WidgetMixin:Init(config) ... end
+function WidgetMixin:SomeMethod() ... end
+
+-- 2. Create factory function
+function FenUI:CreateWidget(parent, config)
+    local widget = CreateFrame("Frame", nil, parent)
+    FenUI.Mixin(widget, WidgetMixin)
+    widget:Init(config)
+    return widget
+end
+
+-- 3. Optionally, create a builder for fluent API
+function FenUI.Widget(parent)
+    return WidgetBuilder:new(parent)
+end
+```
+
+### Dual API Pattern
+
+Every widget supports both APIs:
+
+**Config Object (simple):**
+```lua
+local tabs = FenUI:CreateTabGroup(parent, {
+    tabs = { { key = "main", text = "Main" } },
+    onChange = function(key) end,
+})
+```
+
+**Builder Pattern (fluent):**
+```lua
+local tabs = FenUI.TabGroup(parent)
+    :tab("main", "Main")
+    :onChange(function(key) end)
+    :build()
+```
+
+### Graceful Degradation Pattern
+
+Consuming addons should always check before use:
+
+```lua
+-- Pattern used in Weekly, Strategy, etc.
+if FenUI and FenUI.CreatePanel then
+    frame = FenUI:CreatePanel(parent, config)
+else
+    frame = CreateFrame("Frame", nil, parent, "BackdropTemplate")
+    -- Manual fallback setup...
+end
+```
+
+### Blizzard Bridge
+
+`BlizzardBridge.lua` wraps native Blizzard APIs:
+
+```lua
+-- Layout aliases (simplified names for NineSlice layouts)
+FenUI.Layouts = {
+    Panel = "ButtonFrameTemplateNoPortrait",
+    Inset = "InsetFrameTemplate",
+    -- etc.
+}
+
+-- Apply a layout to any frame
+FenUI:ApplyLayout(frame, "Panel", textureKit)
+```
+
+## SavedVariables
+
+Stored in `FenUIDB`:
+
+```lua
+{
+    globalTheme = "Default",  -- Currently active theme
+    -- Future: user preferences, custom themes
+}
+```
+
+## Slash Commands
+
+- `/fenui` – Show version and status
+- `/fenui validate` – Run dependency checker
+- `/fenui theme <name>` – Switch global theme
+
+## Debugging
+
+- **Debug Mode**: `FenUI.debugMode = true` enables verbose logging
+- **Validation**: `/fenui validate` checks for Blizzard API changes
+- **Globals**: `FenUI` (main namespace), `FenUIDB` (saved variables)
+
+## Consuming Addons
+
+FenUI is used by:
+
+| Addon | Usage |
+|-------|-------|
+| **Weekly** | Journal window, tabs, grid, empty states |
+| **Strategy** | *(Planned)* Strategy panel UI |
+
+When modifying FenUI, test these addons to ensure compatibility.
+
+## Agent Guidelines
+
+1. **Token Everything** – Never hardcode colors or pixel values
+2. **Provide Fallbacks** – Consuming addons must work without FenUI
+3. **Test Integration** – Load Weekly after any widget changes
+4. **Sync ADDON_DEV** – Copy changes to `Interface/ADDON_DEV/FenUI/`
+5. **Follow Patterns** – Use existing widget patterns (Mixin + Factory + Builder)
+
+## Documentation Requirements
+
+**Always update documentation when making changes:**
+
+### README.md
+Update when:
+- Adding new widgets or APIs
+- Changing existing widget behavior
+- Modifying token names or structure
+
+### Docs/DESIGN_PRINCIPLES.md
+Update when:
+- Establishing new patterns or guidelines
+- Learning from integration issues
+- Refining the token system
+
+### IMPROVEMENTS.md
+Update when:
+- Identifying potential improvements during integration
+- Completing items from the backlog
+
+**Format** (Keep a Changelog style):
+```markdown
+## [Version] - YYYY-MM-DD
+### Added
+- New widgets or features
+
+### Changed
+- Changes to existing APIs
+
+### Fixed
+- Bug fixes
+```
+
+## Future Considerations
+
+### Midnight (12.0) Compatibility
+
+Secret values may affect:
+- Font string sizing calculations
+- Dynamic layout measurements
+
+Mitigation: Use `issecretvalue()` checks where numeric comparisons are critical.
+
+### Planned Components
+
+See `IMPROVEMENTS.md` for the backlog, including:
+- Divider/Header component
+- Stat Row component
+- List convenience wrapper for Grid
+- Enhanced badge system
+
+## Performance Notes
+
+### Avoid in Hot Paths
+
+- `FenUI:GetModule()` lookups – cache references
+- Token resolution in `OnUpdate` – cache values at frame level
+- Table creation in event handlers – reuse tables with `wipe()`
+
+### Frame Pooling
+
+Grid and other list components use row pooling:
+```lua
+local row = table.remove(self.rowPool) or CreateNewRow()
+-- ... use row ...
+table.insert(self.rowPool, row)  -- return to pool
+```
+
+## Library Management
+
+FenUI is developed in `ADDON_DEV/FenUI/` and deployed to consuming addons via `update_libs.ps1`.
+
+**Source of Truth:** `Interface/ADDON_DEV/FenUI/`
+
+**Deployment:** FenUI is embedded in consuming addons (not a standalone addon):
+- `Weekly/Libs/FenUI/`
+- `Strategy/Libs/FenUI/`
+
+**To deploy changes:**
+```powershell
+powershell -File "c:\Program Files (x86)\World of Warcraft\_retail_\Interface\ADDON_DEV\update_libs.ps1"
+```
+
+**Load Order:** Consuming addons include FenUI via `embeds.xml`:
+```xml
+<Include file="Libs\FenUI\FenUI.xml"/>
+```
+
+**Note:** The `.toc` file is kept for reference but is not used when FenUI is embedded.
