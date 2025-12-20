@@ -4,6 +4,114 @@ All notable changes to FenUI will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2.4.0] - 2025-12-19
+
+### Fixed
+
+- **NineSlice background compatibility** - Background textures now render correctly with NineSlice borders
+  - Created dedicated `bgFrame` child at frameLevel 0 (follows Blizzard's FlatPanelBackgroundTemplate pattern)
+  - Removed BackdropTemplate inheritance from Layout frames (conflicts with NineSlice in WoW 9.1.5+)
+- **Deferred sizing issue** - Backgrounds now display correctly for frames sized via anchor points
+  - Added `OnSizeChanged` handler that reapplies background anchors when frame gets actual size
+- **Asymmetric chamfer support** - Different border edges now get appropriate insets
+  - Panel: left=6, right=2, top=6, bottom=2 (chamfered corners vs straight edges)
+  - Inset: uniform 2px
+  - Dialog: uniform 6px
+
+### Added
+
+- **`BORDER_INSETS` table** - Per-border-type asymmetric inset definitions
+- **Asymmetric inset support** - `SetBackgroundInset()` now accepts `{ left, right, top, bottom }` table
+- **Troubleshooting guide** - Added to AGENTS.md for common background issues
+- **Background architecture docs** - Added to SPACING.md explaining the bgFrame pattern
+
+### Changed
+
+- `ApplyBackgroundAnchors()` now supports both number (symmetric) and table (asymmetric) insets
+- Enhanced code comments in Layout.lua explaining the NineSlice compatibility architecture
+
+## [2.3.1] - 2025-12-19
+
+### Fixed
+
+- **Background bleeding at chamfered corners** - Layout now auto-insets backgrounds 3px from edges when borders are applied
+- **Panel title positioning** - Title now vertically centered in header bar with smaller font
+- **Panel close button positioning** - Close button now flush with top-right corner
+
+### Added
+
+- `SetBackgroundInset()` method on Layout for manual background inset control
+- `backgroundInset` config option for Layout
+
+## [2.3.0] - 2025-12-19
+
+### Added
+
+- **Drop shadow system** - Full implementation using custom textures:
+  - `shadow = "soft"` - 64px soft shadow with offset
+  - `shadow = "hard"` - 64px hard/sharp shadow
+  - `shadow = "glow"` - 64px soft glow (additive blend)
+  - `shadow = "glowHard"` - 24px hard glow
+- **Custom shadow/glow assets** in `Assets/` folder:
+  - `shadow-soft-64.png` - Soft shadow gradient
+  - `shadow-hard-64.png` - Hard shadow gradient
+  - `glow-soft-64.png` - Soft glow gradient
+  - `glow-hard-24.png` - Hard glow gradient
+- **Glow color customization** - `shadow = { type = "glow", color = "gold500" }`
+
+### Changed
+
+- Inner shadow textures now use `INNER_SHADOW_TEXTURES` constant (internal refactor)
+- Drop shadows render on a frame behind the main layout (proper layering)
+
+## [2.2.0] - 2025-12-19
+
+### Added
+
+- **Layout component** - Foundational container primitive that unifies:
+  - Background system (color, image, gradient, conditional via Image component)
+  - Border system (NineSlice via BlizzardBridge)
+  - Inner shadow system (using Blizzard's `Interface\Common\ShadowOverlay-*` textures)
+  - Multi-cell row system with CSS Grid-like syntax (`rows`, `cells`, `gap`)
+- **`fill` mode for Image** - `fill = true` stretches image to parent bounds
+- **`drawLayer` option for Image** - Control texture draw layer (default: "ARTWORK")
+- **Convenience container aliases**:
+  - `FenUI:CreateCard()` - Layout with subtle border
+  - `FenUI:CreateDialog()` - Layout with shadow preset
+- **New design tokens**:
+  - Background: `backgroundDefault`, `backgroundElevated`, `backgroundInset`, `backgroundCard`, `backgroundDialog`
+  - Shadow: `shadowColor`, `shadowAlphaInner`, `shadowAlphaDrop`
+  - Layout: `shadowSizeInner`, `shadowSizeDrop`, `shadowOffsetX`, `shadowOffsetY`
+
+### Changed
+
+- **Panel** now uses Layout internally (supports background, shadow config)
+- **Inset** now uses Layout internally when available (backwards compatible)
+- **Load order** updated: Image → Layout → Panel/Containers → other widgets
+
+## [2.1.0] - 2025-12-19
+
+### Added
+
+- **Image widget** - Full-featured image component with:
+  - Conditional variants (faction, class, race, spec, custom resolver)
+  - Sizing modes (fit, fill, contain, cover)
+  - Fallback/placeholder handling
+  - Tinting with FenUI tokens
+  - Interactive handlers (onClick, onEnter, onLeave, tooltip)
+  - Masking (circle, rounded, custom)
+  - Atlas texture support
+- **EmptyState slot architecture** - Two-slot system (top/bottom) for flexible content:
+  - `image` config for conditional Image component
+  - `SetSlot()` / `ClearSlot()` / `GetSlot()` methods
+  - Backwards compatible with existing `icon`, `title`, `subtitle` props
+- **Image semantic tokens** - `imageTintDefault`, `imageTintMuted`, `imagePlaceholder`
+- **Custom condition resolver registration** - `FenUI:RegisterImageCondition()`
+
+### Changed
+
+- EmptyState now uses Image component internally for icons/images
+
 ## [2.0.0] - 2025-12-19
 
 ### Added

@@ -15,9 +15,34 @@ FenUI = FenUI or {}
 -- Version and Metadata
 --------------------------------------------------------------------------------
 
-FenUI.VERSION = "2.0.0"
+FenUI.VERSION = "2.4.0"
 FenUI.AUTHOR = "Fen"
 FenUI.NAME = "FenUI"
+
+--------------------------------------------------------------------------------
+-- Addon Path Detection (works when embedded or standalone)
+--------------------------------------------------------------------------------
+
+-- Detect the addon path by looking at where this file was loaded from
+-- Uses debugstack to find the actual path
+local function DetectAddonPath()
+    local path = debugstack(1, 1, 0)
+    -- debugstack returns something like: "Interface/AddOns/Weekly/Libs/FenUI/Core/FenUI.lua:123: ..."
+    -- We need to extract up to and including FenUI
+    local addonPath = path:match("(Interface[/\\]AddOns[/\\][^/\\]+[/\\]Libs[/\\]FenUI)[/\\]")
+    if addonPath then
+        return addonPath:gsub("/", "\\")
+    end
+    -- Fallback: standalone addon
+    addonPath = path:match("(Interface[/\\]AddOns[/\\]FenUI)[/\\]")
+    if addonPath then
+        return addonPath:gsub("/", "\\")
+    end
+    -- Last resort fallback
+    return "Interface\\AddOns\\FenUI"
+end
+
+FenUI.ADDON_PATH = DetectAddonPath()
 
 --------------------------------------------------------------------------------
 -- Debug Mode
@@ -195,6 +220,13 @@ SlashCmdList["FENUI"] = function(msg)
     elseif cmd == "version" then
         FenUI:Print("Version", FenUI.VERSION, "by", FenUI.AUTHOR)
         
+    elseif cmd == "tokens" then
+        FenUI:Print("Current Tokens (Resolution):")
+        FenUI:Print("  marginPanel:", FenUI:GetSpacing("marginPanel"))
+        FenUI:Print("  panelPadding:", FenUI:GetLayout("panelPadding"))
+        FenUI:Print("  headerHeight:", FenUI:GetLayout("headerHeight"))
+        FenUI:Print("  footerHeight:", FenUI:GetLayout("footerHeight"))
+        
     elseif cmd == "frames" then
         local count = 0
         for _ in pairs(FenUI.registeredFrames) do count = count + 1 end
@@ -211,6 +243,7 @@ SlashCmdList["FENUI"] = function(msg)
         FenUI:Print("  /fenui theme [name] - Get/set global theme")
         FenUI:Print("  /fenui themes - List available themes")
         FenUI:Print("  /fenui frames - Show registered frame count")
+        FenUI:Print("  /fenui tokens - Show current spacing tokens")
         FenUI:Print("  /fenui debug - Toggle debug mode")
         FenUI:Print("  /fenui version - Show version info")
     end

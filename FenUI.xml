@@ -10,11 +10,13 @@
     <!-- Validation -->
     <Script file="Validation\DependencyChecker.lua"/>
     
-    <!-- Widgets -->
+    <!-- Widgets (load order matters: Image -> Layout -> Panel/Containers) -->
+    <Script file="Widgets\Image.lua"/>
+    <Script file="Widgets\Layout.lua"/>
     <Script file="Widgets\Panel.lua"/>
+    <Script file="Widgets\Containers.lua"/>
     <Script file="Widgets\Tabs.lua"/>
     <Script file="Widgets\Buttons.lua"/>
-    <Script file="Widgets\Containers.lua"/>
     <Script file="Widgets\Grid.lua"/>
     <Script file="Widgets\Toolbar.lua"/>
     <Script file="Widgets\EmptyState.lua"/>

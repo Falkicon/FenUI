@@ -56,13 +56,21 @@ FenUI/
 │   └── ThemeManager.lua    # Theme registration and application
 │
 ├── Widgets/                 # UI components
-│   ├── Panel.lua           # Main window container with slots
+│   ├── Layout.lua          # FOUNDATIONAL container primitive (background, border, shadow, cells)
+│   ├── Panel.lua           # Main window container (uses Layout internally)
+│   ├── Containers.lua      # Insets, scroll panels (uses Layout internally)
 │   ├── Tabs.lua            # Tab groups with states and badges
 │   ├── Buttons.lua         # Standard, icon, and close buttons
-│   ├── Containers.lua      # Insets, scroll panels
-│   ├── Grid.lua            # CSS Grid-inspired layout
+│   ├── Grid.lua            # CSS Grid-inspired layout for content
 │   ├── Toolbar.lua         # Horizontal slot-based layout
-│   └── EmptyState.lua      # Centered empty content overlay
+│   ├── Image.lua           # Conditional images with sizing, masking, tinting, fill mode
+│   └── EmptyState.lua      # Slot-based centered empty content overlay
+│
+├── Assets/                  # Custom textures
+│   ├── shadow-soft-64.png  # Soft drop shadow (64px gradient)
+│   ├── shadow-hard-64.png  # Hard drop shadow (64px gradient)
+│   ├── glow-soft-64.png    # Soft glow effect (64px gradient)
+│   └── glow-hard-24.png    # Hard glow effect (24px gradient)
 │
 ├── Validation/
 │   └── DependencyChecker.lua  # API/layout validation for updates
@@ -170,6 +178,70 @@ else
 end
 ```
 
+### Layout Component
+
+`Layout.lua` is the foundational container primitive. All other containers (Panel, Inset, Dialog, Card) build on it:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  Layout Component                                           │
+│  ├── Drop Shadow Frame (behind, for soft/hard/glow)        │
+│  ├── Shadow Layer (inner shadow using Blizzard textures)   │
+│  ├── Background Layer (color, image, gradient, conditional) │
+│  ├── Border Layer (NineSlice via BlizzardBridge)           │
+│  └── Content Layer (single-cell or multi-row cells)        │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**Key APIs:**
+```lua
+-- Simple container with inner shadow
+local box = FenUI:CreateLayout(parent, {
+    border = "Panel",
+    background = "surfacePanel",
+    shadow = "inner",
+    padding = "spacingPanel",
+})
+
+-- Container with drop shadow
+local elevated = FenUI:CreateLayout(parent, {
+    border = "Panel",
+    background = "surfaceElevated",
+    shadow = "soft",  -- or "hard", "glow", "glowHard"
+})
+
+-- Glow with custom color
+local highlighted = FenUI:CreateLayout(parent, {
+    border = "Panel",
+    shadow = { type = "glow", color = "gold500", alpha = 0.8 },
+})
+
+-- Multi-cell container (CSS Grid-like syntax)
+local gridBox = FenUI:CreateLayout(parent, {
+    border = "Inset",
+    rows = { "auto", "1fr", "auto" },  -- header, content, footer
+    cells = {
+        [1] = { background = "gray800" },
+        [2] = { background = { image = "..." } },
+        [3] = { background = "gray800" },
+    },
+    gap = "spacingElement",
+})
+```
+
+**Shadow Types:**
+| Type | Texture | Effect |
+|------|---------|--------|
+| `"inner"` | Blizzard overlays | Inset shadow inside frame |
+| `"soft"` | shadow-soft-64 | Diffuse drop shadow |
+| `"hard"` | shadow-hard-64 | Sharp drop shadow |
+| `"glow"` | glow-soft-64 | Soft additive glow |
+| `"glowHard"` | glow-hard-24 | Tight additive glow |
+
+**Convenience Aliases:**
+- `FenUI:CreateCard()` - Layout with subtle border
+- `FenUI:CreateDialog()` - Layout with shadow preset
+
 ### Blizzard Bridge
 
 `BlizzardBridge.lua` wraps native Blizzard APIs:
@@ -208,6 +280,44 @@ Stored in `FenUIDB`:
 - **Debug Mode**: `FenUI.debugMode = true` enables verbose logging
 - **Validation**: `/fenui validate` checks for Blizzard API changes
 - **Globals**: `FenUI` (main namespace), `FenUIDB` (saved variables)
+
+## Troubleshooting
+
+### Background Issues
+
+FenUI uses a dedicated background frame architecture for NineSlice compatibility. Common issues and solutions:
+
+| Problem | Cause | Solution |
+|---------|-------|----------|
+| **Background not showing** | Frame has 0x0 size at Init time | The `OnSizeChanged` handler should auto-fix this. If not, ensure the frame gets sized via anchors or explicit `SetSize()`. |
+| **Background bleeding outside corners** | Inset too small for chamfered border | Increase the inset values in `BORDER_INSETS` table or use `backgroundInset` config override. |
+| **Transparent gaps at edges** | Inset too large | Decrease the inset values. Panel uses asymmetric insets (6/2/6/2) to balance this. |
+| **Background visible but wrong color** | Token not resolving | Check that the color token exists in `Tokens.lua`. Use `/fenui tokens` to debug. |
+
+### Adding Custom Border Types
+
+To add support for a new NineSlice border:
+
+1. Find the layout name used in `BlizzardBridge.lua` or `NineSliceLayouts.lua`
+2. Test in-game to find the minimum inset that prevents bleeding
+3. Add an entry to `BORDER_INSETS` in `Layout.lua`:
+
+```lua
+local BORDER_INSETS = {
+    -- existing entries...
+    MyCustomBorder = { left = 4, right = 4, top = 4, bottom = 4 },
+}
+```
+
+### Architecture Reference
+
+```
+Layout Frame (NineSlice border)
+  └── bgFrame (frameLevel 0)
+        └── bgTexture (color/gradient/image)
+```
+
+The `bgFrame` child exists because WoW 9.1.5+ has conflicts between NineSlice and textures created directly on the same frame. This follows Blizzard's pattern in `FlatPanelBackgroundTemplate`.
 
 ## Consuming Addons
 

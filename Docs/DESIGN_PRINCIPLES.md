@@ -133,6 +133,42 @@ toolbar:SetRightLabel("text")
 
 Slots let developers compose components freely. Props lock them into predefined options.
 
+### Container Architecture
+
+The `Layout` component is the foundation for all containers. It handles:
+
+- **Background** — Color, image, gradient, or conditional
+- **Border** — NineSlice via BlizzardBridge
+- **Shadow** — Inner (Blizzard textures) or drop (custom textures)
+- **Cells** — Single content area or multi-row structure
+
+Higher-level components build on Layout:
+
+```
+Layout (foundation)
+  ├── Panel = Layout + title + close button
+  ├── Inset = Layout with inset styling
+  ├── Card = Layout with subtle border
+  └── Dialog = Layout with shadow preset
+```
+
+Use Layout directly when you need custom containers:
+
+```lua
+local custom = FenUI:CreateLayout(parent, {
+    border = "Inset",
+    background = {
+        gradient = { orientation = "VERTICAL", from = "gray950", to = "gray900" },
+    },
+    shadow = "inner",
+    rows = { "auto", "1fr" },
+    cells = {
+        [1] = { background = "gray800" },  -- Header
+        [2] = {},                          -- Content
+    },
+})
+```
+
 ### Lifecycle Hooks
 
 Widgets should provide standard hooks for extension:

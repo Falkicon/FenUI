@@ -67,6 +67,7 @@ FenUI.Tokens = {
         none = 0,
         xs = 4,
         sm = 8,
+        reg = 12,
         md = 16,
         lg = 24,
         xl = 32,
@@ -138,15 +139,40 @@ FenUI.Tokens.semantic = {
     textEmptyTitle = "textMuted",       -- Empty state title text
     textEmptySubtitle = "textDisabled", -- Empty state subtitle text
     
+    -- IMAGE
+    imageTintDefault = "white",         -- Default image tint (no tint)
+    imageTintMuted = "gray600",         -- Muted/disabled image tint
+    imagePlaceholder = "gray800",       -- Placeholder background color
+    
+    -- BACKGROUND (Layout component)
+    backgroundDefault = "surfacePanel",    -- Default container background
+    backgroundElevated = "surfaceElevated",-- Elevated/floating elements
+    backgroundInset = "surfaceInset",      -- Inset/recessed areas
+    backgroundCard = "surfaceElevated",    -- Card components
+    backgroundDialog = "surfacePanel",     -- Dialog/modal windows
+    
+    -- SHADOW
+    shadowColor = "black",              -- Shadow color (inner/drop)
+    shadowAlphaInner = 0.5,             -- Inner shadow opacity (note: stored as number, not token)
+    shadowAlphaDrop = 0.4,              -- Drop shadow opacity
+    
     -- SPACING (contextual)
-    spacingPanel = "lg",                -- Panel internal padding
+    spacingPanel = "md",                -- Panel internal padding
     spacingSection = "md",              -- Between sections
     spacingElement = "sm",              -- Between related elements
     spacingTight = "xs",                -- Tight groupings (e.g., icon + label)
-    spacingInset = "md",                -- Inset content padding
+    spacingInset = "sm",                -- Inset content padding
+    
+    -- MARGINS (external spacing)
+    marginPanel = "lg",                 -- Space between panel border and main content
+    marginContainer = "sm",             -- Space between adjacent containers
+    
+    -- INSETS (internal spacing)
+    insetContent = "sm",                -- Standard internal padding for containers
     
     -- FONTS (contextual)
     fontHeading = "heading",            -- Window/section headings
+    fontTitle = "headingMed",           -- Panel title bar text (smaller than heading)
     fontBody = "body",                  -- Normal body text
     fontSmall = "bodySmall",            -- Small/caption text
     fontButton = "highlight",           -- Button labels
@@ -159,15 +185,19 @@ FenUI.Tokens.semantic = {
 
 FenUI.Tokens.layout = {
     -- Panel structure
-    panelPadding = 12,          -- Edge padding inside panels
-    headerHeight = 40,          -- Title bar height
-    footerHeight = 40,          -- Footer area height
+    panelPadding = 24,          -- Default internal edge padding (24px safe for Blizzard borders)
+    headerHeight = 24,          -- Standard Blizzard header bar height
+    footerHeight = 32,          -- Standard footer area height
     
     -- Content structure
     tabHeight = 28,             -- Tab button height
     rowHeight = 24,             -- Standard list row height
     iconSize = 20,              -- Standard icon size
     iconSizeLarge = 32,         -- Large icon size
+    
+    -- Layout margins (standard gaps from container edges)
+    marginPanel = 24,           -- Space from Panel border to first inner element (24px safe for Blizzard borders)
+    marginInset = 8,            -- Space between inset content and its border
     
     -- Scroll
     scrollBarWidth = 20,        -- Scroll bar width
@@ -177,6 +207,12 @@ FenUI.Tokens.layout = {
     buttonHeight = 24,          -- Standard button height
     buttonHeightLarge = 32,     -- Large button height
     buttonMinWidth = 80,        -- Minimum button width
+    
+    -- Shadows
+    shadowSizeInner = 24,       -- Inner shadow edge size (Blizzard default)
+    shadowSizeDrop = 16,        -- Drop shadow offset/blur size
+    shadowOffsetX = 4,          -- Default drop shadow X offset
+    shadowOffsetY = -4,         -- Default drop shadow Y offset
 }
 
 --------------------------------------------------------------------------------

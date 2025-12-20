@@ -27,7 +27,8 @@ FenUI is a **progressive enhancement layer** on top of Blizzard's native UI syst
 | **Grid** | CSS Grid-inspired layout with column definitions and data binding |
 | **Toolbar** | Horizontal slot-based layout for buttons and controls |
 | **Buttons** | Standard, icon, and close buttons with consistent styling |
-| **EmptyState** | Centered overlay for empty content areas |
+| **Image** | Conditional variants, sizing modes, masking, tinting, Atlas support |
+| **EmptyState** | Slot-based centered overlay for empty content areas |
 | **Containers** | Insets and scroll panels |
 | **Themes** | Multiple built-in themes (TWW, Dragonflight, Dark, etc.) |
 | **Tokens** | Three-tier design token system (primitive → semantic → component) |
@@ -107,6 +108,39 @@ grid:SetData(myItems, function(row, item)
     row:SetText(2, item.name)
     row:SetText(3, item.count)
 end)
+```
+
+### Create an Image
+
+```lua
+-- Simple texture
+local img = FenUI:CreateImage(parent, {
+    texture = "Interface\\Icons\\INV_Misc_Book_09",
+    width = 64,
+    height = 64,
+})
+
+-- Faction-conditional image
+local factionImg = FenUI:CreateImage(parent, {
+    condition = "faction",  -- or "class", "race", "spec"
+    variants = {
+        Horde = "path/to/horde.png",
+        Alliance = "path/to/alliance.png",
+    },
+    fallback = "path/to/default.png",
+    width = 128,
+    height = 128,
+    mask = "circle",  -- or "rounded", or custom texture path
+    onClick = function(self) print("Clicked!") end,
+})
+
+-- Atlas texture with tinting
+local atlasImg = FenUI:CreateImage(parent, {
+    atlas = "ShipMissionIcon-Combat-Map",
+    width = 32,
+    height = 32,
+    tint = "feedbackSuccess",  -- FenUI token
+})
 ```
 
 ### Use Design Tokens
