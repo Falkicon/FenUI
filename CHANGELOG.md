@@ -18,6 +18,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Inset: uniform 2px
   - Dialog: uniform 6px
 
+### Infrastructure
+
+- Updated `AGENTS.md` with new library management script path (`lib_sync.ps1`).
+
 ### Added
 
 - **`BORDER_INSETS` table** - Per-border-type asymmetric inset definitions

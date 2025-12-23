@@ -6,8 +6,10 @@ Technical reference for AI agents modifying this UI library.
 
 ### Development Documentation
 
-- **[ADDON_DEV/AGENTS.md](../../ADDON_DEV/AGENTS.md)** – Library index, automation scripts, dependency chains
-- **[Addon Development Guide](../../ADDON_DEV/Addon_Dev_Guide/)** – Full documentation covering:
+- **[ADDON_DEV/AGENTS.md](../../AGENTS.md)** – Build versions, standard patterns, index
+- **[Library Reference](../../AGENTS_reference/libraries.md)** – Library index, automation scripts, dependency chains
+- **[Blizzard UI Reference](../../AGENTS_reference/blizzard-ui.md)** – Source paths and usage guides
+- **[Addon Development Guide](../../Addon_Dev_Guide/)** – Full documentation covering:
   - Core principles, project structure, TOC best practices
   - UI engineering, configuration UI, combat lockdown
   - Performance optimization, API resilience
@@ -16,7 +18,8 @@ Technical reference for AI agents modifying this UI library.
 
 ### Blizzard UI Source Code
 
-- **[wow-ui-source-live](../../wow-ui-source-live/)** – Official Blizzard UI addon code
+- **[wow-ui-source-live](../../_retail_/Interface/wow-ui-source-live/wow-ui-source-live/)** – Official Blizzard UI addon code (Live)
+- **[wow-ui-source-beta](../../_beta_/Interface/wow-ui-source-beta/wow-ui-source-beta/)** – Official Blizzard UI addon code (Beta)
   - Essential for understanding `NineSliceUtil`, `NineSliceLayouts`, and Atlas textures
   - Reference for native frame templates and widget implementations
   - Use when building new widgets or debugging layout issues
@@ -335,7 +338,7 @@ When modifying FenUI, test these addons to ensure compatibility.
 1. **Token Everything** – Never hardcode colors or pixel values
 2. **Provide Fallbacks** – Consuming addons must work without FenUI
 3. **Test Integration** – Load Weekly after any widget changes
-4. **Sync ADDON_DEV** – Copy changes to `Interface/ADDON_DEV/FenUI/`
+4. **Sync ADDON_DEV** – Copy changes to `Libs/FenUI/`
 5. **Follow Patterns** – Use existing widget patterns (Mixin + Factory + Builder)
 
 ## Documentation Requirements
@@ -409,9 +412,9 @@ table.insert(self.rowPool, row)  -- return to pool
 
 ## Library Management
 
-FenUI is developed in `ADDON_DEV/FenUI/` and deployed to consuming addons via `update_libs.ps1`.
+FenUI is developed in `ADDON_DEV/Libs/FenUI/` and deployed to consuming addons via `lib_sync.ps1`.
 
-**Source of Truth:** `Interface/ADDON_DEV/FenUI/`
+**Source of Truth:** `Libs/FenUI/`
 
 **Deployment:** FenUI is embedded in consuming addons (not a standalone addon):
 - `Weekly/Libs/FenUI/`
@@ -419,7 +422,7 @@ FenUI is developed in `ADDON_DEV/FenUI/` and deployed to consuming addons via `u
 
 **To deploy changes:**
 ```powershell
-powershell -File "c:\Program Files (x86)\World of Warcraft\_retail_\Interface\ADDON_DEV\update_libs.ps1"
+powershell -File "c:\Program Files (x86)\World of Warcraft\_dev_\ADDON_DEV\Tools\LibrarySync\lib_sync.ps1"
 ```
 
 **Load Order:** Consuming addons include FenUI via `embeds.xml`:
