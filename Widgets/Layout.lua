@@ -151,13 +151,19 @@ end
 local DEFAULT_BG_INSET = 2
 
 function LayoutMixin:CreateBackgroundLayer()
-    -- Create a dedicated background frame at frameLevel 0
-    -- This avoids NineSlice conflicts (see architecture notes above)
+    -- Create a dedicated background frame
+    -- We don't set a fixed frame level of 0, as that can put it behind the parent
+    -- frame's background if the parent is at a high frame level.
+    -- Instead, we let it inherit and we'll manage layering via draw layers
+    -- or a slightly lower frame level than the parent.
     self.bgFrame = CreateFrame("Frame", nil, self)
-    self.bgFrame:SetFrameLevel(0)
+    
+    -- Ensure it's at the bottom of the parent's internal stack
+    local parentLevel = self:GetFrameLevel()
+    self.bgFrame:SetFrameLevel(math.max(0, parentLevel - 1))
     
     -- Create the background texture on bgFrame (not self)
-    self.bgTexture = self.bgFrame:CreateTexture(nil, "BACKGROUND")
+    self.bgTexture = self.bgFrame:CreateTexture(nil, "BACKGROUND", nil, -8)
     self.bgTexture:SetAllPoints(self.bgFrame)
     self.bgTexture:Hide()
     
@@ -262,18 +268,9 @@ function LayoutMixin:ApplyColorBackground(values)
         a = values.alpha
     end
     
-    -- #region agent log H4c
-    print("[FenUI:DBG:H4c] ApplyColorBackground: token=" .. tostring(values.token) .. " rgba=" .. tostring(r) .. "," .. tostring(g) .. "," .. tostring(b) .. "," .. tostring(a))
-    -- #endregion
-    
     self.bgTexture:SetColorTexture(r, g, b, a)
     self:ApplyBackgroundAnchors()
     self.bgTexture:Show()
-    
-    -- #region agent log H2
-    local bgW, bgH = self.bgFrame:GetSize()
-    print("[FenUI:DBG:H2] ApplyColorBackground: bgTexture:Show() called, IsShown=" .. tostring(self.bgTexture:IsShown()) .. ", bgFrame:IsShown=" .. tostring(self.bgFrame:IsShown()) .. ", bgFrame size=" .. tostring(bgW) .. "x" .. tostring(bgH))
-    -- #endregion
 end
 
 function LayoutMixin:ApplyGradientBackground(values)

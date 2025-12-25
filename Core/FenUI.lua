@@ -210,7 +210,7 @@ SlashCmdList["FENUI"] = function(msg)
         FenUI:Print("Available themes:")
         for _, theme in ipairs(FenUI:GetThemeList()) do
             local marker = (theme == FenUI.currentGlobalTheme) and " |cff00ff00(active)|r" or ""
-            FenUI:Print("  -", theme .. marker)
+            FenUI:Print("  -", theme, marker)
         end
         
     elseif cmd == "debug" then
@@ -233,7 +233,7 @@ SlashCmdList["FENUI"] = function(msg)
         FenUI:Print("Registered frames:", count)
         if FenUI.debugMode then
             for id, data in pairs(FenUI.registeredFrames) do
-                FenUI:Print("  -", id, "(" .. data.frameType .. ")", "theme:", data.theme or "none")
+                FenUI:Print("  -", id, "(", data.frameType, ")", "theme:", data.theme or "none")
             end
         end
         

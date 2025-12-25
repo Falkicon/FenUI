@@ -114,10 +114,10 @@ button:SetBadgeColor("feedbackSuccess")
 
 ## Low Priority
 
-### 9. Divider/Header Component
+### 9. ~~Divider/Header Component~~ (COMPLETED)
 **Problem**: Section headers like "By Category" are manually created.
 
-**Solution**: Add `FenUI:CreateDivider(parent, text)` and `FenUI:CreateSectionHeader(parent, text)`.
+**Solution**: Added `FenUI:CreateSectionHeader(parent, config)` widget.
 
 ### 10. Footer Component
 **Problem**: Panel footers with buttons need manual layout.

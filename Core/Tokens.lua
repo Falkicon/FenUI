@@ -83,6 +83,7 @@ FenUI.Tokens = {
         highlight = "GameFontHighlight",
         highlightSmall = "GameFontHighlightSmall",
         disabled = "GameFontDisable",
+        mono = "ChatFontNormal",
     },
 }
 
@@ -176,6 +177,7 @@ FenUI.Tokens.semantic = {
     fontBody = "body",                  -- Normal body text
     fontSmall = "bodySmall",            -- Small/caption text
     fontButton = "highlight",           -- Button labels
+    fontMono = "mono",                  -- Monospaced text (console, code)
 }
 
 --------------------------------------------------------------------------------

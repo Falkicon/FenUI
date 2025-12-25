@@ -27,6 +27,8 @@ FenUI is a **progressive enhancement layer** on top of Blizzard's native UI syst
 | **Grid** | CSS Grid-inspired layout with column definitions and data binding |
 | **Toolbar** | Horizontal slot-based layout for buttons and controls |
 | **Buttons** | Standard, icon, and close buttons with consistent styling |
+| **SectionHeader** | Navigation section headers with design token styling |
+| **StatusRow** | Standardized icon + label + value row with optional formatting |
 | **Image** | Conditional variants, sizing modes, masking, tinting, Atlas support |
 | **EmptyState** | Slot-based centered overlay for empty content areas |
 | **Containers** | Insets and scroll panels |
@@ -140,6 +142,15 @@ local atlasImg = FenUI:CreateImage(parent, {
     width = 32,
     height = 32,
     tint = "feedbackSuccess",  -- FenUI token
+})
+```
+
+### Create a Section Header
+
+```lua
+local header = FenUI:CreateSectionHeader(parent, {
+    text = "ADDONS",
+    spacing = "md",  -- 12-16px top margin
 })
 ```
 

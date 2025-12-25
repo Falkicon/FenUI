@@ -267,6 +267,11 @@ function TabGroupMixin:Select(key)
     end
 end
 
+-- Alias for backward compatibility and idiomatic naming
+function TabGroupMixin:SelectTab(key)
+    self:Select(key)
+end
+
 function TabGroupMixin:SetFocus(key)
     for k, t in pairs(self.tabs) do
         t.isFocused = (k == key)

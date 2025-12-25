@@ -4,6 +4,12 @@ All notable changes to FenUI will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+
+## [2.5.0] - 2025-12-25
+
+### Changed
+- Added MultiLineEditBox, SectionHeader, and StatusRow widgets. Internal code cleanup and linting fixes.
+
 ## [2.4.0] - 2025-12-19
 
 ### Fixed
