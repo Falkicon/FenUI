@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coverage Report: ADDON_DEV_LOCAL/Libs/FenUI - Widgets\SplitLayout.lua</title>
+    <style>
+        :root {
+            --bg: #1e1e2e;
+            --surface: #313244;
+            --text: #cdd6f4;
+            --subtext: #a6adc8;
+            --green: #a6e3a1;
+            --yellow: #f9e2af;
+            --red: #f38ba8;
+            --blue: #89b4fa;
+            --border: #45475a;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 {
+            color: var(--blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.75rem;
+        }
+        .timestamp {
+            color: var(--subtext);
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+        }
+        .summary-card {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        .stat-label {
+            color: var(--subtext);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .coverage-high { color: var(--green); }
+        .coverage-medium { color: var(--yellow); }
+        .coverage-low { color: var(--red); }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--surface);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 0.875rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: rgba(0,0,0,0.2);
+            font-weight: 600;
+            color: var(--subtext);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+        tr:hover { background: rgba(255,255,255,0.02); }
+        tr:last-child td { border-bottom: none; }
+        .file-link {
+            color: var(--blue);
+            text-decoration: none;
+        }
+        .file-link:hover { text-decoration: underline; }
+        .progress-bar {
+            width: 100px;
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        .text-right { text-align: right; }
+        .file-detail {
+            background: var(--surface);
+            border-radius: 12px;
+            margin-top: 2rem;
+            overflow: hidden;
+        }
+        .file-header {
+            padding: 1rem 1.5rem;
+            background: rgba(0,0,0,0.2);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .file-name {
+            font-family: 'Consolas', 'Monaco', monospace;
+            color: var(--blue);
+        }
+        .code-view {
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+        }
+        .code-line {
+            display: flex;
+            min-height: 1.5rem;
+        }
+        .line-number {
+            width: 50px;
+            padding: 0 0.75rem;
+            text-align: right;
+            color: var(--subtext);
+            user-select: none;
+            flex-shrink: 0;
+            background: rgba(0,0,0,0.1);
+        }
+        .line-content {
+            flex: 1;
+            padding: 0 1rem;
+            white-space: pre;
+        }
+        .line-covered {
+            background: rgba(166, 227, 161, 0.1);
+        }
+        .line-uncovered {
+            background: rgba(243, 139, 168, 0.15);
+        }
+        .line-uncovered .line-number {
+            background: rgba(243, 139, 168, 0.2);
+            color: var(--red);
+        }
+        .nav { margin-bottom: 1rem; }
+        .nav a {
+            color: var(--blue);
+            text-decoration: none;
+            margin-right: 1rem;
+        }
+        .nav a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="nav">
+            <a href="index.html">← Back to Summary</a>
+        </div>
+        
+        <div class="file-detail">
+            <div class="file-header">
+                <span class="file-name">Widgets\SplitLayout.lua</span>
+                <span class="coverage-medium">75.1% (127/169 lines)</span>
+            </div>
+            <div class="code-view">
+    
+                <div class="code-line ">
+                    <span class="line-number">1</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">2</span>
+                    <span class="line-content">-- FenUI v2 - Split Layout Widget</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">3</span>
+                    <span class="line-content">--</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">4</span>
+                    <span class="line-content">-- A specialized layout with a navigation sidebar and a content area.</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">5</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">6</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">7</span>
+                    <span class="line-content">local FenUI = FenUI</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">8</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">9</span>
+                    <span class="line-content">local SplitLayoutMixin = {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">10</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">11</span>
+                    <span class="line-content">function SplitLayoutMixin:InitSplit(config)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">12</span>
+                    <span class="line-content">	self.config = config or {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">13</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">14</span>
+                    <span class="line-content">	-- SplitLayout is a 2-column Layout</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">15</span>
+                    <span class="line-content">	-- Cell 1: Navigation</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">16</span>
+                    <span class="line-content">	-- Cell 2: Content</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">17</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">18</span>
+                    <span class="line-content">	local navWidth = config.navWidth or 200</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">19</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">20</span>
+                    <span class="line-content">	-- Content Area (Cell 2)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">21</span>
+                    <span class="line-content">	self.contentArea = self:GetCell(2)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">22</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">23</span>
+                    <span class="line-content">	-- Navigation Area (Cell 1)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">24</span>
+                    <span class="line-content">	local navCell = self:GetCell(1)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">25</span>
+                    <span class="line-content">	self.navPanel = navCell</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">26</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">27</span>
+                    <span class="line-content">	-- Navigation Background</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">28</span>
+                    <span class="line-content">	-- We use a dedicated texture on the navigation cell to provide visual depth.</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">29</span>
+                    <span class="line-content">	-- FenUI:GetColor resolves the &quot;surfaceInset&quot; semantic token to its primitive RGBA values.</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">30</span>
+                    <span class="line-content">	-- We then override the alpha (0.4) to create a semi-transparent &quot;sunken&quot; sidebar look</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">31</span>
+                    <span class="line-content">	-- that matches modern Blizzard UI (e.g., Settings Panel) without needing an explicit border.</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">32</span>
+                    <span class="line-content">	self.navBackground = navCell:CreateTexture(nil, &quot;BACKGROUND&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">33</span>
+                    <span class="line-content">	self.navBackground:SetAllPoints()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">34</span>
+                    <span class="line-content">	local r, g, b, a = FenUI:GetColor(&quot;surfaceInset&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">35</span>
+                    <span class="line-content">	self.navBackground:SetColorTexture(r, g, b, 0.1)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">36</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">37</span>
+                    <span class="line-content">	-- Navigation Border (Right edge separator)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">38</span>
+                    <span class="line-content">	self.navSeparator = navCell:CreateTexture(nil, &quot;BORDER&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">39</span>
+                    <span class="line-content">	self.navSeparator:SetPoint(&quot;TOPRIGHT&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">40</span>
+                    <span class="line-content">	self.navSeparator:SetPoint(&quot;BOTTOMRIGHT&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">41</span>
+                    <span class="line-content">	self.navSeparator:SetWidth(1)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">42</span>
+                    <span class="line-content">	self.navSeparator:SetColorTexture(FenUI:GetColorRGB(&quot;borderSubtle&quot;))</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">43</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">44</span>
+                    <span class="line-content">	-- Navigation Scroll Frame</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">45</span>
+                    <span class="line-content">	local navScrollPanel = FenUI:CreateScrollPanel(navCell, {</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">46</span>
+                    <span class="line-content">		padding = 2,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">47</span>
+                    <span class="line-content">	})</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">48</span>
+                    <span class="line-content">	navScrollPanel:SetAllPoints()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">49</span>
+                    <span class="line-content">	self.navScrollPanel = navScrollPanel</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">50</span>
+                    <span class="line-content">	self.navScroll = navScrollPanel.scrollFrame</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">51</span>
+                    <span class="line-content">	self.navContent = navScrollPanel.scrollChild</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">52</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">53</span>
+                    <span class="line-content">	-- Sync navContent width</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">54</span>
+                    <span class="line-content">	self.navScroll:SetScript(&quot;OnSizeChanged&quot;, function(frame, width)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">55</span>
+                    <span class="line-content">		self.navContent:SetWidth(width)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">56</span>
+                    <span class="line-content">		self:RefreshNav()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">57</span>
+                    <span class="line-content">	end)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">58</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">59</span>
+                    <span class="line-content">	-- State</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">60</span>
+                    <span class="line-content">	self.items = {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">61</span>
+                    <span class="line-content">	self.buttons = {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">62</span>
+                    <span class="line-content">	self.headers = {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">63</span>
+                    <span class="line-content">	self.selectedKey = config.defaultKey</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">64</span>
+                    <span class="line-content">	self.contentFrames = {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">65</span>
+                    <span class="line-content">	self.onSelect = config.onSelect</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">66</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">67</span>
+                    <span class="line-content">	-- Methods (Ensure they are on the instance)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">68</span>
+                    <span class="line-content">	self.SetItems = SplitLayoutMixin.SetItems</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">69</span>
+                    <span class="line-content">	self.RefreshNav = SplitLayoutMixin.RefreshNav</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">70</span>
+                    <span class="line-content">	self.GetOrCreateButton = SplitLayoutMixin.GetOrCreateButton</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">71</span>
+                    <span class="line-content">	self.GetOrCreateHeader = SplitLayoutMixin.GetOrCreateHeader</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">72</span>
+                    <span class="line-content">	self.UpdateButtonStates = SplitLayoutMixin.UpdateButtonStates</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">73</span>
+                    <span class="line-content">	self.Select = SplitLayoutMixin.Select</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">74</span>
+                    <span class="line-content">	self.GetContentFrame = SplitLayoutMixin.GetContentFrame</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">75</span>
+                    <span class="line-content">	self.GetSelectedKey = SplitLayoutMixin.GetSelectedKey</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">76</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">77</span>
+                    <span class="line-content">	if config.items then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">78</span>
+                    <span class="line-content">		self:SetItems(config.items)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">79</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">80</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">81</span>
+                    <span class="line-content">	-- Trigger initial selection if requested</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">82</span>
+                    <span class="line-content">	if self.selectedKey then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">83</span>
+                    <span class="line-content">		self:Select(self.selectedKey, true)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">84</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">85</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">86</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">87</span>
+                    <span class="line-content">function SplitLayoutMixin:SetItems(items)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">88</span>
+                    <span class="line-content">	self.items = items or {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">89</span>
+                    <span class="line-content">	self:RefreshNav()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">90</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">91</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">92</span>
+                    <span class="line-content">function SplitLayoutMixin:RefreshNav()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">93</span>
+                    <span class="line-content">	if not self.navContent then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">94</span>
+                    <span class="line-content">		return</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">95</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">96</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">97</span>
+                    <span class="line-content">	-- Hide all existing buttons and headers</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">98</span>
+                    <span class="line-content">	for _, btn in ipairs(self.buttons) do</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">99</span>
+                    <span class="line-content">		btn:Hide()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">100</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">101</span>
+                    <span class="line-content">	for _, header in ipairs(self.headers) do</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">102</span>
+                    <span class="line-content">		header:Hide()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">103</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">104</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">105</span>
+                    <span class="line-content">	local yOffset = 0</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">106</span>
+                    <span class="line-content">	local buttonIndex = 1</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">107</span>
+                    <span class="line-content">	local headerIndex = 1</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">108</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">109</span>
+                    <span class="line-content">	for i, item in ipairs(self.items) do</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">110</span>
+                    <span class="line-content">		if item.isHeader or item.isCategory then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">111</span>
+                    <span class="line-content">			local header = self:GetOrCreateHeader(headerIndex)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">112</span>
+                    <span class="line-content">			header:SetPoint(&quot;TOPLEFT&quot;, self.navContent, &quot;TOPLEFT&quot;, 0, -yOffset)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">113</span>
+                    <span class="line-content">			header:SetPoint(&quot;TOPRIGHT&quot;, self.navContent, &quot;TOPRIGHT&quot;, 0, -yOffset)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">114</span>
+                    <span class="line-content">			header:SetText(item.text)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">115</span>
+                    <span class="line-content">			header:Show()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">116</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">117</span>
+                    <span class="line-content">			yOffset = yOffset + header:GetHeight() + 2</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">118</span>
+                    <span class="line-content">			headerIndex = headerIndex + 1</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">119</span>
+                    <span class="line-content">		else</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">120</span>
+                    <span class="line-content">			local btn = self:GetOrCreateButton(buttonIndex)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">121</span>
+                    <span class="line-content">			btn:SetPoint(&quot;TOPLEFT&quot;, self.navContent, &quot;TOPLEFT&quot;, 0, -yOffset)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">122</span>
+                    <span class="line-content">			btn:SetPoint(&quot;TOPRIGHT&quot;, self.navContent, &quot;TOPRIGHT&quot;, 0, -yOffset)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">123</span>
+                    <span class="line-content">			btn.text:SetText(item.text)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">124</span>
+                    <span class="line-content">			btn.key = item.key</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">125</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">126</span>
+                    <span class="line-content">			-- Handle icons</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">127</span>
+                    <span class="line-content">			if item.icon then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">128</span>
+                    <span class="line-content">				btn.icon:SetTexture(item.icon)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">129</span>
+                    <span class="line-content">				btn.icon:Show()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">130</span>
+                    <span class="line-content">				btn.text:SetPoint(&quot;LEFT&quot;, 32, 0)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">131</span>
+                    <span class="line-content">			else</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">132</span>
+                    <span class="line-content">				btn.icon:Hide()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">133</span>
+                    <span class="line-content">				btn.text:SetPoint(&quot;LEFT&quot;, 8, 0)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">134</span>
+                    <span class="line-content">			end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">135</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">136</span>
+                    <span class="line-content">			btn:Show()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">137</span>
+                    <span class="line-content">			yOffset = yOffset + 24 + 2</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">138</span>
+                    <span class="line-content">			buttonIndex = buttonIndex + 1</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">139</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">140</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">141</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">142</span>
+                    <span class="line-content">	self.navContent:SetHeight(math.max(1, yOffset))</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">143</span>
+                    <span class="line-content">	if self.navScrollPanel then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">144</span>
+                    <span class="line-content">		self.navScrollPanel:UpdateScrollBar()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">145</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">146</span>
+                    <span class="line-content">	self:UpdateButtonStates()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">147</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">148</span>
+                    <span class="line-content">	-- Ensure content frame for selected key is shown</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">149</span>
+                    <span class="line-content">	if self.selectedKey and self.contentFrames[self.selectedKey] then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">150</span>
+                    <span class="line-content">		self.contentFrames[self.selectedKey]:Show()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">151</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">152</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">153</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">154</span>
+                    <span class="line-content">function SplitLayoutMixin:GetOrCreateButton(index)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">155</span>
+                    <span class="line-content">	if self.buttons[index] then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">156</span>
+                    <span class="line-content">		return self.buttons[index]</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">157</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">158</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">159</span>
+                    <span class="line-content">	local btn = CreateFrame(&quot;Button&quot;, nil, self.navContent)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">160</span>
+                    <span class="line-content">	btn:SetHeight(24)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">161</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">162</span>
+                    <span class="line-content">	-- Background highlight (selected)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">163</span>
+                    <span class="line-content">	local highlight = btn:CreateTexture(nil, &quot;BACKGROUND&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">164</span>
+                    <span class="line-content">	highlight:SetAllPoints()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">165</span>
+                    <span class="line-content">	highlight:SetColorTexture(1, 1, 1, 0.1)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">166</span>
+                    <span class="line-content">	highlight:Hide()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">167</span>
+                    <span class="line-content">	btn.highlight = highlight</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">168</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">169</span>
+                    <span class="line-content">	-- Hover highlight</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">170</span>
+                    <span class="line-content">	local hover = btn:CreateTexture(nil, &quot;HIGHLIGHT&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">171</span>
+                    <span class="line-content">	hover:SetAllPoints()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">172</span>
+                    <span class="line-content">	hover:SetColorTexture(1, 1, 1, 0.05)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">173</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">174</span>
+                    <span class="line-content">	-- Text</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">175</span>
+                    <span class="line-content">	local text = btn:CreateFontString(nil, &quot;OVERLAY&quot;, &quot;GameFontNormal&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">176</span>
+                    <span class="line-content">	text:SetPoint(&quot;LEFT&quot;, 8, 0)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">177</span>
+                    <span class="line-content">	text:SetPoint(&quot;RIGHT&quot;, -8, 0)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">178</span>
+                    <span class="line-content">	text:SetJustifyH(&quot;LEFT&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">179</span>
+                    <span class="line-content">	btn.text = text</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">180</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">181</span>
+                    <span class="line-content">	-- Icon</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">182</span>
+                    <span class="line-content">	local icon = btn:CreateTexture(nil, &quot;OVERLAY&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">183</span>
+                    <span class="line-content">	icon:SetSize(16, 16)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">184</span>
+                    <span class="line-content">	icon:SetPoint(&quot;LEFT&quot;, 8, 0)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">185</span>
+                    <span class="line-content">	btn.icon = icon</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">186</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">187</span>
+                    <span class="line-content">	btn:SetScript(&quot;OnClick&quot;, function()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">188</span>
+                    <span class="line-content">		if btn.key then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">189</span>
+                    <span class="line-content">			self:Select(btn.key)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">190</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">191</span>
+                    <span class="line-content">	end)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">192</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">193</span>
+                    <span class="line-content">	self.buttons[index] = btn</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">194</span>
+                    <span class="line-content">	return btn</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">195</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">196</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">197</span>
+                    <span class="line-content">function SplitLayoutMixin:GetOrCreateHeader(index)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">198</span>
+                    <span class="line-content">	if self.headers[index] then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">199</span>
+                    <span class="line-content">		return self.headers[index]</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">200</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">201</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">202</span>
+                    <span class="line-content">	local header = FenUI:CreateSectionHeader(self.navContent, {</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">203</span>
+                    <span class="line-content">		text = &quot;Header&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">204</span>
+                    <span class="line-content">		spacing = &quot;md&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">205</span>
+                    <span class="line-content">	})</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">206</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">207</span>
+                    <span class="line-content">	self.headers[index] = header</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">208</span>
+                    <span class="line-content">	return header</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">209</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">210</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">211</span>
+                    <span class="line-content">function SplitLayoutMixin:UpdateButtonStates()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">212</span>
+                    <span class="line-content">	for _, btn in ipairs(self.buttons) do</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">213</span>
+                    <span class="line-content">		if btn:IsShown() then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">214</span>
+                    <span class="line-content">			if btn.key == self.selectedKey then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">215</span>
+                    <span class="line-content">				btn.highlight:Show()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">216</span>
+                    <span class="line-content">				btn.text:SetTextColor(1, 1, 1)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">217</span>
+                    <span class="line-content">			else</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">218</span>
+                    <span class="line-content">				btn.highlight:Hide()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">219</span>
+                    <span class="line-content">				btn.text:SetTextColor(1, 0.82, 0)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">220</span>
+                    <span class="line-content">			end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">221</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">222</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">223</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">224</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">225</span>
+                    <span class="line-content">function SplitLayoutMixin:Select(key, force)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">226</span>
+                    <span class="line-content">	if self.selectedKey == key and not force then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">227</span>
+                    <span class="line-content">		return</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">228</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">229</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">230</span>
+                    <span class="line-content">	self.selectedKey = key</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">231</span>
+                    <span class="line-content">	self:UpdateButtonStates()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">232</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">233</span>
+                    <span class="line-content">	-- Hide all content frames</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">234</span>
+                    <span class="line-content">	for _, frame in pairs(self.contentFrames) do</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">235</span>
+                    <span class="line-content">		frame:Hide()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">236</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">237</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">238</span>
+                    <span class="line-content">	-- Show selected content frame</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">239</span>
+                    <span class="line-content">	if self.contentFrames[key] then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">240</span>
+                    <span class="line-content">		self.contentFrames[key]:Show()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">241</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">242</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">243</span>
+                    <span class="line-content">	-- Callback</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">244</span>
+                    <span class="line-content">	if self.onSelect then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">245</span>
+                    <span class="line-content">		self.onSelect(key)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">246</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">247</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">248</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">249</span>
+                    <span class="line-content">function SplitLayoutMixin:GetContentFrame(key)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">250</span>
+                    <span class="line-content">	if not self.contentFrames[key] then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">251</span>
+                    <span class="line-content">		local frame = CreateFrame(&quot;Frame&quot;, nil, self.contentArea)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">252</span>
+                    <span class="line-content">		frame:SetAllPoints()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">253</span>
+                    <span class="line-content">		self.contentFrames[key] = frame</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">254</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">255</span>
+                    <span class="line-content">		-- If this is already the selected key, show it immediately</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">256</span>
+                    <span class="line-content">		if self.selectedKey == key then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">257</span>
+                    <span class="line-content">			frame:Show()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">258</span>
+                    <span class="line-content">		else</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">259</span>
+                    <span class="line-content">			frame:Hide()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">260</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">261</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">262</span>
+                    <span class="line-content">	return self.contentFrames[key]</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">263</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">264</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">265</span>
+                    <span class="line-content">function SplitLayoutMixin:GetSelectedKey()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">266</span>
+                    <span class="line-content">	return self.selectedKey</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">267</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">268</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">269</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">270</span>
+                    <span class="line-content">-- Factory</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">271</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">272</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">273</span>
+                    <span class="line-content">function FenUI:CreateSplitLayout(parent, config)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">274</span>
+                    <span class="line-content">	config = config or {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">275</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">276</span>
+                    <span class="line-content">	-- SplitLayout is a 2-column Layout</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">277</span>
+                    <span class="line-content">	local layout = self:CreateLayout(parent, {</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">278</span>
+                    <span class="line-content">		name = config.name,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">279</span>
+                    <span class="line-content">		cols = { config.navWidth or 200, &quot;fr&quot; },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">280</span>
+                    <span class="line-content">		gap = config.gap or 4,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">281</span>
+                    <span class="line-content">		padding = config.padding or 0,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">282</span>
+                    <span class="line-content">		border = config.border,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">283</span>
+                    <span class="line-content">		background = config.background or &quot;surfacePanel&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">284</span>
+                    <span class="line-content">	})</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">285</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">286</span>
+                    <span class="line-content">	FenUI.Mixin(layout, SplitLayoutMixin)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">287</span>
+                    <span class="line-content">	layout:InitSplit(config)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">288</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">289</span>
+                    <span class="line-content">	return layout</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">290</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">291</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">292</span>
+                    <span class="line-content">FenUI.SplitLayoutMixin = SplitLayoutMixin</span>
+                </div>
+        
+            </div>
+        </div>
+    
+    </div>
+</body>
+</html>

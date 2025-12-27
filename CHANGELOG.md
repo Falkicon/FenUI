@@ -5,6 +5,54 @@ All notable changes to FenUI will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 
+
+## [2.8.0] - 2025-12-27
+
+### Changed
+- Added Animation & Transition System
+
+## [2.8.0] - 2025-12-27
+
+### Added
+- **Animation & Transition System** - A declarative motion system wrapping WoW's native `AnimationGroup`.
+  - **Property Transitions** - Automatically animate changes to `alpha`, `scale`, and `offset` (e.g., `panel:SetAlpha(0.5)`).
+  - **Lifecycle Animations** - Built-in `showAnimation` and `hideAnimation` hooks for `Layout` and `Panel`.
+  - **Animation Library** - Presets including `fadeIn`, `fadeOut`, `scaleIn`, `slideUp`, and `bounce`.
+  - **Keyframes** - Support for multi-step animations via `Animation:Keyframes()`.
+  - **Chaining & Callbacks** - Sequence animations with `.Then()` and use `onStart`/`onComplete`/`onCancel` hooks.
+  - **Fluent API** - Added `transition()`, `showAnimation()`, and `hideAnimation()` to `PanelBuilder`.
+
+## [2.7.0] - 2025-12-26
+
+### Added
+- **New `Stack` and `Flex` layout widgets** - Flexbox-inspired stacking system for declarative UI.
+  - Supports `vertical` and `horizontal` directions.
+  - Full alignment support (`start`, `center`, `end`, `stretch`).
+  - Full justification support (`start`, `center`, `end`, `space-between`, `space-around`).
+  - Dynamic `grow` and `shrink` child properties.
+  - Wrapping support with `rowGap` for responsive flows.
+  - Inherits from `Layout` for borders, backgrounds, and shadows.
+
+## [2.6.0] - 2025-12-26
+
+### Added
+- **New `ImageButton` widget** - High-performance icon buttons built on the Image component logic.
+  - Supports tactile states (hover, pressed/dimmed, disabled) with optional 1px texture shift.
+  - Built-in toggle mode support (`isToggle = true`).
+  - Inherits all Image features (masking, sizing modes, conditional textures).
+- **Texture-based Checkboxes** - `CreateCheckbox` now supports custom icons via `checkedTexture` and `uncheckedTexture` config.
+  - Added `boxSize` option for easier checkbox sizing.
+- **Image Sharpness Improvements** - Icons now use `TRILINEAR` filtering and `SetSnapToPixelGrid(true)` for better clarity at non-power-of-two sizes.
+- **Monospaced Font Support** - Added infrastructure for modern custom fonts.
+  - Defaults to **JetBrains Mono** if the font file is present in `Assets/Fonts/`.
+  - Added `fontMono` token mapped to `FenUIMonoFont`.
+- **Tab Badge Enhancements** - `SetTabBadge()` now supports both text and icons (atlas or texture).
+  - Supports semantic color tokens for badge tinting (e.g., green for OK, red for Error).
+
+### Changed
+- **Toolbar** - Added `AddImageButton()` helper method.
+- **Image Mixin** - Exported `ImageMixin:InitImage()` for better extensibility.
+
 ## [2.5.0] - 2025-12-25
 
 ### Changed

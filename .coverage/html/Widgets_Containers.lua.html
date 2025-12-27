@@ -1,0 +1,1687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coverage Report: ADDON_DEV_LOCAL/Libs/FenUI - Widgets\Containers.lua</title>
+    <style>
+        :root {
+            --bg: #1e1e2e;
+            --surface: #313244;
+            --text: #cdd6f4;
+            --subtext: #a6adc8;
+            --green: #a6e3a1;
+            --yellow: #f9e2af;
+            --red: #f38ba8;
+            --blue: #89b4fa;
+            --border: #45475a;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 {
+            color: var(--blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.75rem;
+        }
+        .timestamp {
+            color: var(--subtext);
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+        }
+        .summary-card {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        .stat-label {
+            color: var(--subtext);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .coverage-high { color: var(--green); }
+        .coverage-medium { color: var(--yellow); }
+        .coverage-low { color: var(--red); }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--surface);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 0.875rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: rgba(0,0,0,0.2);
+            font-weight: 600;
+            color: var(--subtext);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+        tr:hover { background: rgba(255,255,255,0.02); }
+        tr:last-child td { border-bottom: none; }
+        .file-link {
+            color: var(--blue);
+            text-decoration: none;
+        }
+        .file-link:hover { text-decoration: underline; }
+        .progress-bar {
+            width: 100px;
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        .text-right { text-align: right; }
+        .file-detail {
+            background: var(--surface);
+            border-radius: 12px;
+            margin-top: 2rem;
+            overflow: hidden;
+        }
+        .file-header {
+            padding: 1rem 1.5rem;
+            background: rgba(0,0,0,0.2);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .file-name {
+            font-family: 'Consolas', 'Monaco', monospace;
+            color: var(--blue);
+        }
+        .code-view {
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+        }
+        .code-line {
+            display: flex;
+            min-height: 1.5rem;
+        }
+        .line-number {
+            width: 50px;
+            padding: 0 0.75rem;
+            text-align: right;
+            color: var(--subtext);
+            user-select: none;
+            flex-shrink: 0;
+            background: rgba(0,0,0,0.1);
+        }
+        .line-content {
+            flex: 1;
+            padding: 0 1rem;
+            white-space: pre;
+        }
+        .line-covered {
+            background: rgba(166, 227, 161, 0.1);
+        }
+        .line-uncovered {
+            background: rgba(243, 139, 168, 0.15);
+        }
+        .line-uncovered .line-number {
+            background: rgba(243, 139, 168, 0.2);
+            color: var(--red);
+        }
+        .nav { margin-bottom: 1rem; }
+        .nav a {
+            color: var(--blue);
+            text-decoration: none;
+            margin-right: 1rem;
+        }
+        .nav a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="nav">
+            <a href="index.html">← Back to Summary</a>
+        </div>
+        
+        <div class="file-detail">
+            <div class="file-header">
+                <span class="file-name">Widgets\Containers.lua</span>
+                <span class="coverage-medium">75.3% (113/150 lines)</span>
+            </div>
+            <div class="code-view">
+    
+                <div class="code-line ">
+                    <span class="line-number">1</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">2</span>
+                    <span class="line-content">-- FenUI v2 - Container Widgets</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">3</span>
+                    <span class="line-content">--</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">4</span>
+                    <span class="line-content">-- Common container patterns:</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">5</span>
+                    <span class="line-content">-- - Inset: Styled content area with optional scroll</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">6</span>
+                    <span class="line-content">-- - ScrollPanel: Scrollable content with proper styling</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">7</span>
+                    <span class="line-content">--</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">8</span>
+                    <span class="line-content">-- NOTE: These are convenience wrappers. Inset now uses Layout internally</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">9</span>
+                    <span class="line-content">-- when available for consistent background/border handling.</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">10</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">11</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">12</span>
+                    <span class="line-content">local FenUI = FenUI</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">13</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">14</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">15</span>
+                    <span class="line-content">-- Layout Helper (reads from FenUI.Tokens.layout)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">16</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">17</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">18</span>
+                    <span class="line-content">local function GetLayout(name)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">19</span>
+                    <span class="line-content">	return FenUI:GetLayout(name)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">20</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">21</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">22</span>
+                    <span class="line-content">local function GetSpacing(val)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">23</span>
+                    <span class="line-content">	if not val then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">24</span>
+                    <span class="line-content">		return 0</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">25</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">26</span>
+                    <span class="line-content">	if type(val) == &quot;string&quot; then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">27</span>
+                    <span class="line-content">		return FenUI:GetSpacing(val)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">28</span>
+                    <span class="line-content">	elseif type(val) == &quot;number&quot; then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">29</span>
+                    <span class="line-content">		return val</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">30</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">31</span>
+                    <span class="line-content">	return 0</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">32</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">33</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">34</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">35</span>
+                    <span class="line-content">-- Inset Container</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">36</span>
+                    <span class="line-content">-- A styled content area typically used inside panels</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">37</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">38</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">39</span>
+                    <span class="line-content">local InsetMixin = {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">40</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">41</span>
+                    <span class="line-content">function InsetMixin:Init(config)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">42</span>
+                    <span class="line-content">	self.config = config or {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">43</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">44</span>
+                    <span class="line-content">	-- Apply backdrop</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">45</span>
+                    <span class="line-content">	self:SetBackdrop({</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">46</span>
+                    <span class="line-content">		bgFile = &quot;Interface\\Buttons\\WHITE8X8&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">47</span>
+                    <span class="line-content">		edgeFile = &quot;Interface\\Buttons\\WHITE8X8&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">48</span>
+                    <span class="line-content">		edgeSize = 1,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">49</span>
+                    <span class="line-content">		insets = { left = 1, right = 1, top = 1, bottom = 1 },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">50</span>
+                    <span class="line-content">	})</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">51</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">52</span>
+                    <span class="line-content">	-- Use token colors</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">53</span>
+                    <span class="line-content">	local bgR, bgG, bgB = FenUI:GetColorRGB(&quot;surfaceInset&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">54</span>
+                    <span class="line-content">	local borderR, borderG, borderB = FenUI:GetColorRGB(&quot;borderSubtle&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">55</span>
+                    <span class="line-content">	self:SetBackdropColor(bgR, bgG, bgB, config.alpha or 0.95)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">56</span>
+                    <span class="line-content">	self:SetBackdropBorderColor(borderR, borderG, borderB, 1)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">57</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">58</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">59</span>
+                    <span class="line-content">function InsetMixin:SetInsetAlpha(alpha)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">60</span>
+                    <span class="line-content">	local bgR, bgG, bgB = FenUI:GetColorRGB(&quot;surfaceInset&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">61</span>
+                    <span class="line-content">	self:SetBackdropColor(bgR, bgG, bgB, alpha)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">62</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">63</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">64</span>
+                    <span class="line-content">--- Create an inset container (styled content area)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">65</span>
+                    <span class="line-content">---@param parent Frame Parent frame</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">66</span>
+                    <span class="line-content">---@param config table|nil Configuration { padding, alpha, background, shadow }</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">67</span>
+                    <span class="line-content">---@return Frame inset</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">68</span>
+                    <span class="line-content">function FenUI:CreateInset(parent, config)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">69</span>
+                    <span class="line-content">	config = config or {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">70</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">71</span>
+                    <span class="line-content">	local inset</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">72</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">73</span>
+                    <span class="line-content">	-- Use Layout component if available (preferred)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">74</span>
+                    <span class="line-content">	if FenUI.CreateLayout then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">75</span>
+                    <span class="line-content">		-- Determine background config</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">76</span>
+                    <span class="line-content">		local bgConfig = config.background</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">77</span>
+                    <span class="line-content">		if not bgConfig then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">78</span>
+                    <span class="line-content">			-- Default to surfaceInset with alpha</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">79</span>
+                    <span class="line-content">			if config.alpha then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">80</span>
+                    <span class="line-content">				bgConfig = { color = &quot;surfaceInset&quot;, alpha = config.alpha }</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">81</span>
+                    <span class="line-content">			else</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">82</span>
+                    <span class="line-content">				bgConfig = &quot;surfaceInset&quot;</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">83</span>
+                    <span class="line-content">			end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">84</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">85</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">86</span>
+                    <span class="line-content">		inset = FenUI:CreateLayout(parent, {</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">87</span>
+                    <span class="line-content">			border = &quot;Inset&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">88</span>
+                    <span class="line-content">			background = bgConfig,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">89</span>
+                    <span class="line-content">			shadow = config.shadow,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">90</span>
+                    <span class="line-content">		})</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">91</span>
+                    <span class="line-content">	else</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">92</span>
+                    <span class="line-content">		-- Fallback to original implementation</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">93</span>
+                    <span class="line-content">		inset = CreateFrame(&quot;Frame&quot;, nil, parent, &quot;BackdropTemplate&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">94</span>
+                    <span class="line-content">		FenUI.Mixin(inset, InsetMixin)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">95</span>
+                    <span class="line-content">		inset:Init(config)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">96</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">97</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">98</span>
+                    <span class="line-content">	-- Position using layout constants or config</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">99</span>
+                    <span class="line-content">	-- NOTE: Systematic Margin Application</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">100</span>
+                    <span class="line-content">	-- By default, insets are positioned with 0 padding unless specified.</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">101</span>
+                    <span class="line-content">	local padding = GetSpacing(config.padding or 0)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">102</span>
+                    <span class="line-content">	local topOffset = config.topOffset or 0</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">103</span>
+                    <span class="line-content">	local bottomOffset = config.bottomOffset or 0</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">104</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">105</span>
+                    <span class="line-content">	inset:ClearAllPoints()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">106</span>
+                    <span class="line-content">	inset:SetPoint(&quot;TOPLEFT&quot;, parent, &quot;TOPLEFT&quot;, padding, -topOffset)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">107</span>
+                    <span class="line-content">	inset:SetPoint(&quot;BOTTOMRIGHT&quot;, parent, &quot;BOTTOMRIGHT&quot;, -padding, bottomOffset)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">108</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">109</span>
+                    <span class="line-content">	-- Add convenience method for backwards compatibility</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">110</span>
+                    <span class="line-content">	if not inset.SetInsetAlpha then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">111</span>
+                    <span class="line-content">		function inset:SetInsetAlpha(alpha)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">112</span>
+                    <span class="line-content">			if self.bgTexture then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">113</span>
+                    <span class="line-content">				local r, g, b = FenUI:GetColorRGB(&quot;surfaceInset&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">114</span>
+                    <span class="line-content">				self.bgTexture:SetColorTexture(r, g, b, alpha)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">115</span>
+                    <span class="line-content">			end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">116</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">117</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">118</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">119</span>
+                    <span class="line-content">	return inset</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">120</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">121</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">122</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">123</span>
+                    <span class="line-content">-- Scroll Panel</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">124</span>
+                    <span class="line-content">-- A scrollable content container with proper styling</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">125</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">126</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">127</span>
+                    <span class="line-content">local ScrollPanelMixin = {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">128</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">129</span>
+                    <span class="line-content">function ScrollPanelMixin:Init(config)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">130</span>
+                    <span class="line-content">	self.config = config or {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">131</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">132</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">133</span>
+                    <span class="line-content">function ScrollPanelMixin:GetScrollChild()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">134</span>
+                    <span class="line-content">	return self.scrollChild</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">135</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">136</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">137</span>
+                    <span class="line-content">function ScrollPanelMixin:GetContentWidth()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">138</span>
+                    <span class="line-content">	return self.scrollChild:GetWidth()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">139</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">140</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">141</span>
+                    <span class="line-content">function ScrollPanelMixin:SetContentHeight(height)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">142</span>
+                    <span class="line-content">	self.scrollChild:SetHeight(height)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">143</span>
+                    <span class="line-content">	self:UpdateScrollBar()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">144</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">145</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">146</span>
+                    <span class="line-content">function ScrollPanelMixin:ScrollToTop()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">147</span>
+                    <span class="line-content">	self.scrollFrame:SetVerticalScroll(0)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">148</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">149</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">150</span>
+                    <span class="line-content">function ScrollPanelMixin:ScrollToBottom()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">151</span>
+                    <span class="line-content">	local maxScroll = self.scrollFrame:GetVerticalScrollRange()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">152</span>
+                    <span class="line-content">	self.scrollFrame:SetVerticalScroll(maxScroll)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">153</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">154</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">155</span>
+                    <span class="line-content">function ScrollPanelMixin:UpdateScrollBar()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">156</span>
+                    <span class="line-content">	if not self.scrollBar then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">157</span>
+                    <span class="line-content">		return</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">158</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">159</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">160</span>
+                    <span class="line-content">	local visibleHeight = self.scrollFrame:GetHeight()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">161</span>
+                    <span class="line-content">	local totalHeight = self.scrollChild:GetHeight()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">162</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">163</span>
+                    <span class="line-content">	-- If height is 0, we might be in the first frame.</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">164</span>
+                    <span class="line-content">	-- Retry in next frame to ensure layout is done.</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">165</span>
+                    <span class="line-content">	if visibleHeight &lt;= 0 or totalHeight &lt;= 0 then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">166</span>
+                    <span class="line-content">		if not self.initRetry then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">167</span>
+                    <span class="line-content">			self.initRetry = true</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">168</span>
+                    <span class="line-content">			C_Timer.After(0.1, function()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">169</span>
+                    <span class="line-content">				self.initRetry = false</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">170</span>
+                    <span class="line-content">				self:UpdateScrollBar()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">171</span>
+                    <span class="line-content">			end)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">172</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">173</span>
+                    <span class="line-content">		return</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">174</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">175</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">176</span>
+                    <span class="line-content">	self.scrollBar:UpdateThumbSize(visibleHeight, totalHeight)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">177</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">178</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">179</span>
+                    <span class="line-content">--- Create a scroll panel (scrollable content area)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">180</span>
+                    <span class="line-content">---@param parent Frame Parent frame</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">181</span>
+                    <span class="line-content">---@param config table|nil Configuration { padding, showScrollBar }</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">182</span>
+                    <span class="line-content">---@return Frame scrollPanel</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">183</span>
+                    <span class="line-content">function FenUI:CreateScrollPanel(parent, config)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">184</span>
+                    <span class="line-content">	config = config or {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">185</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">186</span>
+                    <span class="line-content">	local container = CreateFrame(&quot;Frame&quot;, nil, parent)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">187</span>
+                    <span class="line-content">	FenUI.Mixin(container, ScrollPanelMixin)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">188</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">189</span>
+                    <span class="line-content">	local padding = GetSpacing(config.padding or 0)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">190</span>
+                    <span class="line-content">	local scrollBarWidth = config.showScrollBar ~= false and GetLayout(&quot;scrollBarWidth&quot;) or 0</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">191</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">192</span>
+                    <span class="line-content">	-- 1. Create native ScrollFrame (no template)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">193</span>
+                    <span class="line-content">	local scrollFrame = CreateFrame(&quot;ScrollFrame&quot;, nil, container)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">194</span>
+                    <span class="line-content">	scrollFrame:SetPoint(&quot;TOPLEFT&quot;, padding, -padding)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">195</span>
+                    <span class="line-content">	scrollFrame:SetPoint(&quot;BOTTOMRIGHT&quot;, -(padding + scrollBarWidth), padding)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">196</span>
+                    <span class="line-content">	container.scrollFrame = scrollFrame</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">197</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">198</span>
+                    <span class="line-content">	-- 2. Create custom ScrollBar</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">199</span>
+                    <span class="line-content">	if config.showScrollBar ~= false then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">200</span>
+                    <span class="line-content">		local scrollBar = self:CreateScrollBar(container, {</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">201</span>
+                    <span class="line-content">			width = scrollBarWidth,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">202</span>
+                    <span class="line-content">		})</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">203</span>
+                    <span class="line-content">		scrollBar:SetPoint(&quot;TOPRIGHT&quot;, -padding, -padding)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">204</span>
+                    <span class="line-content">		scrollBar:SetPoint(&quot;BOTTOMRIGHT&quot;, -padding, padding)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">205</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">206</span>
+                    <span class="line-content">		-- Link scrollBar and scrollFrame</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">207</span>
+                    <span class="line-content">		scrollBar:SetScript(&quot;OnValueChanged&quot;, function(_, value)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">208</span>
+                    <span class="line-content">			scrollFrame:SetVerticalScroll(value)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">209</span>
+                    <span class="line-content">		end)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">210</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">211</span>
+                    <span class="line-content">		scrollFrame:SetScript(&quot;OnScrollRangeChanged&quot;, function(_, xrange, yrange)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">212</span>
+                    <span class="line-content">			container:UpdateScrollBar()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">213</span>
+                    <span class="line-content">		end)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">214</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">215</span>
+                    <span class="line-content">		scrollFrame:SetScript(&quot;OnVerticalScroll&quot;, function(_, offset)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">216</span>
+                    <span class="line-content">			scrollBar:SetValue(offset)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">217</span>
+                    <span class="line-content">		end)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">218</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">219</span>
+                    <span class="line-content">		-- Mouse wheel support</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">220</span>
+                    <span class="line-content">		scrollFrame:EnableMouseWheel(true)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">221</span>
+                    <span class="line-content">		scrollFrame:SetScript(&quot;OnMouseWheel&quot;, function(_, delta)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">222</span>
+                    <span class="line-content">			local current = scrollBar:GetValue()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">223</span>
+                    <span class="line-content">			scrollBar:SetValue(current - (delta * 20)) -- 20px per scroll step</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">224</span>
+                    <span class="line-content">		end)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">225</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">226</span>
+                    <span class="line-content">		container.scrollBar = scrollBar</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">227</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">228</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">229</span>
+                    <span class="line-content">	-- 3. Create scroll child</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">230</span>
+                    <span class="line-content">	local scrollChild = CreateFrame(&quot;Frame&quot;, nil, scrollFrame)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">231</span>
+                    <span class="line-content">	scrollChild:SetWidth(1) -- Set by OnSizeChanged</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">232</span>
+                    <span class="line-content">	scrollChild:SetHeight(1) -- Will be set by content</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">233</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">234</span>
+                    <span class="line-content">	-- INSPECT SUPPORT: Enable picking for the content area</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">235</span>
+                    <span class="line-content">	scrollChild:EnableMouse(true)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">236</span>
+                    <span class="line-content">	if scrollChild.SetMouseClickEnabled then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">237</span>
+                    <span class="line-content">		scrollChild:SetMouseClickEnabled(false)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">238</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">239</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">240</span>
+                    <span class="line-content">	scrollFrame:SetScrollChild(scrollChild)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">241</span>
+                    <span class="line-content">	container.scrollChild = scrollChild</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">242</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">243</span>
+                    <span class="line-content">	-- Update scroll child width and scrollbar when container resizes</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">244</span>
+                    <span class="line-content">	container:SetScript(&quot;OnSizeChanged&quot;, function(self, width, height)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">245</span>
+                    <span class="line-content">		local innerWidth = width - (padding * 2) - scrollBarWidth</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">246</span>
+                    <span class="line-content">		scrollChild:SetWidth(math.max(1, innerWidth))</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">247</span>
+                    <span class="line-content">		self:UpdateScrollBar()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">248</span>
+                    <span class="line-content">	end)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">249</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">250</span>
+                    <span class="line-content">	container:Init(config)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">251</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">252</span>
+                    <span class="line-content">	return container</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">253</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">254</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">255</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">256</span>
+                    <span class="line-content">-- Inset with Scroll (Combined convenience widget)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">257</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">258</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">259</span>
+                    <span class="line-content">--- Create an inset container with built-in scroll functionality</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">260</span>
+                    <span class="line-content">---@param parent Frame Parent frame</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">261</span>
+                    <span class="line-content">---@param config table|nil Configuration { padding, topOffset, bottomOffset, alpha, scrollPadding }</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">262</span>
+                    <span class="line-content">---@return Frame inset, Frame scrollChild</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">263</span>
+                    <span class="line-content">function FenUI:CreateScrollInset(parent, config)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">264</span>
+                    <span class="line-content">	config = config or {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">265</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">266</span>
+                    <span class="line-content">	-- Create the inset container</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">267</span>
+                    <span class="line-content">	local inset = self:CreateInset(parent, config)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">268</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">269</span>
+                    <span class="line-content">	-- Create scroll panel inside it</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">270</span>
+                    <span class="line-content">	local scrollPanel = self:CreateScrollPanel(inset, {</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">271</span>
+                    <span class="line-content">		padding = config.scrollPadding or 0,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">272</span>
+                    <span class="line-content">		showScrollBar = config.showScrollBar ~= false,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">273</span>
+                    <span class="line-content">	})</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">274</span>
+                    <span class="line-content">	scrollPanel:SetAllPoints()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">275</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">276</span>
+                    <span class="line-content">	-- Attach scroll panel to inset for easy access</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">277</span>
+                    <span class="line-content">	inset.scrollPanel = scrollPanel</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">278</span>
+                    <span class="line-content">	inset.scrollChild = scrollPanel.scrollChild</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">279</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">280</span>
+                    <span class="line-content">	-- Convenience methods</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">281</span>
+                    <span class="line-content">	function inset:GetScrollChild()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">282</span>
+                    <span class="line-content">		return self.scrollChild</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">283</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">284</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">285</span>
+                    <span class="line-content">	function inset:SetContentHeight(height)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">286</span>
+                    <span class="line-content">		self.scrollPanel:SetContentHeight(height)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">287</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">288</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">289</span>
+                    <span class="line-content">	function inset:ScrollToTop()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">290</span>
+                    <span class="line-content">		self.scrollPanel:ScrollToTop()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">291</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">292</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">293</span>
+                    <span class="line-content">	return inset, scrollPanel.scrollChild</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">294</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">295</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">296</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">297</span>
+                    <span class="line-content">-- Export</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">298</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">299</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">300</span>
+                    <span class="line-content">FenUI.InsetMixin = InsetMixin</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">301</span>
+                    <span class="line-content">FenUI.ScrollPanelMixin = ScrollPanelMixin</span>
+                </div>
+        
+            </div>
+        </div>
+    
+    </div>
+</body>
+</html>

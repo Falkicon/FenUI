@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coverage Report: ADDON_DEV_LOCAL/Libs/FenUI - Widgets\EmptyState.lua</title>
+    <style>
+        :root {
+            --bg: #1e1e2e;
+            --surface: #313244;
+            --text: #cdd6f4;
+            --subtext: #a6adc8;
+            --green: #a6e3a1;
+            --yellow: #f9e2af;
+            --red: #f38ba8;
+            --blue: #89b4fa;
+            --border: #45475a;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 {
+            color: var(--blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.75rem;
+        }
+        .timestamp {
+            color: var(--subtext);
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+        }
+        .summary-card {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        .stat-label {
+            color: var(--subtext);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .coverage-high { color: var(--green); }
+        .coverage-medium { color: var(--yellow); }
+        .coverage-low { color: var(--red); }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--surface);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 0.875rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: rgba(0,0,0,0.2);
+            font-weight: 600;
+            color: var(--subtext);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+        tr:hover { background: rgba(255,255,255,0.02); }
+        tr:last-child td { border-bottom: none; }
+        .file-link {
+            color: var(--blue);
+            text-decoration: none;
+        }
+        .file-link:hover { text-decoration: underline; }
+        .progress-bar {
+            width: 100px;
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        .text-right { text-align: right; }
+        .file-detail {
+            background: var(--surface);
+            border-radius: 12px;
+            margin-top: 2rem;
+            overflow: hidden;
+        }
+        .file-header {
+            padding: 1rem 1.5rem;
+            background: rgba(0,0,0,0.2);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .file-name {
+            font-family: 'Consolas', 'Monaco', monospace;
+            color: var(--blue);
+        }
+        .code-view {
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+        }
+        .code-line {
+            display: flex;
+            min-height: 1.5rem;
+        }
+        .line-number {
+            width: 50px;
+            padding: 0 0.75rem;
+            text-align: right;
+            color: var(--subtext);
+            user-select: none;
+            flex-shrink: 0;
+            background: rgba(0,0,0,0.1);
+        }
+        .line-content {
+            flex: 1;
+            padding: 0 1rem;
+            white-space: pre;
+        }
+        .line-covered {
+            background: rgba(166, 227, 161, 0.1);
+        }
+        .line-uncovered {
+            background: rgba(243, 139, 168, 0.15);
+        }
+        .line-uncovered .line-number {
+            background: rgba(243, 139, 168, 0.2);
+            color: var(--red);
+        }
+        .nav { margin-bottom: 1rem; }
+        .nav a {
+            color: var(--blue);
+            text-decoration: none;
+            margin-right: 1rem;
+        }
+        .nav a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="nav">
+            <a href="index.html">← Back to Summary</a>
+        </div>
+        
+        <div class="file-detail">
+            <div class="file-header">
+                <span class="file-name">Widgets\EmptyState.lua</span>
+                <span class="coverage-high">86.6% (123/142 lines)</span>
+            </div>
+            <div class="code-view">
+    
+                <div class="code-line ">
+                    <span class="line-number">1</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">2</span>
+                    <span class="line-content">-- FenUI v2 - EmptyState Widget</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">3</span>
+                    <span class="line-content">--</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">4</span>
+                    <span class="line-content">-- Centered overlay for empty content areas with two-slot architecture.</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">5</span>
+                    <span class="line-content">--</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">6</span>
+                    <span class="line-content">-- Slots:</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">7</span>
+                    <span class="line-content">-- - top: Typically an Image, icon, or custom frame</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">8</span>
+                    <span class="line-content">-- - bottom: Typically text (title + subtitle), or custom composite</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">9</span>
+                    <span class="line-content">--</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">10</span>
+                    <span class="line-content">-- Features:</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">11</span>
+                    <span class="line-content">-- - Background (color, gradient, or image)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">12</span>
+                    <span class="line-content">-- - Slot-based content injection</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">13</span>
+                    <span class="line-content">-- - Backwards compatible with icon/title/subtitle props</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">14</span>
+                    <span class="line-content">-- - Creates Image component for conditional icons</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">15</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">16</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">17</span>
+                    <span class="line-content">local FenUI = FenUI</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">18</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">19</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">20</span>
+                    <span class="line-content">-- EmptyState Mixin</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">21</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">22</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">23</span>
+                    <span class="line-content">local EmptyStateMixin = {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">24</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">25</span>
+                    <span class="line-content">function EmptyStateMixin:Init(config)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">26</span>
+                    <span class="line-content">	self.config = config or {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">27</span>
+                    <span class="line-content">	self.slots = {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">28</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">29</span>
+                    <span class="line-content">	-- 1. Background</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">30</span>
+                    <span class="line-content">	self.bg = self:CreateTexture(nil, &quot;BACKGROUND&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">31</span>
+                    <span class="line-content">	self.bg:SetAllPoints()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">32</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">33</span>
+                    <span class="line-content">	if config.backgroundGradient then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">34</span>
+                    <span class="line-content">		local g = config.backgroundGradient</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">35</span>
+                    <span class="line-content">		local fromR, fromG, fromB, fromA = FenUI:GetColor(g.from or &quot;black&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">36</span>
+                    <span class="line-content">		local toR, toG, toB, toA = FenUI:GetColor(g.to or &quot;transparent&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">37</span>
+                    <span class="line-content">		self.bg:SetGradient(</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">38</span>
+                    <span class="line-content">			g.direction or &quot;VERTICAL&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">39</span>
+                    <span class="line-content">			CreateColor(fromR, fromG, fromB, fromA),</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">40</span>
+                    <span class="line-content">			CreateColor(toR, toG, toB, toA)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">41</span>
+                    <span class="line-content">		)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">42</span>
+                    <span class="line-content">	elseif config.backgroundImage then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">43</span>
+                    <span class="line-content">		self.bg:SetTexture(config.backgroundImage)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">44</span>
+                    <span class="line-content">	elseif config.background then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">45</span>
+                    <span class="line-content">		local r, g, b, a = FenUI:GetColor(config.background)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">46</span>
+                    <span class="line-content">		self.bg:SetColorTexture(r, g, b, a)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">47</span>
+                    <span class="line-content">	else</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">48</span>
+                    <span class="line-content">		self.bg:Hide()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">49</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">50</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">51</span>
+                    <span class="line-content">	-- 2. Content Container (centered)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">52</span>
+                    <span class="line-content">	self.content = CreateFrame(&quot;Frame&quot;, nil, self)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">53</span>
+                    <span class="line-content">	self.content:SetPoint(&quot;CENTER&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">54</span>
+                    <span class="line-content">	local contentWidth = config.width or (self:GetParent() and self:GetParent():GetWidth()) or 300</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">55</span>
+                    <span class="line-content">	self.content:SetSize(contentWidth, 200)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">56</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">57</span>
+                    <span class="line-content">	-- 3. Create slots container frames</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">58</span>
+                    <span class="line-content">	self.topSlot = CreateFrame(&quot;Frame&quot;, nil, self.content)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">59</span>
+                    <span class="line-content">	self.topSlot:SetPoint(&quot;TOP&quot;, self.content, &quot;TOP&quot;, 0, 0)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">60</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">61</span>
+                    <span class="line-content">	self.bottomSlot = CreateFrame(&quot;Frame&quot;, nil, self.content)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">62</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">63</span>
+                    <span class="line-content">	-- Gap between slots</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">64</span>
+                    <span class="line-content">	local gap = config.gap or 16</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">65</span>
+                    <span class="line-content">	if type(gap) == &quot;string&quot; then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">66</span>
+                    <span class="line-content">		gap = FenUI:GetSpacing(gap) or 16</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">67</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">68</span>
+                    <span class="line-content">	self.slotGap = gap</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">69</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">70</span>
+                    <span class="line-content">	-- 4. Populate slots based on config (backwards compatibility)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">71</span>
+                    <span class="line-content">	self:PopulateFromConfig(config)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">72</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">73</span>
+                    <span class="line-content">	-- 5. Layout slots</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">74</span>
+                    <span class="line-content">	self:LayoutSlots()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">75</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">76</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">77</span>
+                    <span class="line-content">--- Populate slots from config (backwards compatibility layer)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">78</span>
+                    <span class="line-content">function EmptyStateMixin:PopulateFromConfig(config)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">79</span>
+                    <span class="line-content">	-- TOP SLOT: Image or icon</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">80</span>
+                    <span class="line-content">	if config.image then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">81</span>
+                    <span class="line-content">		-- New image config - create Image component</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">82</span>
+                    <span class="line-content">		if FenUI.CreateImage then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">83</span>
+                    <span class="line-content">			local imageConfig = type(config.image) == &quot;table&quot; and config.image or { texture = config.image }</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">84</span>
+                    <span class="line-content">			-- Apply default size if not specified (default reduced to 32)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">85</span>
+                    <span class="line-content">			imageConfig.width = imageConfig.width or config.iconSize or 32</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">86</span>
+                    <span class="line-content">			imageConfig.height = imageConfig.height or imageConfig.width</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">87</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">88</span>
+                    <span class="line-content">			local img = FenUI:CreateImage(self.topSlot, imageConfig)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">89</span>
+                    <span class="line-content">			img:SetPoint(&quot;CENTER&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">90</span>
+                    <span class="line-content">			self.topSlot:SetSize(imageConfig.width, imageConfig.height)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">91</span>
+                    <span class="line-content">			self.slots.top = img</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">92</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">93</span>
+                    <span class="line-content">	elseif config.icon then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">94</span>
+                    <span class="line-content">		-- Legacy icon prop - create simple texture or Image component (default reduced to 32)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">95</span>
+                    <span class="line-content">		local iconSize = config.iconSize or 32</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">96</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">97</span>
+                    <span class="line-content">		if FenUI.CreateImage then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">98</span>
+                    <span class="line-content">			local img = FenUI:CreateImage(self.topSlot, {</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">99</span>
+                    <span class="line-content">				texture = config.icon,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">100</span>
+                    <span class="line-content">				width = iconSize,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">101</span>
+                    <span class="line-content">				height = iconSize,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">102</span>
+                    <span class="line-content">			})</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">103</span>
+                    <span class="line-content">			img:SetPoint(&quot;CENTER&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">104</span>
+                    <span class="line-content">			self.slots.top = img</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">105</span>
+                    <span class="line-content">		else</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">106</span>
+                    <span class="line-content">			-- Fallback to raw texture</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">107</span>
+                    <span class="line-content">			local icon = self.topSlot:CreateTexture(nil, &quot;ARTWORK&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">108</span>
+                    <span class="line-content">			icon:SetTexture(config.icon)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">109</span>
+                    <span class="line-content">			icon:SetSize(iconSize, iconSize)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">110</span>
+                    <span class="line-content">			icon:SetPoint(&quot;CENTER&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">111</span>
+                    <span class="line-content">			self.slots.top = icon</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">112</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">113</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">114</span>
+                    <span class="line-content">		self.topSlot:SetSize(iconSize, iconSize)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">115</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">116</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">117</span>
+                    <span class="line-content">	-- BOTTOM SLOT: Title and/or subtitle</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">118</span>
+                    <span class="line-content">	if config.title or config.subtitle then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">119</span>
+                    <span class="line-content">		local textHeight = 0</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">120</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">121</span>
+                    <span class="line-content">		-- Title</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">122</span>
+                    <span class="line-content">		if config.title then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">123</span>
+                    <span class="line-content">			self.titleText = self.bottomSlot:CreateFontString(nil, &quot;OVERLAY&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">124</span>
+                    <span class="line-content">			self.titleText:SetFontObject(FenUI:GetFont(&quot;fontHeading&quot;))</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">125</span>
+                    <span class="line-content">			self.titleText:SetText(config.title)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">126</span>
+                    <span class="line-content">			self.titleText:SetPoint(&quot;TOP&quot;, self.bottomSlot, &quot;TOP&quot;, 0, 0)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">127</span>
+                    <span class="line-content">			self.titleText:SetJustifyH(&quot;CENTER&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">128</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">129</span>
+                    <span class="line-content">			local r, g, b = FenUI:GetColorRGB(config.titleToken or &quot;textEmptyTitle&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">130</span>
+                    <span class="line-content">			self.titleText:SetTextColor(r, g, b)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">131</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">132</span>
+                    <span class="line-content">			textHeight = textHeight + self.titleText:GetStringHeight()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">133</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">134</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">135</span>
+                    <span class="line-content">		-- Subtitle</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">136</span>
+                    <span class="line-content">		if config.subtitle then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">137</span>
+                    <span class="line-content">			self.subtitleText = self.bottomSlot:CreateFontString(nil, &quot;OVERLAY&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">138</span>
+                    <span class="line-content">			self.subtitleText:SetFontObject(FenUI:GetFont(&quot;fontSmall&quot;))</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">139</span>
+                    <span class="line-content">			self.subtitleText:SetText(config.subtitle)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">140</span>
+                    <span class="line-content">			self.subtitleText:SetJustifyH(&quot;CENTER&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">141</span>
+                    <span class="line-content">			self.subtitleText:SetWidth(self.content:GetWidth() - 20)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">142</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">143</span>
+                    <span class="line-content">			local r, g, b = FenUI:GetColorRGB(config.subtitleToken or &quot;textEmptySubtitle&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">144</span>
+                    <span class="line-content">			self.subtitleText:SetTextColor(r, g, b)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">145</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">146</span>
+                    <span class="line-content">			if self.titleText then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">147</span>
+                    <span class="line-content">				self.subtitleText:SetPoint(&quot;TOP&quot;, self.titleText, &quot;BOTTOM&quot;, 0, -4)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">148</span>
+                    <span class="line-content">			else</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">149</span>
+                    <span class="line-content">				self.subtitleText:SetPoint(&quot;TOP&quot;, self.bottomSlot, &quot;TOP&quot;, 0, 0)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">150</span>
+                    <span class="line-content">			end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">151</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">152</span>
+                    <span class="line-content">			textHeight = textHeight + self.subtitleText:GetStringHeight() + 4</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">153</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">154</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">155</span>
+                    <span class="line-content">		self.bottomSlot:SetSize(self.content:GetWidth(), textHeight)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">156</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">157</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">158</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">159</span>
+                    <span class="line-content">--- Layout slots vertically with gap</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">160</span>
+                    <span class="line-content">function EmptyStateMixin:LayoutSlots()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">161</span>
+                    <span class="line-content">	local totalHeight = 0</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">162</span>
+                    <span class="line-content">	local topHeight = self.topSlot:GetHeight() or 0</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">163</span>
+                    <span class="line-content">	local bottomHeight = self.bottomSlot:GetHeight() or 0</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">164</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">165</span>
+                    <span class="line-content">	-- Calculate total content height</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">166</span>
+                    <span class="line-content">	if topHeight &gt; 0 then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">167</span>
+                    <span class="line-content">		totalHeight = totalHeight + topHeight</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">168</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">169</span>
+                    <span class="line-content">	if bottomHeight &gt; 0 then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">170</span>
+                    <span class="line-content">		if topHeight &gt; 0 then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">171</span>
+                    <span class="line-content">			totalHeight = totalHeight + self.slotGap</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">172</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">173</span>
+                    <span class="line-content">		totalHeight = totalHeight + bottomHeight</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">174</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">175</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">176</span>
+                    <span class="line-content">	-- Update content container height</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">177</span>
+                    <span class="line-content">	self.content:SetHeight(math.max(totalHeight, 50))</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">178</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">179</span>
+                    <span class="line-content">	-- Position slots</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">180</span>
+                    <span class="line-content">	self.topSlot:ClearAllPoints()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">181</span>
+                    <span class="line-content">	self.topSlot:SetPoint(&quot;TOP&quot;, self.content, &quot;TOP&quot;, 0, 0)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">182</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">183</span>
+                    <span class="line-content">	self.bottomSlot:ClearAllPoints()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">184</span>
+                    <span class="line-content">	if topHeight &gt; 0 then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">185</span>
+                    <span class="line-content">		self.bottomSlot:SetPoint(&quot;TOP&quot;, self.topSlot, &quot;BOTTOM&quot;, 0, -self.slotGap)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">186</span>
+                    <span class="line-content">	else</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">187</span>
+                    <span class="line-content">		self.bottomSlot:SetPoint(&quot;TOP&quot;, self.content, &quot;TOP&quot;, 0, 0)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">188</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">189</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">190</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">191</span>
+                    <span class="line-content">--- Set content for a slot</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">192</span>
+                    <span class="line-content">---@param slotName string &quot;top&quot; or &quot;bottom&quot;</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">193</span>
+                    <span class="line-content">---@param frame Frame|nil Frame to place in slot, or nil to clear</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">194</span>
+                    <span class="line-content">function EmptyStateMixin:SetSlot(slotName, frame)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">195</span>
+                    <span class="line-content">	local slotFrame = slotName == &quot;top&quot; and self.topSlot or self.bottomSlot</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">196</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">197</span>
+                    <span class="line-content">	-- Clear existing content</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">198</span>
+                    <span class="line-content">	self:ClearSlot(slotName)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">199</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">200</span>
+                    <span class="line-content">	if frame then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">201</span>
+                    <span class="line-content">		frame:SetParent(slotFrame)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">202</span>
+                    <span class="line-content">		frame:SetPoint(&quot;CENTER&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">203</span>
+                    <span class="line-content">		self.slots[slotName] = frame</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">204</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">205</span>
+                    <span class="line-content">		-- Update slot size to match frame</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">206</span>
+                    <span class="line-content">		local width, height = frame:GetSize()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">207</span>
+                    <span class="line-content">		if width &gt; 0 and height &gt; 0 then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">208</span>
+                    <span class="line-content">			slotFrame:SetSize(width, height)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">209</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">210</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">211</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">212</span>
+                    <span class="line-content">	self:LayoutSlots()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">213</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">214</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">215</span>
+                    <span class="line-content">--- Clear a slot&#x27;s content</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">216</span>
+                    <span class="line-content">---@param slotName string &quot;top&quot; or &quot;bottom&quot;</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">217</span>
+                    <span class="line-content">function EmptyStateMixin:ClearSlot(slotName)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">218</span>
+                    <span class="line-content">	local existing = self.slots[slotName]</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">219</span>
+                    <span class="line-content">	if existing then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">220</span>
+                    <span class="line-content">		if existing.Hide then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">221</span>
+                    <span class="line-content">			existing:Hide()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">222</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">223</span>
+                    <span class="line-content">		self.slots[slotName] = nil</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">224</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">225</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">226</span>
+                    <span class="line-content">	local slotFrame = slotName == &quot;top&quot; and self.topSlot or self.bottomSlot</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">227</span>
+                    <span class="line-content">	slotFrame:SetSize(0, 0)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">228</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">229</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">230</span>
+                    <span class="line-content">--- Get the frame in a slot</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">231</span>
+                    <span class="line-content">---@param slotName string &quot;top&quot; or &quot;bottom&quot;</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">232</span>
+                    <span class="line-content">---@return Frame|nil</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">233</span>
+                    <span class="line-content">function EmptyStateMixin:GetSlot(slotName)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">234</span>
+                    <span class="line-content">	return self.slots[slotName]</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">235</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">236</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">237</span>
+                    <span class="line-content">--- Update title text</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">238</span>
+                    <span class="line-content">---@param text string</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">239</span>
+                    <span class="line-content">function EmptyStateMixin:SetTitle(text)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">240</span>
+                    <span class="line-content">	if self.titleText then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">241</span>
+                    <span class="line-content">		self.titleText:SetText(text)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">242</span>
+                    <span class="line-content">		self:LayoutSlots()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">243</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">244</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">245</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">246</span>
+                    <span class="line-content">--- Update subtitle text</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">247</span>
+                    <span class="line-content">---@param text string</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">248</span>
+                    <span class="line-content">function EmptyStateMixin:SetSubtitle(text)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">249</span>
+                    <span class="line-content">	if self.subtitleText then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">250</span>
+                    <span class="line-content">		self.subtitleText:SetText(text)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">251</span>
+                    <span class="line-content">		self:LayoutSlots()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">252</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">253</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">254</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">255</span>
+                    <span class="line-content">--- Refresh the image (re-resolve conditional)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">256</span>
+                    <span class="line-content">function EmptyStateMixin:RefreshImage()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">257</span>
+                    <span class="line-content">	local topContent = self.slots.top</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">258</span>
+                    <span class="line-content">	if topContent and topContent.Refresh then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">259</span>
+                    <span class="line-content">		topContent:Refresh()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">260</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">261</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">262</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">263</span>
+                    <span class="line-content">--- Show/hide the empty state</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">264</span>
+                    <span class="line-content">---@param visible boolean</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">265</span>
+                    <span class="line-content">function EmptyStateMixin:SetVisible(visible)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">266</span>
+                    <span class="line-content">	self:SetShown(visible)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">267</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">268</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">269</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">270</span>
+                    <span class="line-content">-- Factory</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">271</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">272</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">273</span>
+                    <span class="line-content">--- Create an empty state component</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">274</span>
+                    <span class="line-content">---@param parent Frame Parent frame</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">275</span>
+                    <span class="line-content">---@param config table Configuration { background, image, icon, title, subtitle, gap, etc }</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">276</span>
+                    <span class="line-content">---@return Frame emptyState</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">277</span>
+                    <span class="line-content">function FenUI:CreateEmptyState(parent, config)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">278</span>
+                    <span class="line-content">	local empty = CreateFrame(&quot;Frame&quot;, nil, parent)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">279</span>
+                    <span class="line-content">	empty:SetAllPoints()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">280</span>
+                    <span class="line-content">	FenUI.Mixin(empty, EmptyStateMixin)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">281</span>
+                    <span class="line-content">	empty:Init(config or {})</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">282</span>
+                    <span class="line-content">	return empty</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">283</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+            </div>
+        </div>
+    
+    </div>
+</body>
+</html>

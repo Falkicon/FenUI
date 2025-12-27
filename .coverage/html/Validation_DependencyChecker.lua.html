@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coverage Report: ADDON_DEV_LOCAL/Libs/FenUI - Validation\DependencyChecker.lua</title>
+    <style>
+        :root {
+            --bg: #1e1e2e;
+            --surface: #313244;
+            --text: #cdd6f4;
+            --subtext: #a6adc8;
+            --green: #a6e3a1;
+            --yellow: #f9e2af;
+            --red: #f38ba8;
+            --blue: #89b4fa;
+            --border: #45475a;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 {
+            color: var(--blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.75rem;
+        }
+        .timestamp {
+            color: var(--subtext);
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+        }
+        .summary-card {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        .stat-label {
+            color: var(--subtext);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .coverage-high { color: var(--green); }
+        .coverage-medium { color: var(--yellow); }
+        .coverage-low { color: var(--red); }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--surface);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 0.875rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: rgba(0,0,0,0.2);
+            font-weight: 600;
+            color: var(--subtext);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+        tr:hover { background: rgba(255,255,255,0.02); }
+        tr:last-child td { border-bottom: none; }
+        .file-link {
+            color: var(--blue);
+            text-decoration: none;
+        }
+        .file-link:hover { text-decoration: underline; }
+        .progress-bar {
+            width: 100px;
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        .text-right { text-align: right; }
+        .file-detail {
+            background: var(--surface);
+            border-radius: 12px;
+            margin-top: 2rem;
+            overflow: hidden;
+        }
+        .file-header {
+            padding: 1rem 1.5rem;
+            background: rgba(0,0,0,0.2);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .file-name {
+            font-family: 'Consolas', 'Monaco', monospace;
+            color: var(--blue);
+        }
+        .code-view {
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+        }
+        .code-line {
+            display: flex;
+            min-height: 1.5rem;
+        }
+        .line-number {
+            width: 50px;
+            padding: 0 0.75rem;
+            text-align: right;
+            color: var(--subtext);
+            user-select: none;
+            flex-shrink: 0;
+            background: rgba(0,0,0,0.1);
+        }
+        .line-content {
+            flex: 1;
+            padding: 0 1rem;
+            white-space: pre;
+        }
+        .line-covered {
+            background: rgba(166, 227, 161, 0.1);
+        }
+        .line-uncovered {
+            background: rgba(243, 139, 168, 0.15);
+        }
+        .line-uncovered .line-number {
+            background: rgba(243, 139, 168, 0.2);
+            color: var(--red);
+        }
+        .nav { margin-bottom: 1rem; }
+        .nav a {
+            color: var(--blue);
+            text-decoration: none;
+            margin-right: 1rem;
+        }
+        .nav a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="nav">
+            <a href="index.html">← Back to Summary</a>
+        </div>
+        
+        <div class="file-detail">
+            <div class="file-header">
+                <span class="file-name">Validation\DependencyChecker.lua</span>
+                <span class="coverage-high">82.4% (122/148 lines)</span>
+            </div>
+            <div class="code-view">
+    
+                <div class="code-line ">
+                    <span class="line-number">1</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">2</span>
+                    <span class="line-content">-- FenUI v2 - Dependency Checker</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">3</span>
+                    <span class="line-content">--</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">4</span>
+                    <span class="line-content">-- Validates that all Blizzard APIs, layouts, and atlases FenUI depends on exist.</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">5</span>
+                    <span class="line-content">-- Run via: /fenui validate</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">6</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">7</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">8</span>
+                    <span class="line-content">local FenUI = FenUI</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">9</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">10</span>
+                    <span class="line-content">FenUI.Validation = {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">11</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">12</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">13</span>
+                    <span class="line-content">-- Dependency Definitions</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">14</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">15</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">16</span>
+                    <span class="line-content">FenUI.Validation.Dependencies = {</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">17</span>
+                    <span class="line-content">	-- Core APIs that must exist</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">18</span>
+                    <span class="line-content">	apis = {</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">19</span>
+                    <span class="line-content">		{ name = &quot;NineSliceUtil&quot;, path = &quot;NineSliceUtil&quot; },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">20</span>
+                    <span class="line-content">		{ name = &quot;NineSliceUtil.ApplyLayout&quot;, path = &quot;NineSliceUtil.ApplyLayout&quot; },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">21</span>
+                    <span class="line-content">		{ name = &quot;NineSliceUtil.GetLayout&quot;, path = &quot;NineSliceUtil.GetLayout&quot; },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">22</span>
+                    <span class="line-content">		{ name = &quot;NineSliceLayouts&quot;, path = &quot;NineSliceLayouts&quot; },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">23</span>
+                    <span class="line-content">		{ name = &quot;NineSlicePanelMixin&quot;, path = &quot;NineSlicePanelMixin&quot; },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">24</span>
+                    <span class="line-content">		{ name = &quot;C_Texture.GetAtlasInfo&quot;, path = &quot;C_Texture.GetAtlasInfo&quot; },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">25</span>
+                    <span class="line-content">		{ name = &quot;CreateFromMixins&quot;, path = &quot;CreateFromMixins&quot; },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">26</span>
+                    <span class="line-content">		{ name = &quot;Mixin&quot;, path = &quot;Mixin&quot; },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">27</span>
+                    <span class="line-content">	},</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">28</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">29</span>
+                    <span class="line-content">	-- Blizzard NineSlice layouts we use</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">30</span>
+                    <span class="line-content">	layouts = {</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">31</span>
+                    <span class="line-content">		-- Core layouts</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">32</span>
+                    <span class="line-content">		&quot;SimplePanelTemplate&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">33</span>
+                    <span class="line-content">		&quot;PortraitFrameTemplate&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">34</span>
+                    <span class="line-content">		&quot;ButtonFrameTemplateNoPortrait&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">35</span>
+                    <span class="line-content">		&quot;InsetFrameTemplate&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">36</span>
+                    <span class="line-content">		&quot;GenericMetal&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">37</span>
+                    <span class="line-content">		&quot;Dialog&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">38</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">39</span>
+                    <span class="line-content">		-- Expansion-specific</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">40</span>
+                    <span class="line-content">		&quot;DragonflightMissionFrame&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">41</span>
+                    <span class="line-content">		&quot;CovenantMissionFrame&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">42</span>
+                    <span class="line-content">		&quot;BFAMissionHorde&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">43</span>
+                    <span class="line-content">		&quot;BFAMissionAlliance&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">44</span>
+                    <span class="line-content">	},</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">45</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">46</span>
+                    <span class="line-content">	-- Atlas textures we may reference</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">47</span>
+                    <span class="line-content">	atlases = {</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">48</span>
+                    <span class="line-content">		-- SimpleMetal frame</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">49</span>
+                    <span class="line-content">		&quot;UI-Frame-SimpleMetal-CornerTopLeft&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">50</span>
+                    <span class="line-content">		&quot;_UI-Frame-SimpleMetal-EdgeTop&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">51</span>
+                    <span class="line-content">		&quot;!UI-Frame-SimpleMetal-EdgeLeft&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">52</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">53</span>
+                    <span class="line-content">		-- Metal frame</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">54</span>
+                    <span class="line-content">		&quot;UI-Frame-Metal-CornerTopLeft&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">55</span>
+                    <span class="line-content">		&quot;UI-Frame-Metal-CornerTopRight&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">56</span>
+                    <span class="line-content">		&quot;UI-Frame-Metal-CornerBottomLeft&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">57</span>
+                    <span class="line-content">		&quot;UI-Frame-Metal-CornerBottomRight&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">58</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">59</span>
+                    <span class="line-content">		-- Inset frame</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">60</span>
+                    <span class="line-content">		&quot;UI-Frame-InnerTopLeft&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">61</span>
+                    <span class="line-content">		&quot;UI-Frame-InnerTopRight&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">62</span>
+                    <span class="line-content">		&quot;UI-Frame-InnerBotLeftCorner&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">63</span>
+                    <span class="line-content">		&quot;UI-Frame-InnerBotRight&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">64</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">65</span>
+                    <span class="line-content">		-- Generic metal</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">66</span>
+                    <span class="line-content">		&quot;UI-Frame-GenericMetal-Corner&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">67</span>
+                    <span class="line-content">	},</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">68</span>
+                    <span class="line-content">}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">69</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">70</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">71</span>
+                    <span class="line-content">-- Validation Functions</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">72</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">73</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">74</span>
+                    <span class="line-content">local function CheckAPI(apiDef)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">75</span>
+                    <span class="line-content">	local parts = { strsplit(&quot;.&quot;, apiDef.path) }</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">76</span>
+                    <span class="line-content">	local current = _G</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">77</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">78</span>
+                    <span class="line-content">	for _, part in ipairs(parts) do</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">79</span>
+                    <span class="line-content">		if current == nil then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">80</span>
+                    <span class="line-content">			return false, &quot;Parent is nil&quot;</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">81</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">82</span>
+                    <span class="line-content">		current = current[part]</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">83</span>
+                    <span class="line-content">		if current == nil then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">84</span>
+                    <span class="line-content">			return false, &quot;Not found&quot;</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">85</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">86</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">87</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">88</span>
+                    <span class="line-content">	return true, type(current)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">89</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">90</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">91</span>
+                    <span class="line-content">local function CheckLayout(layoutName)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">92</span>
+                    <span class="line-content">	if not NineSliceLayouts then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">93</span>
+                    <span class="line-content">		return false, &quot;NineSliceLayouts not loaded&quot;</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">94</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">95</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">96</span>
+                    <span class="line-content">	local layout = NineSliceLayouts[layoutName]</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">97</span>
+                    <span class="line-content">	if layout then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">98</span>
+                    <span class="line-content">		return true, &quot;exists&quot;</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">99</span>
+                    <span class="line-content">	else</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">100</span>
+                    <span class="line-content">		return false, &quot;Not found&quot;</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">101</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">102</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">103</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">104</span>
+                    <span class="line-content">local function CheckAtlas(atlasName)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">105</span>
+                    <span class="line-content">	if not C_Texture or not C_Texture.GetAtlasInfo then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">106</span>
+                    <span class="line-content">		return false, &quot;C_Texture.GetAtlasInfo not available&quot;</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">107</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">108</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">109</span>
+                    <span class="line-content">	local info = C_Texture.GetAtlasInfo(atlasName)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">110</span>
+                    <span class="line-content">	if info then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">111</span>
+                    <span class="line-content">		return true, string.format(&quot;%dx%d&quot;, info.width or 0, info.height or 0)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">112</span>
+                    <span class="line-content">	else</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">113</span>
+                    <span class="line-content">		return false, &quot;Not found&quot;</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">114</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">115</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">116</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">117</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">118</span>
+                    <span class="line-content">-- Main Validation Runner</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">119</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">120</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">121</span>
+                    <span class="line-content">function FenUI.Validation:Run(verbose)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">122</span>
+                    <span class="line-content">	local results = {</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">123</span>
+                    <span class="line-content">		valid = true,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">124</span>
+                    <span class="line-content">		timestamp = date(&quot;%Y-%m-%d %H:%M:%S&quot;),</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">125</span>
+                    <span class="line-content">		gameVersion = GetBuildInfo(),</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">126</span>
+                    <span class="line-content">		apis = { passed = 0, failed = 0, missing = {} },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">127</span>
+                    <span class="line-content">		layouts = { passed = 0, failed = 0, missing = {} },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">128</span>
+                    <span class="line-content">		atlases = { passed = 0, failed = 0, missing = {} },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">129</span>
+                    <span class="line-content">	}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">130</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">131</span>
+                    <span class="line-content">	-- Check APIs</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">132</span>
+                    <span class="line-content">	for _, apiDef in ipairs(self.Dependencies.apis) do</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">133</span>
+                    <span class="line-content">		local ok, detail = CheckAPI(apiDef)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">134</span>
+                    <span class="line-content">		if ok then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">135</span>
+                    <span class="line-content">			results.apis.passed = results.apis.passed + 1</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">136</span>
+                    <span class="line-content">			if verbose then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">137</span>
+                    <span class="line-content">				print(string.format(&quot;  |cff00ff00OK|r API: %s (%s)&quot;, apiDef.name, detail))</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">138</span>
+                    <span class="line-content">			end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">139</span>
+                    <span class="line-content">		else</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">140</span>
+                    <span class="line-content">			results.apis.failed = results.apis.failed + 1</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">141</span>
+                    <span class="line-content">			results.valid = false</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">142</span>
+                    <span class="line-content">			table.insert(results.apis.missing, { name = apiDef.name, reason = detail })</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">143</span>
+                    <span class="line-content">			if verbose then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">144</span>
+                    <span class="line-content">				print(string.format(&quot;  |cffff0000FAIL|r API: %s (%s)&quot;, apiDef.name, detail))</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">145</span>
+                    <span class="line-content">			end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">146</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">147</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">148</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">149</span>
+                    <span class="line-content">	-- Check Layouts</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">150</span>
+                    <span class="line-content">	for _, layoutName in ipairs(self.Dependencies.layouts) do</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">151</span>
+                    <span class="line-content">		local ok, detail = CheckLayout(layoutName)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">152</span>
+                    <span class="line-content">		if ok then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">153</span>
+                    <span class="line-content">			results.layouts.passed = results.layouts.passed + 1</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">154</span>
+                    <span class="line-content">			if verbose then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">155</span>
+                    <span class="line-content">				print(string.format(&quot;  |cff00ff00OK|r Layout: %s&quot;, layoutName))</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">156</span>
+                    <span class="line-content">			end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">157</span>
+                    <span class="line-content">		else</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">158</span>
+                    <span class="line-content">			results.layouts.failed = results.layouts.failed + 1</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">159</span>
+                    <span class="line-content">			results.valid = false</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">160</span>
+                    <span class="line-content">			table.insert(results.layouts.missing, { name = layoutName, reason = detail })</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">161</span>
+                    <span class="line-content">			if verbose then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">162</span>
+                    <span class="line-content">				print(string.format(&quot;  |cffff0000FAIL|r Layout: %s (%s)&quot;, layoutName, detail))</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">163</span>
+                    <span class="line-content">			end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">164</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">165</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">166</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">167</span>
+                    <span class="line-content">	-- Check Atlases</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">168</span>
+                    <span class="line-content">	for _, atlasName in ipairs(self.Dependencies.atlases) do</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">169</span>
+                    <span class="line-content">		local ok, detail = CheckAtlas(atlasName)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">170</span>
+                    <span class="line-content">		if ok then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">171</span>
+                    <span class="line-content">			results.atlases.passed = results.atlases.passed + 1</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">172</span>
+                    <span class="line-content">			if verbose then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">173</span>
+                    <span class="line-content">				print(string.format(&quot;  |cff00ff00OK|r Atlas: %s (%s)&quot;, atlasName, detail))</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">174</span>
+                    <span class="line-content">			end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">175</span>
+                    <span class="line-content">		else</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">176</span>
+                    <span class="line-content">			results.atlases.failed = results.atlases.failed + 1</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">177</span>
+                    <span class="line-content">			results.valid = false</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">178</span>
+                    <span class="line-content">			table.insert(results.atlases.missing, { name = atlasName, reason = detail })</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">179</span>
+                    <span class="line-content">			if verbose then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">180</span>
+                    <span class="line-content">				print(string.format(&quot;  |cffff0000FAIL|r Atlas: %s (%s)&quot;, atlasName, detail))</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">181</span>
+                    <span class="line-content">			end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">182</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">183</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">184</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">185</span>
+                    <span class="line-content">	return results</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">186</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">187</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">188</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">189</span>
+                    <span class="line-content">-- Report Generation</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">190</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">191</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">192</span>
+                    <span class="line-content">function FenUI.Validation:PrintReport(results)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">193</span>
+                    <span class="line-content">	print(&quot; &quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">194</span>
+                    <span class="line-content">	print(&quot;|cff88ccffFenUI Dependency Validation|r&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">195</span>
+                    <span class="line-content">	print(&quot;================================&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">196</span>
+                    <span class="line-content">	print(&quot;Game Version:&quot;, results.gameVersion)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">197</span>
+                    <span class="line-content">	print(&quot;Checked:&quot;, results.timestamp)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">198</span>
+                    <span class="line-content">	print(&quot; &quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">199</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">200</span>
+                    <span class="line-content">	-- Summary</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">201</span>
+                    <span class="line-content">	local apiTotal = results.apis.passed + results.apis.failed</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">202</span>
+                    <span class="line-content">	local layoutTotal = results.layouts.passed + results.layouts.failed</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">203</span>
+                    <span class="line-content">	local atlasTotal = results.atlases.passed + results.atlases.failed</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">204</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">205</span>
+                    <span class="line-content">	local apiStatus = results.apis.failed == 0 and &quot;|cff00ff00OK|r&quot; or &quot;|cffff6600WARN|r&quot;</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">206</span>
+                    <span class="line-content">	local layoutStatus = results.layouts.failed == 0 and &quot;|cff00ff00OK|r&quot; or &quot;|cffff6600WARN|r&quot;</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">207</span>
+                    <span class="line-content">	local atlasStatus = results.atlases.failed == 0 and &quot;|cff00ff00OK|r&quot; or &quot;|cffff6600WARN|r&quot;</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">208</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">209</span>
+                    <span class="line-content">	print(string.format(&quot;APIs:    %s %d/%d&quot;, apiStatus, results.apis.passed, apiTotal))</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">210</span>
+                    <span class="line-content">	print(string.format(&quot;Layouts: %s %d/%d&quot;, layoutStatus, results.layouts.passed, layoutTotal))</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">211</span>
+                    <span class="line-content">	print(string.format(&quot;Atlases: %s %d/%d&quot;, atlasStatus, results.atlases.passed, atlasTotal))</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">212</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">213</span>
+                    <span class="line-content">	-- Missing items</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">214</span>
+                    <span class="line-content">	if #results.apis.missing &gt; 0 then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">215</span>
+                    <span class="line-content">		print(&quot; &quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">216</span>
+                    <span class="line-content">		print(&quot;|cffff6600Missing APIs:|r&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">217</span>
+                    <span class="line-content">		for _, item in ipairs(results.apis.missing) do</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">218</span>
+                    <span class="line-content">			print(&quot;  -&quot;, item.name)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">219</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">220</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">221</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">222</span>
+                    <span class="line-content">	if #results.layouts.missing &gt; 0 then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">223</span>
+                    <span class="line-content">		print(&quot; &quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">224</span>
+                    <span class="line-content">		print(&quot;|cffff6600Missing Layouts:|r&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">225</span>
+                    <span class="line-content">		for _, item in ipairs(results.layouts.missing) do</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">226</span>
+                    <span class="line-content">			print(&quot;  -&quot;, item.name)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">227</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">228</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">229</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">230</span>
+                    <span class="line-content">	if #results.atlases.missing &gt; 0 then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">231</span>
+                    <span class="line-content">		print(&quot; &quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">232</span>
+                    <span class="line-content">		print(&quot;|cffff6600Missing Atlases:|r&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">233</span>
+                    <span class="line-content">		for _, item in ipairs(results.atlases.missing) do</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">234</span>
+                    <span class="line-content">			print(&quot;  -&quot;, item.name)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">235</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">236</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">237</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">238</span>
+                    <span class="line-content">	-- Final status</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">239</span>
+                    <span class="line-content">	print(&quot; &quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">240</span>
+                    <span class="line-content">	if results.valid then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">241</span>
+                    <span class="line-content">		print(&quot;|cff00ff00Status: ALL DEPENDENCIES VALID|r&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">242</span>
+                    <span class="line-content">	else</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">243</span>
+                    <span class="line-content">		local totalIssues = results.apis.failed + results.layouts.failed + results.atlases.failed</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">244</span>
+                    <span class="line-content">		print(string.format(&quot;|cffff0000Status: %d ISSUE(S) FOUND|r&quot;, totalIssues))</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">245</span>
+                    <span class="line-content">		print(&quot;Run |cff88ccff/fenui validate verbose|r for details&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">246</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">247</span>
+                    <span class="line-content">	print(&quot; &quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">248</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">249</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">250</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">251</span>
+                    <span class="line-content">-- Auto-validation on Load</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">252</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">253</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">254</span>
+                    <span class="line-content">function FenUI.Validation:OnLoad(showWarnings)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">255</span>
+                    <span class="line-content">	-- Run silent validation</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">256</span>
+                    <span class="line-content">	local results = self:Run(false)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">257</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">258</span>
+                    <span class="line-content">	-- Store results</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">259</span>
+                    <span class="line-content">	if FenUIDB then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">260</span>
+                    <span class="line-content">		FenUIDB.lastValidation = results</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">261</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">262</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">263</span>
+                    <span class="line-content">	-- Only warn if there are issues and warnings are enabled</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">264</span>
+                    <span class="line-content">	if not results.valid and showWarnings then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">265</span>
+                    <span class="line-content">		local totalIssues = results.apis.failed + results.layouts.failed + results.atlases.failed</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">266</span>
+                    <span class="line-content">		FenUI:Print(string.format(&quot;%d dependency issue(s) detected. Run /fenui validate&quot;, totalIssues))</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">267</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">268</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">269</span>
+                    <span class="line-content">	return results</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">270</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+            </div>
+        </div>
+    
+    </div>
+</body>
+</html>

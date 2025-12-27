@@ -1,0 +1,2497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coverage Report: ADDON_DEV_LOCAL/Libs/FenUI - Core\Tokens.lua</title>
+    <style>
+        :root {
+            --bg: #1e1e2e;
+            --surface: #313244;
+            --text: #cdd6f4;
+            --subtext: #a6adc8;
+            --green: #a6e3a1;
+            --yellow: #f9e2af;
+            --red: #f38ba8;
+            --blue: #89b4fa;
+            --border: #45475a;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 {
+            color: var(--blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.75rem;
+        }
+        .timestamp {
+            color: var(--subtext);
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+        }
+        .summary-card {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        .stat-label {
+            color: var(--subtext);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .coverage-high { color: var(--green); }
+        .coverage-medium { color: var(--yellow); }
+        .coverage-low { color: var(--red); }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--surface);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 0.875rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: rgba(0,0,0,0.2);
+            font-weight: 600;
+            color: var(--subtext);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+        tr:hover { background: rgba(255,255,255,0.02); }
+        tr:last-child td { border-bottom: none; }
+        .file-link {
+            color: var(--blue);
+            text-decoration: none;
+        }
+        .file-link:hover { text-decoration: underline; }
+        .progress-bar {
+            width: 100px;
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        .text-right { text-align: right; }
+        .file-detail {
+            background: var(--surface);
+            border-radius: 12px;
+            margin-top: 2rem;
+            overflow: hidden;
+        }
+        .file-header {
+            padding: 1rem 1.5rem;
+            background: rgba(0,0,0,0.2);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .file-name {
+            font-family: 'Consolas', 'Monaco', monospace;
+            color: var(--blue);
+        }
+        .code-view {
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+        }
+        .code-line {
+            display: flex;
+            min-height: 1.5rem;
+        }
+        .line-number {
+            width: 50px;
+            padding: 0 0.75rem;
+            text-align: right;
+            color: var(--subtext);
+            user-select: none;
+            flex-shrink: 0;
+            background: rgba(0,0,0,0.1);
+        }
+        .line-content {
+            flex: 1;
+            padding: 0 1rem;
+            white-space: pre;
+        }
+        .line-covered {
+            background: rgba(166, 227, 161, 0.1);
+        }
+        .line-uncovered {
+            background: rgba(243, 139, 168, 0.15);
+        }
+        .line-uncovered .line-number {
+            background: rgba(243, 139, 168, 0.2);
+            color: var(--red);
+        }
+        .nav { margin-bottom: 1rem; }
+        .nav a {
+            color: var(--blue);
+            text-decoration: none;
+            margin-right: 1rem;
+        }
+        .nav a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="nav">
+            <a href="index.html">← Back to Summary</a>
+        </div>
+        
+        <div class="file-detail">
+            <div class="file-header">
+                <span class="file-name">Core\Tokens.lua</span>
+                <span class="coverage-high">91.8% (213/232 lines)</span>
+            </div>
+            <div class="code-view">
+    
+                <div class="code-line ">
+                    <span class="line-number">1</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">2</span>
+                    <span class="line-content">-- FenUI v2 - Design Tokens</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">3</span>
+                    <span class="line-content">--</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">4</span>
+                    <span class="line-content">-- Three-tier design token system:</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">5</span>
+                    <span class="line-content">-- 1. GLOBAL (primitives) - Raw color/spacing values</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">6</span>
+                    <span class="line-content">-- 2. SEMANTIC (purpose-based) - Contextual meaning tokens</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">7</span>
+                    <span class="line-content">-- 3. COMPONENT (widget-specific) - Per-widget overrides</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">8</span>
+                    <span class="line-content">--</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">9</span>
+                    <span class="line-content">-- Themes override semantic tokens, not global primitives.</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">10</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">11</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">12</span>
+                    <span class="line-content">local FenUI = FenUI</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">13</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">14</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">15</span>
+                    <span class="line-content">-- Global Tokens (Primitives)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">16</span>
+                    <span class="line-content">-- These are raw values that never change. Semantic tokens reference these.</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">17</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">18</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">19</span>
+                    <span class="line-content">FenUI.Tokens = {</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">20</span>
+                    <span class="line-content">	-- Color primitives (raw RGBA values)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">21</span>
+                    <span class="line-content">	colors = {</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">22</span>
+                    <span class="line-content">		-- Gold spectrum</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">23</span>
+                    <span class="line-content">		gold300 = { 1.0, 0.95, 0.6, 1 },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">24</span>
+                    <span class="line-content">		gold400 = { 1.0, 0.9, 0.4, 1 },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">25</span>
+                    <span class="line-content">		gold500 = { 1.0, 0.82, 0, 1 },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">26</span>
+                    <span class="line-content">		gold600 = { 0.8, 0.65, 0, 1 },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">27</span>
+                    <span class="line-content">		gold700 = { 0.6, 0.5, 0.2, 1 },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">28</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">29</span>
+                    <span class="line-content">		-- Gray spectrum (dark to light)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">30</span>
+                    <span class="line-content">		-- Neutral grays (lighter values)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">31</span>
+                    <span class="line-content">		gray50 = { 0.98, 0.98, 0.98, 1 },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">32</span>
+                    <span class="line-content">		gray100 = { 0.9, 0.9, 0.9, 1 },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">33</span>
+                    <span class="line-content">		gray200 = { 0.8, 0.8, 0.8, 1 },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">34</span>
+                    <span class="line-content">		gray300 = { 0.7, 0.7, 0.7, 1 },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">35</span>
+                    <span class="line-content">		gray400 = { 0.6, 0.6, 0.6, 1 },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">36</span>
+                    <span class="line-content">		gray500 = { 0.5, 0.5, 0.5, 1 },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">37</span>
+                    <span class="line-content">		gray600 = { 0.4, 0.4, 0.4, 1 },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">38</span>
+                    <span class="line-content">		gray700 = { 0.3, 0.3, 0.3, 1 },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">39</span>
+                    <span class="line-content">		-- Warm grays (modern Blizzard dark mode palette)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">40</span>
+                    <span class="line-content">		gray800 = { 0.23, 0.21, 0.19, 1 }, -- #3A3531 - Main panel background</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">41</span>
+                    <span class="line-content">		gray900 = { 0.17, 0.15, 0.14, 1 }, -- Approx #2B2724 - Inset/recessed areas</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">42</span>
+                    <span class="line-content">		gray950 = { 0.12, 0.11, 0.10, 1 }, -- Approx #1F1C1A - Deep inset/alternating rows</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">43</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">44</span>
+                    <span class="line-content">		-- Feedback colors</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">45</span>
+                    <span class="line-content">		red400 = { 0.9, 0.4, 0.4, 1 },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">46</span>
+                    <span class="line-content">		red500 = { 0.8, 0.2, 0.2, 1 },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">47</span>
+                    <span class="line-content">		red600 = { 0.6, 0.15, 0.15, 1 },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">48</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">49</span>
+                    <span class="line-content">		green400 = { 0.4, 0.9, 0.4, 1 },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">50</span>
+                    <span class="line-content">		green500 = { 0.2, 0.8, 0.2, 1 },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">51</span>
+                    <span class="line-content">		green600 = { 0.15, 0.6, 0.15, 1 },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">52</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">53</span>
+                    <span class="line-content">		blue400 = { 0.4, 0.6, 0.9, 1 },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">54</span>
+                    <span class="line-content">		blue500 = { 0.2, 0.4, 0.8, 1 },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">55</span>
+                    <span class="line-content">		blue600 = { 0.15, 0.3, 0.6, 1 },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">56</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">57</span>
+                    <span class="line-content">		yellow400 = { 1.0, 0.9, 0.4, 1 },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">58</span>
+                    <span class="line-content">		yellow500 = { 0.9, 0.8, 0.2, 1 },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">59</span>
+                    <span class="line-content">		yellow600 = { 0.7, 0.6, 0.15, 1 },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">60</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">61</span>
+                    <span class="line-content">		-- Special</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">62</span>
+                    <span class="line-content">		white = { 1, 1, 1, 1 },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">63</span>
+                    <span class="line-content">		black = { 0, 0, 0, 1 },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">64</span>
+                    <span class="line-content">		transparent = { 0, 0, 0, 0 },</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">65</span>
+                    <span class="line-content">	},</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">66</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">67</span>
+                    <span class="line-content">	-- Spacing primitives (in pixels)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">68</span>
+                    <span class="line-content">	spacing = {</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">69</span>
+                    <span class="line-content">		none = 0,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">70</span>
+                    <span class="line-content">		xs = 4,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">71</span>
+                    <span class="line-content">		sm = 8,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">72</span>
+                    <span class="line-content">		reg = 12,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">73</span>
+                    <span class="line-content">		md = 16,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">74</span>
+                    <span class="line-content">		lg = 24,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">75</span>
+                    <span class="line-content">		xl = 32,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">76</span>
+                    <span class="line-content">		xxl = 48,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">77</span>
+                    <span class="line-content">	},</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">78</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">79</span>
+                    <span class="line-content">	-- Font primitives (WoW font object names)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">80</span>
+                    <span class="line-content">	fonts = {</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">81</span>
+                    <span class="line-content">		heading = &quot;GameFontNormalLarge&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">82</span>
+                    <span class="line-content">		headingMed = &quot;GameFontNormal&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">83</span>
+                    <span class="line-content">		body = &quot;GameFontNormal&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">84</span>
+                    <span class="line-content">		bodySmall = &quot;GameFontNormalSmall&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">85</span>
+                    <span class="line-content">		highlight = &quot;GameFontHighlight&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">86</span>
+                    <span class="line-content">		highlightSmall = &quot;GameFontHighlightSmall&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">87</span>
+                    <span class="line-content">		disabled = &quot;GameFontDisable&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">88</span>
+                    <span class="line-content">		mono = &quot;ChatFontNormal&quot;, -- Safe default (Arial Narrow), will be upgraded if available</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">89</span>
+                    <span class="line-content">	},</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">90</span>
+                    <span class="line-content">}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">91</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">92</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">93</span>
+                    <span class="line-content">-- Semantic Tokens (Purpose-Based)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">94</span>
+                    <span class="line-content">-- These describe PURPOSE, not appearance. Themes override these.</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">95</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">96</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">97</span>
+                    <span class="line-content">FenUI.Tokens.semantic = {</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">98</span>
+                    <span class="line-content">	-- SURFACES (backgrounds) - Modern Blizzard Dark Mode Hierarchy</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">99</span>
+                    <span class="line-content">	-- Based on 11.0+ Settings Panel and FlatPanelBackgroundTemplate</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">100</span>
+                    <span class="line-content">	surfacePanel = &quot;gray800&quot;, -- Main panel/window backgrounds (#3A3531)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">101</span>
+                    <span class="line-content">	surfaceElevated = &quot;gray700&quot;, -- Elevated elements (dropdowns, tooltips)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">102</span>
+                    <span class="line-content">	surfaceInset = &quot;gray900&quot;, -- Inset/recessed areas (#2B2724)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">103</span>
+                    <span class="line-content">	surfaceDeep = &quot;gray950&quot;, -- Deep recessed areas, alternating rows (#1F1C1A)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">104</span>
+                    <span class="line-content">	surfaceOverlay = &quot;gray800&quot;, -- Modal overlays</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">105</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">106</span>
+                    <span class="line-content">	-- TEXT</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">107</span>
+                    <span class="line-content">	textDefault = &quot;gray100&quot;, -- Primary readable text</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">108</span>
+                    <span class="line-content">	textMuted = &quot;gray500&quot;, -- Secondary/less important text</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">109</span>
+                    <span class="line-content">	textDisabled = &quot;gray600&quot;, -- Disabled state text</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">110</span>
+                    <span class="line-content">	textOnAccent = &quot;gray950&quot;, -- Text on accent-colored backgrounds</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">111</span>
+                    <span class="line-content">	textHeading = &quot;gold500&quot;, -- Headings and titles</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">112</span>
+                    <span class="line-content">	textLink = &quot;blue400&quot;, -- Clickable links</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">113</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">114</span>
+                    <span class="line-content">	-- BORDERS</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">115</span>
+                    <span class="line-content">	borderDefault = &quot;gray700&quot;, -- Standard borders</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">116</span>
+                    <span class="line-content">	borderSubtle = &quot;gray800&quot;, -- Subtle/decorative borders</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">117</span>
+                    <span class="line-content">	borderFocus = &quot;gold500&quot;, -- Focus indicators</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">118</span>
+                    <span class="line-content">	borderInteractive = &quot;gray500&quot;, -- Interactive element borders</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">119</span>
+                    <span class="line-content">	borderSelected = &quot;gold600&quot;, -- Selected state borders</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">120</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">121</span>
+                    <span class="line-content">	-- INTERACTIVE ELEMENTS (buttons, tabs, etc.)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">122</span>
+                    <span class="line-content">	interactiveDefault = &quot;gold500&quot;, -- Default interactive color</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">123</span>
+                    <span class="line-content">	interactiveHover = &quot;gold400&quot;, -- Hover state</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">124</span>
+                    <span class="line-content">	interactiveActive = &quot;gold600&quot;, -- Active/pressed state</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">125</span>
+                    <span class="line-content">	interactiveDisabled = &quot;gray600&quot;, -- Disabled state</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">126</span>
+                    <span class="line-content">	interactiveSelected = &quot;gold500&quot;, -- Selected state</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">127</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">128</span>
+                    <span class="line-content">	-- GRID / LISTS</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">129</span>
+                    <span class="line-content">	surfaceRowAlt = &quot;gray950&quot;, -- Alternating row background (deep)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">130</span>
+                    <span class="line-content">	surfaceRowHover = &quot;gray800&quot;, -- Row hover state (Panel level)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">131</span>
+                    <span class="line-content">	surfaceRowSelected = &quot;gray700&quot;, -- Selected row state (Elevated level)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">132</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">133</span>
+                    <span class="line-content">	-- FEEDBACK STATES</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">134</span>
+                    <span class="line-content">	feedbackSuccess = &quot;green500&quot;, -- Success messages/states</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">135</span>
+                    <span class="line-content">	feedbackSuccessSubtle = &quot;green600&quot;, -- Subtle success</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">136</span>
+                    <span class="line-content">	feedbackError = &quot;red500&quot;, -- Error messages/states</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">137</span>
+                    <span class="line-content">	feedbackErrorSubtle = &quot;red600&quot;, -- Subtle error</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">138</span>
+                    <span class="line-content">	feedbackWarning = &quot;yellow500&quot;, -- Warning messages/states</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">139</span>
+                    <span class="line-content">	feedbackWarningSubtle = &quot;yellow600&quot;, -- Subtle warning</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">140</span>
+                    <span class="line-content">	feedbackInfo = &quot;blue500&quot;, -- Informational messages</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">141</span>
+                    <span class="line-content">	feedbackInfoSubtle = &quot;blue600&quot;, -- Subtle info</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">142</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">143</span>
+                    <span class="line-content">	-- EMPTY STATE</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">144</span>
+                    <span class="line-content">	textEmptyTitle = &quot;textMuted&quot;, -- Empty state title text</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">145</span>
+                    <span class="line-content">	textEmptySubtitle = &quot;textDisabled&quot;, -- Empty state subtitle text</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">146</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">147</span>
+                    <span class="line-content">	-- IMAGE</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">148</span>
+                    <span class="line-content">	imageTintDefault = &quot;white&quot;, -- Default image tint (no tint)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">149</span>
+                    <span class="line-content">	imageTintMuted = &quot;gray600&quot;, -- Muted/disabled image tint</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">150</span>
+                    <span class="line-content">	imagePlaceholder = &quot;gray800&quot;, -- Placeholder background color</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">151</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">152</span>
+                    <span class="line-content">	-- BACKGROUND (Layout component)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">153</span>
+                    <span class="line-content">	backgroundDefault = &quot;surfacePanel&quot;, -- Default container background</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">154</span>
+                    <span class="line-content">	backgroundElevated = &quot;surfaceElevated&quot;, -- Elevated/floating elements</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">155</span>
+                    <span class="line-content">	backgroundInset = &quot;surfaceInset&quot;, -- Inset/recessed areas</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">156</span>
+                    <span class="line-content">	backgroundDeep = &quot;surfaceDeep&quot;, -- Deep recessed areas</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">157</span>
+                    <span class="line-content">	backgroundCard = &quot;surfaceElevated&quot;, -- Card components</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">158</span>
+                    <span class="line-content">	backgroundDialog = &quot;surfacePanel&quot;, -- Dialog/modal windows</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">159</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">160</span>
+                    <span class="line-content">	-- SCROLLBAR</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">161</span>
+                    <span class="line-content">	surfaceScrollTrack = &quot;gray950&quot;, -- Scroll track background</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">162</span>
+                    <span class="line-content">	interactiveScrollThumb = &quot;gray600&quot;, -- Scroll thumb (normal)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">163</span>
+                    <span class="line-content">	interactiveScrollThumbHover = &quot;gray500&quot;, -- Scroll thumb (hover)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">164</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">165</span>
+                    <span class="line-content">	-- SHADOW</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">166</span>
+                    <span class="line-content">	shadowColor = &quot;black&quot;, -- Shadow color (inner/drop)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">167</span>
+                    <span class="line-content">	shadowAlphaInner = 0.5, -- Inner shadow opacity (note: stored as number, not token)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">168</span>
+                    <span class="line-content">	shadowAlphaDrop = 0.4, -- Drop shadow opacity</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">169</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">170</span>
+                    <span class="line-content">	-- SPACING (contextual)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">171</span>
+                    <span class="line-content">	spacingPanel = &quot;md&quot;, -- Panel internal padding</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">172</span>
+                    <span class="line-content">	spacingSection = &quot;md&quot;, -- Between sections</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">173</span>
+                    <span class="line-content">	spacingElement = &quot;sm&quot;, -- Between related elements</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">174</span>
+                    <span class="line-content">	spacingTight = &quot;xs&quot;, -- Tight groupings (e.g., icon + label)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">175</span>
+                    <span class="line-content">	spacingInset = &quot;sm&quot;, -- Inset content padding</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">176</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">177</span>
+                    <span class="line-content">	-- MARGINS (external spacing)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">178</span>
+                    <span class="line-content">	marginPanel = &quot;lg&quot;, -- Space between panel border and main content</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">179</span>
+                    <span class="line-content">	marginContainer = &quot;sm&quot;, -- Space between adjacent containers</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">180</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">181</span>
+                    <span class="line-content">	-- INSETS (internal spacing)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">182</span>
+                    <span class="line-content">	insetContent = &quot;sm&quot;, -- Standard internal padding for containers</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">183</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">184</span>
+                    <span class="line-content">	-- FONTS (contextual)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">185</span>
+                    <span class="line-content">	fontHeading = &quot;heading&quot;, -- Window/section headings</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">186</span>
+                    <span class="line-content">	fontTitle = &quot;headingMed&quot;, -- Panel title bar text (smaller than heading)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">187</span>
+                    <span class="line-content">	fontBody = &quot;body&quot;, -- Normal body text</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">188</span>
+                    <span class="line-content">	fontSmall = &quot;bodySmall&quot;, -- Small/caption text</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">189</span>
+                    <span class="line-content">	fontButton = &quot;highlight&quot;, -- Button labels</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">190</span>
+                    <span class="line-content">	fontMono = &quot;mono&quot;, -- Monospaced text (console, code)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">191</span>
+                    <span class="line-content">}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">192</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">193</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">194</span>
+                    <span class="line-content">-- Border Packs (Visual Asset Definitions)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">195</span>
+                    <span class="line-content">-- These define the geometry and assets for custom NineSlice borders.</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">196</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">197</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">198</span>
+                    <span class="line-content">FenUI.Tokens.borders = {</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">199</span>
+                    <span class="line-content">	-- Clean, sharp dark border (matches modern Blizzard Settings UI)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">200</span>
+                    <span class="line-content">	ModernDark = {</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">201</span>
+                    <span class="line-content">		file = [[Interface\AddOns\FenUI\Assets\border-modern-dark]],</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">202</span>
+                    <span class="line-content">		slice = 8, -- Corner size in the source texture</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">203</span>
+                    <span class="line-content">		edgeSize = 1, -- Visual thickness of the edge lines</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">204</span>
+                    <span class="line-content">		contentInset = 2, -- Space between border edge and content</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">205</span>
+                    <span class="line-content">		bgInset = 1, -- Space between border edge and background</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">206</span>
+                    <span class="line-content">	},</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">207</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">208</span>
+                    <span class="line-content">	-- Recessed inset style</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">209</span>
+                    <span class="line-content">	Inset = {</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">210</span>
+                    <span class="line-content">		file = [[Interface\AddOns\FenUI\Assets\border-inset]],</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">211</span>
+                    <span class="line-content">		slice = 4,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">212</span>
+                    <span class="line-content">		edgeSize = 1,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">213</span>
+                    <span class="line-content">		contentInset = 1,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">214</span>
+                    <span class="line-content">		bgInset = 0,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">215</span>
+                    <span class="line-content">	},</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">216</span>
+                    <span class="line-content">}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">217</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">218</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">219</span>
+                    <span class="line-content">-- Layout Constants (pixel values for common UI patterns)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">220</span>
+                    <span class="line-content">-- These are NOT design tokens - they&#x27;re structural measurements</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">221</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">222</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">223</span>
+                    <span class="line-content">FenUI.Tokens.layout = {</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">224</span>
+                    <span class="line-content">	-- Panel structure</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">225</span>
+                    <span class="line-content">	panelPadding = 24, -- Default internal edge padding (24px safe for Blizzard borders)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">226</span>
+                    <span class="line-content">	headerHeight = 24, -- Standard Blizzard header bar height</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">227</span>
+                    <span class="line-content">	footerHeight = 32, -- Standard footer area height</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">228</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">229</span>
+                    <span class="line-content">	-- Content structure</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">230</span>
+                    <span class="line-content">	tabHeight = 28, -- Tab button height</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">231</span>
+                    <span class="line-content">	rowHeight = 24, -- Standard list row height</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">232</span>
+                    <span class="line-content">	iconSize = 20, -- Standard icon size</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">233</span>
+                    <span class="line-content">	iconSizeLarge = 32, -- Large icon size</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">234</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">235</span>
+                    <span class="line-content">	-- Layout margins (standard gaps from container edges)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">236</span>
+                    <span class="line-content">	marginPanel = 24, -- Space from Panel border to first inner element (24px safe for Blizzard borders)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">237</span>
+                    <span class="line-content">	marginInset = 8, -- Space between inset content and its border</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">238</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">239</span>
+                    <span class="line-content">	-- Scroll</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">240</span>
+                    <span class="line-content">	scrollBarWidth = 20, -- Scroll bar width</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">241</span>
+                    <span class="line-content">	scrollPadding = 5, -- Padding inside scroll areas</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">242</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">243</span>
+                    <span class="line-content">	-- Buttons</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">244</span>
+                    <span class="line-content">	buttonHeight = 24, -- Standard button height</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">245</span>
+                    <span class="line-content">	buttonHeightLarge = 32, -- Large button height</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">246</span>
+                    <span class="line-content">	buttonMinWidth = 80, -- Minimum button width</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">247</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">248</span>
+                    <span class="line-content">	-- Shadows</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">249</span>
+                    <span class="line-content">	shadowSizeInner = 24, -- Inner shadow edge size (Blizzard default)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">250</span>
+                    <span class="line-content">	shadowSizeDrop = 16, -- Drop shadow offset/blur size</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">251</span>
+                    <span class="line-content">	shadowOffsetX = 4, -- Default drop shadow X offset</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">252</span>
+                    <span class="line-content">	shadowOffsetY = -4, -- Default drop shadow Y offset</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">253</span>
+                    <span class="line-content">}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">254</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">255</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">256</span>
+                    <span class="line-content">-- Current Theme Token Overrides</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">257</span>
+                    <span class="line-content">-- These are applied on top of semantic tokens when a theme is active</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">258</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">259</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">260</span>
+                    <span class="line-content">FenUI.Tokens.currentOverrides = {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">261</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">262</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">263</span>
+                    <span class="line-content">-- Token Resolution Functions</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">264</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">265</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">266</span>
+                    <span class="line-content">--- Resolve a primitive color token to RGBA values</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">267</span>
+                    <span class="line-content">---@param tokenName string The color token name (e.g., &quot;gold500&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">268</span>
+                    <span class="line-content">---@return number, number, number, number r, g, b, a values</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">269</span>
+                    <span class="line-content">local function ResolvePrimitiveColor(tokenName)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">270</span>
+                    <span class="line-content">	local color = FenUI.Tokens.colors[tokenName]</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">271</span>
+                    <span class="line-content">	if color then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">272</span>
+                    <span class="line-content">		return color[1], color[2], color[3], color[4] or 1</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">273</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">274</span>
+                    <span class="line-content">	-- Fallback to white if token not found</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">275</span>
+                    <span class="line-content">	FenUI:Debug(&quot;Unknown color token:&quot;, tokenName)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">276</span>
+                    <span class="line-content">	return 1, 1, 1, 1</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">277</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">278</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">279</span>
+                    <span class="line-content">--- Resolve a spacing token to a pixel value</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">280</span>
+                    <span class="line-content">---@param tokenName string The spacing token name (e.g., &quot;md&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">281</span>
+                    <span class="line-content">---@return number pixels</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">282</span>
+                    <span class="line-content">local function ResolvePrimitiveSpacing(tokenName)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">283</span>
+                    <span class="line-content">	local spacing = FenUI.Tokens.spacing[tokenName]</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">284</span>
+                    <span class="line-content">	if spacing then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">285</span>
+                    <span class="line-content">		return spacing</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">286</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">287</span>
+                    <span class="line-content">	FenUI:Debug(&quot;Unknown spacing token:&quot;, tokenName)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">288</span>
+                    <span class="line-content">	return 0</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">289</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">290</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">291</span>
+                    <span class="line-content">--- Resolve a font token to a font object name</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">292</span>
+                    <span class="line-content">---@param tokenName string The font token name</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">293</span>
+                    <span class="line-content">---@return string fontObjectName</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">294</span>
+                    <span class="line-content">local function ResolvePrimitiveFont(tokenName)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">295</span>
+                    <span class="line-content">	local font = FenUI.Tokens.fonts[tokenName]</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">296</span>
+                    <span class="line-content">	if font then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">297</span>
+                    <span class="line-content">		return font</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">298</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">299</span>
+                    <span class="line-content">	FenUI:Debug(&quot;Unknown font token:&quot;, tokenName)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">300</span>
+                    <span class="line-content">	return &quot;GameFontNormal&quot;</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">301</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">302</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">303</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">304</span>
+                    <span class="line-content">-- Public Token API</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">305</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">306</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">307</span>
+                    <span class="line-content">--- Get a color by semantic token name</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">308</span>
+                    <span class="line-content">--- Resolves through: overrides -&gt; semantic -&gt; primitive</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">309</span>
+                    <span class="line-content">---@param semanticToken string The semantic token name (e.g., &quot;surfacePanel&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">310</span>
+                    <span class="line-content">---@return number, number, number, number r, g, b, a values</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">311</span>
+                    <span class="line-content">function FenUI:GetColor(semanticToken)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">312</span>
+                    <span class="line-content">	-- Check for theme overrides first</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">313</span>
+                    <span class="line-content">	local primitiveToken = self.Tokens.currentOverrides[semanticToken] or self.Tokens.semantic[semanticToken]</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">314</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">315</span>
+                    <span class="line-content">	if primitiveToken then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">316</span>
+                    <span class="line-content">		return ResolvePrimitiveColor(primitiveToken)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">317</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">318</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">319</span>
+                    <span class="line-content">	-- If it&#x27;s already a primitive token name, resolve directly</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">320</span>
+                    <span class="line-content">	if self.Tokens.colors[semanticToken] then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">321</span>
+                    <span class="line-content">		return ResolvePrimitiveColor(semanticToken)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">322</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">323</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">324</span>
+                    <span class="line-content">	FenUI:Debug(&quot;Unknown semantic color token:&quot;, semanticToken)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">325</span>
+                    <span class="line-content">	return 1, 1, 1, 1</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">326</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">327</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">328</span>
+                    <span class="line-content">--- Get a color as a table {r, g, b, a}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">329</span>
+                    <span class="line-content">---@param semanticToken string</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">330</span>
+                    <span class="line-content">---@return table color {r, g, b, a}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">331</span>
+                    <span class="line-content">function FenUI:GetColorTable(semanticToken)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">332</span>
+                    <span class="line-content">	local r, g, b, a = self:GetColor(semanticToken)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">333</span>
+                    <span class="line-content">	return { r, g, b, a }</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">334</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">335</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">336</span>
+                    <span class="line-content">--- Get a color without alpha (for APIs like SetTextColor that expect 3 values)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">337</span>
+                    <span class="line-content">---@param semanticToken string</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">338</span>
+                    <span class="line-content">---@return number, number, number r, g, b values</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">339</span>
+                    <span class="line-content">function FenUI:GetColorRGB(semanticToken)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">340</span>
+                    <span class="line-content">	local r, g, b = self:GetColor(semanticToken)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">341</span>
+                    <span class="line-content">	return r, g, b</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">342</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">343</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">344</span>
+                    <span class="line-content">--- Get a color as a table without alpha {r, g, b}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">345</span>
+                    <span class="line-content">---@param semanticToken string</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">346</span>
+                    <span class="line-content">---@return table color {r, g, b}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">347</span>
+                    <span class="line-content">function FenUI:GetColorTableRGB(semanticToken)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">348</span>
+                    <span class="line-content">	local r, g, b = self:GetColor(semanticToken)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">349</span>
+                    <span class="line-content">	return { r, g, b }</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">350</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">351</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">352</span>
+                    <span class="line-content">--- Apply a token color directly to a FontString</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">353</span>
+                    <span class="line-content">---@param fontString FontString The font string to color</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">354</span>
+                    <span class="line-content">---@param semanticToken string The color token</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">355</span>
+                    <span class="line-content">function FenUI:SetTextColor(fontString, semanticToken)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">356</span>
+                    <span class="line-content">	if fontString and fontString.SetTextColor then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">357</span>
+                    <span class="line-content">		fontString:SetTextColor(self:GetColorRGB(semanticToken))</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">358</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">359</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">360</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">361</span>
+                    <span class="line-content">--- Apply a token color directly to a Texture</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">362</span>
+                    <span class="line-content">---@param texture Texture The texture to color</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">363</span>
+                    <span class="line-content">---@param semanticToken string The color token</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">364</span>
+                    <span class="line-content">function FenUI:SetVertexColor(texture, semanticToken)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">365</span>
+                    <span class="line-content">	if texture and texture.SetVertexColor then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">366</span>
+                    <span class="line-content">		texture:SetVertexColor(self:GetColor(semanticToken))</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">367</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">368</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">369</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">370</span>
+                    <span class="line-content">--- Get a color as a hex string (without alpha)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">371</span>
+                    <span class="line-content">---@param semanticToken string</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">372</span>
+                    <span class="line-content">---@return string hexColor (e.g., &quot;ff0000&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">373</span>
+                    <span class="line-content">function FenUI:GetColorHex(semanticToken)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">374</span>
+                    <span class="line-content">	local r, g, b = self:GetColor(semanticToken)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">375</span>
+                    <span class="line-content">	return string.format(&quot;%02x%02x%02x&quot;, r * 255, g * 255, b * 255)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">376</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">377</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">378</span>
+                    <span class="line-content">--- Get spacing by semantic token name or raw value</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">379</span>
+                    <span class="line-content">---@param semanticToken string|number The semantic token name (e.g., &quot;spacingPanel&quot;) or raw pixel value</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">380</span>
+                    <span class="line-content">---@return number pixels</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">381</span>
+                    <span class="line-content">function FenUI:GetSpacing(semanticToken)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">382</span>
+                    <span class="line-content">	if type(semanticToken) == &quot;number&quot; then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">383</span>
+                    <span class="line-content">		return semanticToken</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">384</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">385</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">386</span>
+                    <span class="line-content">	-- Check for theme overrides first</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">387</span>
+                    <span class="line-content">	local primitiveToken = self.Tokens.currentOverrides[semanticToken] or self.Tokens.semantic[semanticToken]</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">388</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">389</span>
+                    <span class="line-content">	if primitiveToken then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">390</span>
+                    <span class="line-content">		return ResolvePrimitiveSpacing(primitiveToken)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">391</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">392</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">393</span>
+                    <span class="line-content">	-- If it&#x27;s already a primitive token name, resolve directly</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">394</span>
+                    <span class="line-content">	if self.Tokens.spacing[semanticToken] then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">395</span>
+                    <span class="line-content">		return ResolvePrimitiveSpacing(semanticToken)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">396</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">397</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">398</span>
+                    <span class="line-content">	FenUI:Debug(&quot;Unknown semantic spacing token:&quot;, semanticToken)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">399</span>
+                    <span class="line-content">	return 0</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">400</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">401</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">402</span>
+                    <span class="line-content">--- Get a layout constant by name</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">403</span>
+                    <span class="line-content">---@param layoutName string The layout constant name (e.g., &quot;panelPadding&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">404</span>
+                    <span class="line-content">---@return number pixels</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">405</span>
+                    <span class="line-content">function FenUI:GetLayout(layoutName)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">406</span>
+                    <span class="line-content">	local value = self.Tokens.layout and self.Tokens.layout[layoutName]</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">407</span>
+                    <span class="line-content">	if value then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">408</span>
+                    <span class="line-content">		return value</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">409</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">410</span>
+                    <span class="line-content">	FenUI:Debug(&quot;Unknown layout constant:&quot;, layoutName)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">411</span>
+                    <span class="line-content">	return 0</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">412</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">413</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">414</span>
+                    <span class="line-content">--- Get font by semantic token name</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">415</span>
+                    <span class="line-content">---@param semanticToken string The semantic token name (e.g., &quot;fontHeading&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">416</span>
+                    <span class="line-content">---@return string fontObjectName</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">417</span>
+                    <span class="line-content">function FenUI:GetFont(semanticToken)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">418</span>
+                    <span class="line-content">	-- Check for theme overrides first</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">419</span>
+                    <span class="line-content">	local primitiveToken = self.Tokens.currentOverrides[semanticToken] or self.Tokens.semantic[semanticToken]</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">420</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">421</span>
+                    <span class="line-content">	if primitiveToken then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">422</span>
+                    <span class="line-content">		return ResolvePrimitiveFont(primitiveToken)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">423</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">424</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">425</span>
+                    <span class="line-content">	-- If it&#x27;s already a primitive token name, resolve directly</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">426</span>
+                    <span class="line-content">	if self.Tokens.fonts[semanticToken] then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">427</span>
+                    <span class="line-content">		return ResolvePrimitiveFont(semanticToken)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">428</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">429</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">430</span>
+                    <span class="line-content">	FenUI:Debug(&quot;Unknown semantic font token:&quot;, semanticToken)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">431</span>
+                    <span class="line-content">	return &quot;GameFontNormal&quot;</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">432</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">433</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">434</span>
+                    <span class="line-content">--- Apply token overrides (used by ThemeManager)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">435</span>
+                    <span class="line-content">---@param overrides table&lt;string, string&gt; Token overrides (semantic -&gt; primitive)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">436</span>
+                    <span class="line-content">function FenUI:ApplyTokenOverrides(overrides)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">437</span>
+                    <span class="line-content">	wipe(self.Tokens.currentOverrides)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">438</span>
+                    <span class="line-content">	if overrides then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">439</span>
+                    <span class="line-content">		for semantic, primitive in pairs(overrides) do</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">440</span>
+                    <span class="line-content">			self.Tokens.currentOverrides[semantic] = primitive</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">441</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">442</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">443</span>
+                    <span class="line-content">	FenUI:Debug(&quot;Applied token overrides:&quot;, overrides and #overrides or 0, &quot;tokens&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">444</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">445</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">446</span>
+                    <span class="line-content">--- Clear all token overrides</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">447</span>
+                    <span class="line-content">function FenUI:ClearTokenOverrides()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">448</span>
+                    <span class="line-content">	wipe(self.Tokens.currentOverrides)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">449</span>
+                    <span class="line-content">	FenUI:Debug(&quot;Cleared token overrides&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">450</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">451</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">452</span>
+                    <span class="line-content">--- Get all semantic token names for a category</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">453</span>
+                    <span class="line-content">---@param prefix string Token prefix (e.g., &quot;surface&quot;, &quot;text&quot;, &quot;border&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">454</span>
+                    <span class="line-content">---@return table&lt;string, string&gt; tokens</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">455</span>
+                    <span class="line-content">function FenUI:GetTokensByPrefix(prefix)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">456</span>
+                    <span class="line-content">	local tokens = {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">457</span>
+                    <span class="line-content">	for name, value in pairs(self.Tokens.semantic) do</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">458</span>
+                    <span class="line-content">		if name:find(&quot;^&quot; .. prefix) then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">459</span>
+                    <span class="line-content">			tokens[name] = value</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">460</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">461</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">462</span>
+                    <span class="line-content">	return tokens</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">463</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+            </div>
+        </div>
+    
+    </div>
+</body>
+</html>

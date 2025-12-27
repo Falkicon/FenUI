@@ -1,0 +1,4002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coverage Report: ADDON_DEV_LOCAL/Libs/FenUI - Widgets\Panel.lua</title>
+    <style>
+        :root {
+            --bg: #1e1e2e;
+            --surface: #313244;
+            --text: #cdd6f4;
+            --subtext: #a6adc8;
+            --green: #a6e3a1;
+            --yellow: #f9e2af;
+            --red: #f38ba8;
+            --blue: #89b4fa;
+            --border: #45475a;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 {
+            color: var(--blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.75rem;
+        }
+        .timestamp {
+            color: var(--subtext);
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+        }
+        .summary-card {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        .stat-label {
+            color: var(--subtext);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .coverage-high { color: var(--green); }
+        .coverage-medium { color: var(--yellow); }
+        .coverage-low { color: var(--red); }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--surface);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 0.875rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: rgba(0,0,0,0.2);
+            font-weight: 600;
+            color: var(--subtext);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+        tr:hover { background: rgba(255,255,255,0.02); }
+        tr:last-child td { border-bottom: none; }
+        .file-link {
+            color: var(--blue);
+            text-decoration: none;
+        }
+        .file-link:hover { text-decoration: underline; }
+        .progress-bar {
+            width: 100px;
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        .text-right { text-align: right; }
+        .file-detail {
+            background: var(--surface);
+            border-radius: 12px;
+            margin-top: 2rem;
+            overflow: hidden;
+        }
+        .file-header {
+            padding: 1rem 1.5rem;
+            background: rgba(0,0,0,0.2);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .file-name {
+            font-family: 'Consolas', 'Monaco', monospace;
+            color: var(--blue);
+        }
+        .code-view {
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+        }
+        .code-line {
+            display: flex;
+            min-height: 1.5rem;
+        }
+        .line-number {
+            width: 50px;
+            padding: 0 0.75rem;
+            text-align: right;
+            color: var(--subtext);
+            user-select: none;
+            flex-shrink: 0;
+            background: rgba(0,0,0,0.1);
+        }
+        .line-content {
+            flex: 1;
+            padding: 0 1rem;
+            white-space: pre;
+        }
+        .line-covered {
+            background: rgba(166, 227, 161, 0.1);
+        }
+        .line-uncovered {
+            background: rgba(243, 139, 168, 0.15);
+        }
+        .line-uncovered .line-number {
+            background: rgba(243, 139, 168, 0.2);
+            color: var(--red);
+        }
+        .nav { margin-bottom: 1rem; }
+        .nav a {
+            color: var(--blue);
+            text-decoration: none;
+            margin-right: 1rem;
+        }
+        .nav a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="nav">
+            <a href="index.html">← Back to Summary</a>
+        </div>
+        
+        <div class="file-detail">
+            <div class="file-header">
+                <span class="file-name">Widgets\Panel.lua</span>
+                <span class="coverage-medium">73.3% (291/397 lines)</span>
+            </div>
+            <div class="code-view">
+    
+                <div class="code-line ">
+                    <span class="line-number">1</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">2</span>
+                    <span class="line-content">-- FenUI v2 - Panel Widget</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">3</span>
+                    <span class="line-content">--</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">4</span>
+                    <span class="line-content">-- Main window/panel creation with:</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">5</span>
+                    <span class="line-content">-- - Config object API (simple)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">6</span>
+                    <span class="line-content">-- - Builder pattern API (fluent)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">7</span>
+                    <span class="line-content">-- - Lifecycle hooks (onCreate, onShow, onHide, onThemeChange)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">8</span>
+                    <span class="line-content">-- - Slot system for content injection</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">9</span>
+                    <span class="line-content">-- - Background support (via Layout component)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">10</span>
+                    <span class="line-content">-- - Shadow support (via Layout component)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">11</span>
+                    <span class="line-content">--</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">12</span>
+                    <span class="line-content">-- NOTE: Panel internally uses the Layout component as its base frame.</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">13</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">14</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">15</span>
+                    <span class="line-content">local FenUI = FenUI</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">16</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">17</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">18</span>
+                    <span class="line-content">-- Panel Mixin</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">19</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">20</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">21</span>
+                    <span class="line-content">local PanelMixin = {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">22</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">23</span>
+                    <span class="line-content">--- Initialize the panel with configuration</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">24</span>
+                    <span class="line-content">function PanelMixin:Init(config)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">25</span>
+                    <span class="line-content">	self.config = config or {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">26</span>
+                    <span class="line-content">	self.slots = {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">27</span>
+                    <span class="line-content">	self.hooks = {</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">28</span>
+                    <span class="line-content">		onCreate = config.onCreate,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">29</span>
+                    <span class="line-content">		onShow = config.onShow,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">30</span>
+                    <span class="line-content">		onHide = config.onHide,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">31</span>
+                    <span class="line-content">		onThemeChange = config.onThemeChange,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">32</span>
+                    <span class="line-content">	}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">33</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">34</span>
+                    <span class="line-content">	-- Mark as supporting layouts for theme system</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">35</span>
+                    <span class="line-content">	self.fenUISupportsLayout = true</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">36</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">37</span>
+                    <span class="line-content">	-- Size is handled by Layout component or factory, but apply if needed</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">38</span>
+                    <span class="line-content">	if not self.config.usesLayout then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">39</span>
+                    <span class="line-content">		self:SetSize(config.width or 400, config.height or 300)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">40</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">41</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">42</span>
+                    <span class="line-content">	-- Create SafeZone frame for systematic anchoring</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">43</span>
+                    <span class="line-content">	-- This frame is inset to clear the thick Blizzard metal borders</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">44</span>
+                    <span class="line-content">	self:CreateSafeZone()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">45</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">46</span>
+                    <span class="line-content">	-- Default padding (from SafeZone edges to content)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">47</span>
+                    <span class="line-content">	self.padding = { left = 0, right = 0, top = 0, bottom = 0 }</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">48</span>
+                    <span class="line-content">	self:SetPadding(config.padding)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">49</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">50</span>
+                    <span class="line-content">	if config.title then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">51</span>
+                    <span class="line-content">		self:SetTitle(config.title)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">52</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">53</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">54</span>
+                    <span class="line-content">	if config.movable then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">55</span>
+                    <span class="line-content">		self:MakeMovable()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">56</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">57</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">58</span>
+                    <span class="line-content">	if config.resizable then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">59</span>
+                    <span class="line-content">		self:MakeResizable()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">60</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">61</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">62</span>
+                    <span class="line-content">	if config.closable ~= false then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">63</span>
+                    <span class="line-content">		self:CreateCloseButton()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">64</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">65</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">66</span>
+                    <span class="line-content">	-- Apply initial slots</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">67</span>
+                    <span class="line-content">	if config.slots then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">68</span>
+                    <span class="line-content">		for slotName, frame in pairs(config.slots) do</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">69</span>
+                    <span class="line-content">			self:SetSlot(slotName, frame)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">70</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">71</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">72</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">73</span>
+                    <span class="line-content">	-- Register for theme updates if requested</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">74</span>
+                    <span class="line-content">	if config.registerForThemeChanges ~= false then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">75</span>
+                    <span class="line-content">		self:RegisterForThemeChanges()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">76</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">77</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">78</span>
+                    <span class="line-content">	-- Apply theme</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">79</span>
+                    <span class="line-content">	local themeName = config.theme or FenUI:GetGlobalTheme()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">80</span>
+                    <span class="line-content">	FenUI:ApplyTheme(self, themeName)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">81</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">82</span>
+                    <span class="line-content">	-- Fire onCreate hook</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">83</span>
+                    <span class="line-content">	if self.hooks.onCreate then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">84</span>
+                    <span class="line-content">		self.hooks.onCreate(self)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">85</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">86</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">87</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">88</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">89</span>
+                    <span class="line-content">-- Title</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">90</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">91</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">92</span>
+                    <span class="line-content">-- Header bar height for Panel border style (approximate)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">93</span>
+                    <span class="line-content">local HEADER_HEIGHT = 24</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">94</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">95</span>
+                    <span class="line-content">function PanelMixin:SetTitle(text)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">96</span>
+                    <span class="line-content">	if not self.titleText then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">97</span>
+                    <span class="line-content">		self.titleText = self:CreateFontString(nil, &quot;OVERLAY&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">98</span>
+                    <span class="line-content">		self.titleText:SetFontObject(FenUI:GetFont(&quot;fontTitle&quot;))</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">99</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">100</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">101</span>
+                    <span class="line-content">	self.titleText:SetText(text)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">102</span>
+                    <span class="line-content">	local r, g, b = FenUI:GetColor(&quot;textHeading&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">103</span>
+                    <span class="line-content">	self.titleText:SetTextColor(r, g, b)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">104</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">105</span>
+                    <span class="line-content">	-- NOTE: Title Positioning (WoW Coordinate System)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">106</span>
+                    <span class="line-content">	-- X: Positive = Right, Negative = Left</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">107</span>
+                    <span class="line-content">	-- Y: Positive = Up, Negative = Down</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">108</span>
+                    <span class="line-content">	self.titleText:ClearAllPoints()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">109</span>
+                    <span class="line-content">	self.titleText:SetPoint(&quot;TOP&quot;, self, &quot;TOP&quot;, 0, -6) -- 0 = Centered, -12 = 12px down from top</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">110</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">111</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">112</span>
+                    <span class="line-content">function PanelMixin:GetTitle()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">113</span>
+                    <span class="line-content">	return self.titleText and self.titleText:GetText() or &quot;&quot;</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">114</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">115</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">116</span>
+                    <span class="line-content">function PanelMixin:SetSubtitle(text)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">117</span>
+                    <span class="line-content">	if not self.subtitleText then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">118</span>
+                    <span class="line-content">		self.subtitleText = self:CreateFontString(nil, &quot;OVERLAY&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">119</span>
+                    <span class="line-content">		self.subtitleText:SetFontObject(FenUI:GetFont(&quot;fontSmall&quot;))</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">120</span>
+                    <span class="line-content">		local r, g, b = FenUI:GetColor(&quot;textSubtle&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">121</span>
+                    <span class="line-content">		self.subtitleText:SetTextColor(r, g, b)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">122</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">123</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">124</span>
+                    <span class="line-content">	self.subtitleText:SetText(text)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">125</span>
+                    <span class="line-content">	self.subtitleText:ClearAllPoints()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">126</span>
+                    <span class="line-content">	self.subtitleText:SetPoint(&quot;TOP&quot;, self.titleText or self, &quot;BOTTOM&quot;, 0, -2)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">127</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">128</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">129</span>
+                    <span class="line-content">function PanelMixin:GetSubtitle()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">130</span>
+                    <span class="line-content">	return self.subtitleText and self.subtitleText:GetText() or &quot;&quot;</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">131</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">132</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">133</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">134</span>
+                    <span class="line-content">-- Movable</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">135</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">136</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">137</span>
+                    <span class="line-content">function PanelMixin:MakeMovable()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">138</span>
+                    <span class="line-content">	self:SetMovable(true)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">139</span>
+                    <span class="line-content">	self:EnableMouse(true)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">140</span>
+                    <span class="line-content">	self:RegisterForDrag(&quot;LeftButton&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">141</span>
+                    <span class="line-content">	self:SetScript(&quot;OnDragStart&quot;, self.StartMoving)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">142</span>
+                    <span class="line-content">	self:SetScript(&quot;OnDragStop&quot;, function(frame)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">143</span>
+                    <span class="line-content">		frame:StopMovingOrSizing()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">144</span>
+                    <span class="line-content">		if frame.config.onMoved then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">145</span>
+                    <span class="line-content">			frame.config.onMoved(frame)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">146</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">147</span>
+                    <span class="line-content">	end)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">148</span>
+                    <span class="line-content">	self:SetClampedToScreen(true)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">149</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">150</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">151</span>
+                    <span class="line-content">function PanelMixin:MakeResizable()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">152</span>
+                    <span class="line-content">	self:SetResizable(true)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">153</span>
+                    <span class="line-content">	self:EnableMouse(true)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">154</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">155</span>
+                    <span class="line-content">	-- Dimensions</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">156</span>
+                    <span class="line-content">	local minW = self.config.minWidth or 200</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">157</span>
+                    <span class="line-content">	local minH = self.config.minHeight or 150</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">158</span>
+                    <span class="line-content">	local maxW = self.config.maxWidth or 9000</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">159</span>
+                    <span class="line-content">	local maxH = self.config.maxHeight or 9000</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">160</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">161</span>
+                    <span class="line-content">	if self.SetResizeBounds then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">162</span>
+                    <span class="line-content">		self:SetResizeBounds(minW, minH, maxW, maxH)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">163</span>
+                    <span class="line-content">	else</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">164</span>
+                    <span class="line-content">		-- Legacy (pre-10.0) fallback</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">165</span>
+                    <span class="line-content">		if self.SetMinResize then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">166</span>
+                    <span class="line-content">			self:SetMinResize(minW, minH)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">167</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">168</span>
+                    <span class="line-content">		if self.SetMaxResize then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">169</span>
+                    <span class="line-content">			self:SetMaxResize(maxW, maxH)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">170</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">171</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">172</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">173</span>
+                    <span class="line-content">	-- Create resize handle</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">174</span>
+                    <span class="line-content">	if not self.resizeHandle then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">175</span>
+                    <span class="line-content">		self.resizeHandle = CreateFrame(&quot;Button&quot;, nil, self)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">176</span>
+                    <span class="line-content">		self.resizeHandle:SetSize(16, 16)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">177</span>
+                    <span class="line-content">		self.resizeHandle:SetPoint(&quot;BOTTOMRIGHT&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">178</span>
+                    <span class="line-content">		self.resizeHandle:SetFrameLevel(self:GetFrameLevel() + 10)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">179</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">180</span>
+                    <span class="line-content">		local tex = self.resizeHandle:CreateTexture(nil, &quot;OVERLAY&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">181</span>
+                    <span class="line-content">		tex:SetTexture([[Interface\ChatFrame\UI-ChatIM-SizeGrabber-Up]])</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">182</span>
+                    <span class="line-content">		tex:SetAllPoints()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">183</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">184</span>
+                    <span class="line-content">		self.resizeHandle:SetScript(&quot;OnMouseDown&quot;, function()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">185</span>
+                    <span class="line-content">			self:StartSizing(&quot;BOTTOMRIGHT&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">186</span>
+                    <span class="line-content">		end)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">187</span>
+                    <span class="line-content">		self.resizeHandle:SetScript(&quot;OnMouseUp&quot;, function()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">188</span>
+                    <span class="line-content">			self:StopMovingOrSizing()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">189</span>
+                    <span class="line-content">			if self.config.onResized then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">190</span>
+                    <span class="line-content">				self.config.onResized(self)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">191</span>
+                    <span class="line-content">			end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">192</span>
+                    <span class="line-content">		end)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">193</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">194</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">195</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">196</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">197</span>
+                    <span class="line-content">-- Safe Zone (Systematic Anchoring)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">198</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">199</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">200</span>
+                    <span class="line-content">function PanelMixin:CreateSafeZone()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">201</span>
+                    <span class="line-content">	if self.safeZone then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">202</span>
+                    <span class="line-content">		return</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">203</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">204</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">205</span>
+                    <span class="line-content">	-- The SafeZone is a logical frame that represents the &quot;safe&quot; usable area</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">206</span>
+                    <span class="line-content">	-- clear of borders and title bars.</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">207</span>
+                    <span class="line-content">	self.safeZone = CreateFrame(&quot;Frame&quot;, nil, self)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">208</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">209</span>
+                    <span class="line-content">	-- Dynamic insets based on border pack and title presence</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">210</span>
+                    <span class="line-content">	local borderOffset = self.contentInset or 4 -- Fallback if not using custom border yet</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">211</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">212</span>
+                    <span class="line-content">	local left = borderOffset</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">213</span>
+                    <span class="line-content">	local right = borderOffset</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">214</span>
+                    <span class="line-content">	local top = borderOffset</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">215</span>
+                    <span class="line-content">	local bottom = borderOffset</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">216</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">217</span>
+                    <span class="line-content">	-- If we have a title bar, the safe zone top should clear it</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">218</span>
+                    <span class="line-content">	if self.config.title then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">219</span>
+                    <span class="line-content">		top = top + 24 -- Space for title text</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">220</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">221</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">222</span>
+                    <span class="line-content">	self.safeZone:SetPoint(&quot;TOPLEFT&quot;, self, &quot;TOPLEFT&quot;, left, -top)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">223</span>
+                    <span class="line-content">	self.safeZone:SetPoint(&quot;BOTTOMRIGHT&quot;, self, &quot;BOTTOMRIGHT&quot;, -right, bottom)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">224</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">225</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">226</span>
+                    <span class="line-content">function PanelMixin:GetSafeZone()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">227</span>
+                    <span class="line-content">	if not self.safeZone then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">228</span>
+                    <span class="line-content">		self:CreateSafeZone()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">229</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">230</span>
+                    <span class="line-content">	return self.safeZone</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">231</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">232</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">233</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">234</span>
+                    <span class="line-content">-- Close Button</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">235</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">236</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">237</span>
+                    <span class="line-content">function PanelMixin:CreateCloseButton()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">238</span>
+                    <span class="line-content">	if self.closeButton then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">239</span>
+                    <span class="line-content">		return</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">240</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">241</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">242</span>
+                    <span class="line-content">	-- Create custom close button using FenUI components</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">243</span>
+                    <span class="line-content">	-- This avoids the &quot;UIPanelCloseButton&quot; template which has forced textures</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">244</span>
+                    <span class="line-content">	self.closeButton = FenUI:CreateImageButton(self, {</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">245</span>
+                    <span class="line-content">		texture = [[Interface\AddOns\FenUI\Assets\icon-close]], -- We&#x27;ll need this asset</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">246</span>
+                    <span class="line-content">		size = 16,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">247</span>
+                    <span class="line-content">		tooltip = &quot;Close&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">248</span>
+                    <span class="line-content">		onClick = function()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">249</span>
+                    <span class="line-content">			self:Hide()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">250</span>
+                    <span class="line-content">		end,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">251</span>
+                    <span class="line-content">	})</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">252</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">253</span>
+                    <span class="line-content">	self.closeButton:ClearAllPoints()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">254</span>
+                    <span class="line-content">	self.closeButton:SetPoint(&quot;TOPRIGHT&quot;, self, &quot;TOPRIGHT&quot;, -8, -8)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">255</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">256</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">257</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">258</span>
+                    <span class="line-content">-- Slots</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">259</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">260</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">261</span>
+                    <span class="line-content">--[[</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">262</span>
+                    <span class="line-content">Available slots:</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">263</span>
+                    <span class="line-content">- headerLeft: Left side of header (before title)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">264</span>
+                    <span class="line-content">- headerRight: Right side of header (before close button)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">265</span>
+                    <span class="line-content">- content: Main content area</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">266</span>
+                    <span class="line-content">- footerLeft: Left side of footer</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">267</span>
+                    <span class="line-content">- footerRight: Right side of footer</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">268</span>
+                    <span class="line-content">- footer: Entire footer area</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">269</span>
+                    <span class="line-content">]]</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">270</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">271</span>
+                    <span class="line-content">function PanelMixin:SetSlot(slotName, frame)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">272</span>
+                    <span class="line-content">	if not frame then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">273</span>
+                    <span class="line-content">		return</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">274</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">275</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">276</span>
+                    <span class="line-content">	-- Store the slot</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">277</span>
+                    <span class="line-content">	self.slots[slotName] = frame</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">278</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">279</span>
+                    <span class="line-content">	-- Parent and position the frame</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">280</span>
+                    <span class="line-content">	frame:SetParent(self)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">281</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">282</span>
+                    <span class="line-content">	-- NOTE: Systematic Slot Positioning via SafeZone</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">283</span>
+                    <span class="line-content">	-- We anchor slots to the SafeZone frame rather than the main frame.</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">284</span>
+                    <span class="line-content">	-- This ensures they are automatically clear of the Blizzard metal border textures.</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">285</span>
+                    <span class="line-content">	local safeZone = self.safeZone</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">286</span>
+                    <span class="line-content">	local headerH = FenUI:GetLayout(&quot;headerHeight&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">287</span>
+                    <span class="line-content">	local footerH = FenUI:GetLayout(&quot;footerHeight&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">288</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">289</span>
+                    <span class="line-content">	if slotName == &quot;headerLeft&quot; then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">290</span>
+                    <span class="line-content">		frame:SetPoint(&quot;TOPLEFT&quot;, safeZone, &quot;TOPLEFT&quot;, 0, 0)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">291</span>
+                    <span class="line-content">	elseif slotName == &quot;headerRight&quot; then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">292</span>
+                    <span class="line-content">		local offset = self.closeButton and -28 or 0</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">293</span>
+                    <span class="line-content">		frame:SetPoint(&quot;TOPRIGHT&quot;, safeZone, &quot;TOPRIGHT&quot;, offset, 0)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">294</span>
+                    <span class="line-content">	elseif slotName == &quot;content&quot; then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">295</span>
+                    <span class="line-content">		frame:SetPoint(&quot;TOPLEFT&quot;, safeZone, &quot;TOPLEFT&quot;, 0, -headerH)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">296</span>
+                    <span class="line-content">		frame:SetPoint(&quot;BOTTOMRIGHT&quot;, safeZone, &quot;BOTTOMRIGHT&quot;, 0, footerH)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">297</span>
+                    <span class="line-content">	elseif slotName == &quot;footerLeft&quot; then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">298</span>
+                    <span class="line-content">		frame:SetPoint(&quot;BOTTOMLEFT&quot;, safeZone, &quot;BOTTOMLEFT&quot;, 0, 0)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">299</span>
+                    <span class="line-content">	elseif slotName == &quot;footerRight&quot; then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">300</span>
+                    <span class="line-content">		frame:SetPoint(&quot;BOTTOMRIGHT&quot;, safeZone, &quot;BOTTOMRIGHT&quot;, 0, 0)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">301</span>
+                    <span class="line-content">	elseif slotName == &quot;footer&quot; then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">302</span>
+                    <span class="line-content">		frame:SetPoint(&quot;BOTTOMLEFT&quot;, safeZone, &quot;BOTTOMLEFT&quot;, 0, 0)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">303</span>
+                    <span class="line-content">		frame:SetPoint(&quot;BOTTOMRIGHT&quot;, safeZone, &quot;BOTTOMRIGHT&quot;, 0, 0)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">304</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">305</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">306</span>
+                    <span class="line-content">	frame:Show()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">307</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">308</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">309</span>
+                    <span class="line-content">function PanelMixin:GetSlot(slotName)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">310</span>
+                    <span class="line-content">	return self.slots[slotName]</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">311</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">312</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">313</span>
+                    <span class="line-content">function PanelMixin:ClearSlot(slotName)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">314</span>
+                    <span class="line-content">	local frame = self.slots[slotName]</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">315</span>
+                    <span class="line-content">	if frame then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">316</span>
+                    <span class="line-content">		frame:Hide()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">317</span>
+                    <span class="line-content">		frame:ClearAllPoints()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">318</span>
+                    <span class="line-content">		self.slots[slotName] = nil</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">319</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">320</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">321</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">322</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">323</span>
+                    <span class="line-content">-- Content Frame (convenience)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">324</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">325</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">326</span>
+                    <span class="line-content">function PanelMixin:GetContentFrame()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">327</span>
+                    <span class="line-content">	if not self.contentFrame then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">328</span>
+                    <span class="line-content">		self.contentFrame = CreateFrame(&quot;Frame&quot;, nil, self)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">329</span>
+                    <span class="line-content">		self:UpdateContentAnchors()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">330</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">331</span>
+                    <span class="line-content">	return self.contentFrame</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">332</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">333</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">334</span>
+                    <span class="line-content">function PanelMixin:SetPadding(padding)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">335</span>
+                    <span class="line-content">	if type(padding) == &quot;number&quot; then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">336</span>
+                    <span class="line-content">		self.padding = { left = padding, right = padding, top = padding, bottom = padding }</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">337</span>
+                    <span class="line-content">	elseif type(padding) == &quot;table&quot; then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">338</span>
+                    <span class="line-content">		self.padding.left = padding.left or self.padding.left</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">339</span>
+                    <span class="line-content">		self.padding.right = padding.right or self.padding.right</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">340</span>
+                    <span class="line-content">		self.padding.top = padding.top or self.padding.top</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">341</span>
+                    <span class="line-content">		self.padding.bottom = padding.bottom or self.padding.bottom</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">342</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">343</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">344</span>
+                    <span class="line-content">	-- Apply individual side overrides from config</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">345</span>
+                    <span class="line-content">	local config = self.config</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">346</span>
+                    <span class="line-content">	if config.paddingTop then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">347</span>
+                    <span class="line-content">		self.padding.top = FenUI:GetSpacing(config.paddingTop)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">348</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">349</span>
+                    <span class="line-content">	if config.paddingBottom then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">350</span>
+                    <span class="line-content">		self.padding.bottom = FenUI:GetSpacing(config.paddingBottom)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">351</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">352</span>
+                    <span class="line-content">	if config.paddingLeft then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">353</span>
+                    <span class="line-content">		self.padding.left = FenUI:GetSpacing(config.paddingLeft)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">354</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">355</span>
+                    <span class="line-content">	if config.paddingRight then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">356</span>
+                    <span class="line-content">		self.padding.right = FenUI:GetSpacing(config.paddingRight)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">357</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">358</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">359</span>
+                    <span class="line-content">	if self.contentFrame then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">360</span>
+                    <span class="line-content">		self:UpdateContentAnchors()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">361</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">362</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">363</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">364</span>
+                    <span class="line-content">function PanelMixin:UpdateContentAnchors()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">365</span>
+                    <span class="line-content">	if not self.contentFrame then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">366</span>
+                    <span class="line-content">		return</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">367</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">368</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">369</span>
+                    <span class="line-content">	local safeZone = self.safeZone</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">370</span>
+                    <span class="line-content">	local headerH = FenUI:GetLayout(&quot;headerHeight&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">371</span>
+                    <span class="line-content">	local footerH = FenUI:GetLayout(&quot;footerHeight&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">372</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">373</span>
+                    <span class="line-content">	local p = self.padding</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">374</span>
+                    <span class="line-content">	self.contentFrame:ClearAllPoints()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">375</span>
+                    <span class="line-content">	self.contentFrame:SetPoint(&quot;TOPLEFT&quot;, safeZone, &quot;TOPLEFT&quot;, p.left, -(headerH + p.top))</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">376</span>
+                    <span class="line-content">	self.contentFrame:SetPoint(&quot;BOTTOMRIGHT&quot;, safeZone, &quot;BOTTOMRIGHT&quot;, -p.right, footerH + p.bottom)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">377</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">378</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">379</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">380</span>
+                    <span class="line-content">-- Theme Integration</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">381</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">382</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">383</span>
+                    <span class="line-content">function PanelMixin:RegisterForThemeChanges()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">384</span>
+                    <span class="line-content">	FenUI:RegisterFrame(self, &quot;panel&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">385</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">386</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">387</span>
+                    <span class="line-content">function PanelMixin:UnregisterFromThemeChanges()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">388</span>
+                    <span class="line-content">	FenUI:UnregisterFrame(self)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">389</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">390</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">391</span>
+                    <span class="line-content">function PanelMixin:OnFenUIThemeChanged(themeName, theme)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">392</span>
+                    <span class="line-content">	-- Update title color</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">393</span>
+                    <span class="line-content">	if self.titleText then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">394</span>
+                    <span class="line-content">		local r, g, b = FenUI:GetColor(&quot;textHeading&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">395</span>
+                    <span class="line-content">		self.titleText:SetTextColor(r, g, b)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">396</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">397</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">398</span>
+                    <span class="line-content">	-- Fire hook</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">399</span>
+                    <span class="line-content">	if self.hooks.onThemeChange then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">400</span>
+                    <span class="line-content">		self.hooks.onThemeChange(self, themeName, theme)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">401</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">402</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">403</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">404</span>
+                    <span class="line-content">function PanelMixin:SetTheme(themeName)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">405</span>
+                    <span class="line-content">	FenUI:ApplyTheme(self, themeName)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">406</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">407</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">408</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">409</span>
+                    <span class="line-content">-- Lifecycle Hooks</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">410</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">411</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">412</span>
+                    <span class="line-content">function PanelMixin:SetOnShow(callback)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">413</span>
+                    <span class="line-content">	self.hooks.onShow = callback</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">414</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">415</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">416</span>
+                    <span class="line-content">function PanelMixin:SetOnHide(callback)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">417</span>
+                    <span class="line-content">	self.hooks.onHide = callback</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">418</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">419</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">420</span>
+                    <span class="line-content">function PanelMixin:SetOnThemeChange(callback)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">421</span>
+                    <span class="line-content">	self.hooks.onThemeChange = callback</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">422</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">423</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">424</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">425</span>
+                    <span class="line-content">-- Panel Factory (Config API)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">426</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">427</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">428</span>
+                    <span class="line-content">--- Create a panel with configuration object</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">429</span>
+                    <span class="line-content">---@param parent Frame Parent frame</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">430</span>
+                    <span class="line-content">---@param config table|string Configuration table or just a title string</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">431</span>
+                    <span class="line-content">---@return Frame panel</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">432</span>
+                    <span class="line-content">function FenUI:CreatePanel(parent, config)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">433</span>
+                    <span class="line-content">	-- Allow simple string as title</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">434</span>
+                    <span class="line-content">	if type(config) == &quot;string&quot; then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">435</span>
+                    <span class="line-content">		config = { title = config }</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">436</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">437</span>
+                    <span class="line-content">	config = config or {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">438</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">439</span>
+                    <span class="line-content">	-- Determine layout/border</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">440</span>
+                    <span class="line-content">	local theme = FenUI:GetTheme(config.theme)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">441</span>
+                    <span class="line-content">	local borderKey = config.layout or (theme and theme.layout) or &quot;ModernDark&quot;</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">442</span>
+                    <span class="line-content">	local textureKit = config.textureKit or (theme and theme.textureKit)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">443</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">444</span>
+                    <span class="line-content">	-- Create base panel using Layout component</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">445</span>
+                    <span class="line-content">	local panel</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">446</span>
+                    <span class="line-content">	if FenUI.CreateLayout then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">447</span>
+                    <span class="line-content">		-- Use Layout as base (preferred)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">448</span>
+                    <span class="line-content">		local bgConfig = (config.background == nil) and &quot;surfacePanel&quot; or config.background</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">449</span>
+                    <span class="line-content">		panel = FenUI:CreateLayout(parent or UIParent, {</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">450</span>
+                    <span class="line-content">			name = config.name,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">451</span>
+                    <span class="line-content">			width = config.width or 400,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">452</span>
+                    <span class="line-content">			height = config.height or 300,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">453</span>
+                    <span class="line-content">			border = borderKey,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">454</span>
+                    <span class="line-content">			background = bgConfig,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">455</span>
+                    <span class="line-content">			shadow = config.shadow,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">456</span>
+                    <span class="line-content">			padding = config.padding,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">457</span>
+                    <span class="line-content">			paddingTop = config.paddingTop,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">458</span>
+                    <span class="line-content">			paddingBottom = config.paddingBottom,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">459</span>
+                    <span class="line-content">			paddingLeft = config.paddingLeft,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">460</span>
+                    <span class="line-content">			paddingRight = config.paddingRight,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">461</span>
+                    <span class="line-content">			margin = config.margin,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">462</span>
+                    <span class="line-content">			marginTop = config.marginTop,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">463</span>
+                    <span class="line-content">			marginBottom = config.marginBottom,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">464</span>
+                    <span class="line-content">			marginLeft = config.marginLeft,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">465</span>
+                    <span class="line-content">			marginRight = config.marginRight,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">466</span>
+                    <span class="line-content">			textureKit = textureKit,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">467</span>
+                    <span class="line-content">			minWidth = config.minWidth,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">468</span>
+                    <span class="line-content">			maxWidth = config.maxWidth,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">469</span>
+                    <span class="line-content">			minHeight = config.minHeight,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">470</span>
+                    <span class="line-content">			maxHeight = config.maxHeight,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">471</span>
+                    <span class="line-content">			aspectRatio = config.aspectRatio,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">472</span>
+                    <span class="line-content">			aspectBase = config.aspectBase,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">473</span>
+                    <span class="line-content">			resizable = config.resizable,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">474</span>
+                    <span class="line-content">		})</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">475</span>
+                    <span class="line-content">	else</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">476</span>
+                    <span class="line-content">		-- Fallback to direct frame creation</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">477</span>
+                    <span class="line-content">		panel = CreateFrame(&quot;Frame&quot;, config.name, parent or UIParent)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">478</span>
+                    <span class="line-content">		panel:SetSize(config.width or 400, config.height or 300)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">479</span>
+                    <span class="line-content">		FenUI:ApplyBorder(panel, borderKey)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">480</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">481</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">482</span>
+                    <span class="line-content">	-- Apply Panel mixin (title, close button, slots, hooks)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">483</span>
+                    <span class="line-content">	FenUI.Mixin(panel, PanelMixin)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">484</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">485</span>
+                    <span class="line-content">	-- Initialize with config</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">486</span>
+                    <span class="line-content">	panel:Init(config)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">487</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">488</span>
+                    <span class="line-content">	-- Apply constraints on size change</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">489</span>
+                    <span class="line-content">	panel:HookScript(&quot;OnSizeChanged&quot;, function()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">490</span>
+                    <span class="line-content">		panel:ApplyConstraints()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">491</span>
+                    <span class="line-content">	end)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">492</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">493</span>
+                    <span class="line-content">	-- Set up show/hide hooks</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">494</span>
+                    <span class="line-content">	panel:HookScript(&quot;OnShow&quot;, function(self)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">495</span>
+                    <span class="line-content">		if self.hooks.onShow then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">496</span>
+                    <span class="line-content">			self.hooks.onShow(self)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">497</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">498</span>
+                    <span class="line-content">	end)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">499</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">500</span>
+                    <span class="line-content">	panel:HookScript(&quot;OnHide&quot;, function(self)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">501</span>
+                    <span class="line-content">		if self.hooks.onHide then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">502</span>
+                    <span class="line-content">			self.hooks.onHide(self)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">503</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">504</span>
+                    <span class="line-content">	end)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">505</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">506</span>
+                    <span class="line-content">	return panel</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">507</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">508</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">509</span>
+                    <span class="line-content">--- Apply size constraints to the panel</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">510</span>
+                    <span class="line-content">function PanelMixin:ApplyConstraints()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">511</span>
+                    <span class="line-content">	local width = self:GetWidth()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">512</span>
+                    <span class="line-content">	local height = self:GetHeight()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">513</span>
+                    <span class="line-content">	local config = self.config</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">514</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">515</span>
+                    <span class="line-content">	if config.minWidth and width &lt; config.minWidth then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">516</span>
+                    <span class="line-content">		self:SetWidth(config.minWidth)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">517</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">518</span>
+                    <span class="line-content">	if config.minHeight and height &lt; config.minHeight then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">519</span>
+                    <span class="line-content">		self:SetHeight(config.minHeight)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">520</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">521</span>
+                    <span class="line-content">	if config.maxWidth and width &gt; config.maxWidth then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">522</span>
+                    <span class="line-content">		self:SetWidth(config.maxWidth)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">523</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">524</span>
+                    <span class="line-content">	if config.maxHeight and height &gt; config.maxHeight then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">525</span>
+                    <span class="line-content">		self:SetHeight(config.maxHeight)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">526</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">527</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">528</span>
+                    <span class="line-content">	if self.contentFrame then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">529</span>
+                    <span class="line-content">		self:UpdateContentAnchors()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">530</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">531</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">532</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">533</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">534</span>
+                    <span class="line-content">-- Panel Builder (Fluent API)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">535</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">536</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">537</span>
+                    <span class="line-content">local PanelBuilder = {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">538</span>
+                    <span class="line-content">PanelBuilder.__index = PanelBuilder</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">539</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">540</span>
+                    <span class="line-content">function PanelBuilder:new(parent)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">541</span>
+                    <span class="line-content">	local builder = setmetatable({}, PanelBuilder)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">542</span>
+                    <span class="line-content">	builder._parent = parent or UIParent</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">543</span>
+                    <span class="line-content">	builder._config = {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">544</span>
+                    <span class="line-content">	builder._slots = {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">545</span>
+                    <span class="line-content">	return builder</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">546</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">547</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">548</span>
+                    <span class="line-content">function PanelBuilder:name(name)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">549</span>
+                    <span class="line-content">	self._config.name = name</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">550</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">551</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">552</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">553</span>
+                    <span class="line-content">function PanelBuilder:title(title)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">554</span>
+                    <span class="line-content">	self._config.title = title</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">555</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">556</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">557</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">558</span>
+                    <span class="line-content">function PanelBuilder:size(width, height)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">559</span>
+                    <span class="line-content">	self._config.width = width</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">560</span>
+                    <span class="line-content">	self._config.height = height</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">561</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">562</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">563</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">564</span>
+                    <span class="line-content">function PanelBuilder:width(width)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">565</span>
+                    <span class="line-content">	self._config.width = width</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">566</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">567</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">568</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">569</span>
+                    <span class="line-content">function PanelBuilder:height(height)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">570</span>
+                    <span class="line-content">	self._config.height = height</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">571</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">572</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">573</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">574</span>
+                    <span class="line-content">function PanelBuilder:minWidth(width)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">575</span>
+                    <span class="line-content">	self._config.minWidth = width</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">576</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">577</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">578</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">579</span>
+                    <span class="line-content">function PanelBuilder:maxWidth(width)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">580</span>
+                    <span class="line-content">	self._config.maxWidth = width</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">581</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">582</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">583</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">584</span>
+                    <span class="line-content">function PanelBuilder:minHeight(height)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">585</span>
+                    <span class="line-content">	self._config.minHeight = height</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">586</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">587</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">588</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">589</span>
+                    <span class="line-content">function PanelBuilder:maxHeight(height)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">590</span>
+                    <span class="line-content">	self._config.maxHeight = height</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">591</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">592</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">593</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">594</span>
+                    <span class="line-content">function PanelBuilder:minSize(width, height)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">595</span>
+                    <span class="line-content">	self._config.minWidth = width</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">596</span>
+                    <span class="line-content">	self._config.minHeight = height</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">597</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">598</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">599</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">600</span>
+                    <span class="line-content">function PanelBuilder:maxSize(width, height)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">601</span>
+                    <span class="line-content">	self._config.maxWidth = width</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">602</span>
+                    <span class="line-content">	self._config.maxHeight = height</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">603</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">604</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">605</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">606</span>
+                    <span class="line-content">function PanelBuilder:aspectRatio(ratio, base)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">607</span>
+                    <span class="line-content">	self._config.aspectRatio = ratio</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">608</span>
+                    <span class="line-content">	self._config.aspectBase = base or &quot;width&quot;</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">609</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">610</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">611</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">612</span>
+                    <span class="line-content">function PanelBuilder:theme(themeName)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">613</span>
+                    <span class="line-content">	self._config.theme = themeName</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">614</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">615</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">616</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">617</span>
+                    <span class="line-content">function PanelBuilder:layout(layoutName)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">618</span>
+                    <span class="line-content">	self._config.layout = layoutName</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">619</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">620</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">621</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">622</span>
+                    <span class="line-content">function PanelBuilder:background(bgConfig)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">623</span>
+                    <span class="line-content">	self._config.background = bgConfig</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">624</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">625</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">626</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">627</span>
+                    <span class="line-content">function PanelBuilder:shadow(shadowConfig)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">628</span>
+                    <span class="line-content">	self._config.shadow = shadowConfig</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">629</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">630</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">631</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">632</span>
+                    <span class="line-content">function PanelBuilder:padding(paddingConfig)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">633</span>
+                    <span class="line-content">	self._config.padding = paddingConfig</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">634</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">635</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">636</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">637</span>
+                    <span class="line-content">function PanelBuilder:paddingTop(paddingConfig)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">638</span>
+                    <span class="line-content">	self._config.paddingTop = paddingConfig</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">639</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">640</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">641</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">642</span>
+                    <span class="line-content">function PanelBuilder:paddingBottom(paddingConfig)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">643</span>
+                    <span class="line-content">	self._config.paddingBottom = paddingConfig</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">644</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">645</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">646</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">647</span>
+                    <span class="line-content">function PanelBuilder:paddingLeft(paddingConfig)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">648</span>
+                    <span class="line-content">	self._config.paddingLeft = paddingConfig</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">649</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">650</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">651</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">652</span>
+                    <span class="line-content">function PanelBuilder:paddingRight(paddingConfig)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">653</span>
+                    <span class="line-content">	self._config.paddingRight = paddingConfig</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">654</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">655</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">656</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">657</span>
+                    <span class="line-content">function PanelBuilder:margin(marginConfig)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">658</span>
+                    <span class="line-content">	self._config.margin = marginConfig</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">659</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">660</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">661</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">662</span>
+                    <span class="line-content">function PanelBuilder:marginTop(marginConfig)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">663</span>
+                    <span class="line-content">	self._config.marginTop = marginConfig</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">664</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">665</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">666</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">667</span>
+                    <span class="line-content">function PanelBuilder:marginBottom(marginConfig)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">668</span>
+                    <span class="line-content">	self._config.marginBottom = marginConfig</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">669</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">670</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">671</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">672</span>
+                    <span class="line-content">function PanelBuilder:marginLeft(marginConfig)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">673</span>
+                    <span class="line-content">	self._config.marginLeft = marginConfig</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">674</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">675</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">676</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">677</span>
+                    <span class="line-content">function PanelBuilder:marginRight(marginConfig)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">678</span>
+                    <span class="line-content">	self._config.marginRight = marginConfig</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">679</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">680</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">681</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">682</span>
+                    <span class="line-content">function PanelBuilder:movable(enabled)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">683</span>
+                    <span class="line-content">	self._config.movable = enabled ~= false</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">684</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">685</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">686</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">687</span>
+                    <span class="line-content">function PanelBuilder:resizable(enabled)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">688</span>
+                    <span class="line-content">	self._config.resizable = enabled ~= false</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">689</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">690</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">691</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">692</span>
+                    <span class="line-content">function PanelBuilder:closable(enabled)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">693</span>
+                    <span class="line-content">	self._config.closable = enabled ~= false</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">694</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">695</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">696</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">697</span>
+                    <span class="line-content">function PanelBuilder:slot(slotName, frame)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">698</span>
+                    <span class="line-content">	self._slots[slotName] = frame</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">699</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">700</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">701</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">702</span>
+                    <span class="line-content">function PanelBuilder:onCreate(callback)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">703</span>
+                    <span class="line-content">	self._config.onCreate = callback</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">704</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">705</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">706</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">707</span>
+                    <span class="line-content">function PanelBuilder:onShow(callback)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">708</span>
+                    <span class="line-content">	self._config.onShow = callback</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">709</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">710</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">711</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">712</span>
+                    <span class="line-content">function PanelBuilder:onHide(callback)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">713</span>
+                    <span class="line-content">	self._config.onHide = callback</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">714</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">715</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">716</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">717</span>
+                    <span class="line-content">function PanelBuilder:onThemeChange(callback)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">718</span>
+                    <span class="line-content">	self._config.onThemeChange = callback</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">719</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">720</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">721</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">722</span>
+                    <span class="line-content">function PanelBuilder:transition(prop, config)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">723</span>
+                    <span class="line-content">	self._config.transitions = self._config.transitions or {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">724</span>
+                    <span class="line-content">	self._config.transitions[prop] = config</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">725</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">726</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">727</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">728</span>
+                    <span class="line-content">function PanelBuilder:showAnimation(anim)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">729</span>
+                    <span class="line-content">	self._config.showAnimation = anim</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">730</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">731</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">732</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">733</span>
+                    <span class="line-content">function PanelBuilder:hideAnimation(anim)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">734</span>
+                    <span class="line-content">	self._config.hideAnimation = anim</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">735</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">736</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">737</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">738</span>
+                    <span class="line-content">function PanelBuilder:onMoved(callback)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">739</span>
+                    <span class="line-content">	self._config.onMoved = callback</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">740</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">741</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">742</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">743</span>
+                    <span class="line-content">function PanelBuilder:registerForThemeChanges(enabled)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">744</span>
+                    <span class="line-content">	self._config.registerForThemeChanges = enabled ~= false</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">745</span>
+                    <span class="line-content">	return self</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">746</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">747</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">748</span>
+                    <span class="line-content">function PanelBuilder:build()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">749</span>
+                    <span class="line-content">	self._config.slots = self._slots</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">750</span>
+                    <span class="line-content">	return FenUI:CreatePanel(self._parent, self._config)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">751</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">752</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">753</span>
+                    <span class="line-content">--- Start building a panel with fluent API</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">754</span>
+                    <span class="line-content">---@param parent Frame|nil Parent frame</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">755</span>
+                    <span class="line-content">---@return PanelBuilder builder</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">756</span>
+                    <span class="line-content">function FenUI.Panel(parent)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">757</span>
+                    <span class="line-content">	return PanelBuilder:new(parent)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">758</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">759</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">760</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">761</span>
+                    <span class="line-content">-- Export Mixin for advanced use</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">762</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">763</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">764</span>
+                    <span class="line-content">FenUI.PanelMixin = PanelMixin</span>
+                </div>
+        
+            </div>
+        </div>
+    
+    </div>
+</body>
+</html>

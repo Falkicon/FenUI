@@ -119,6 +119,16 @@ button:SetBadgeColor("feedbackSuccess")
 
 **Solution**: Added `FenUI:CreateSectionHeader(parent, config)` widget.
 
+### 14. ~~Constraint System~~ (COMPLETED)
+**Problem**: UI elements sized with percentages or `auto` lack boundaries, causing layout breakage on extreme screen sizes.
+
+**Solution**: Added `minWidth`, `maxWidth`, `minHeight`, `maxHeight`, and `aspectRatio` support to the core sizing engine (`ApplySize`). Supported by all core widgets and builder APIs.
+
+### 15. ~~Resizable Panels~~ (COMPLETED)
+**Problem**: Testing responsive layouts (like % width) requires changing the parent's size, but FenUI panels were fixed size once created.
+
+**Solution**: Added `resizable = true` support to `FenUI:CreatePanel` and the builder API. Includes a custom resize handle and `onResized` callback.
+
 ### 10. Footer Component
 **Problem**: Panel footers with buttons need manual layout.
 

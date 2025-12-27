@@ -1,0 +1,192 @@
+{
+  "Core\\BlizzardBridge.lua": {
+    "lines": 219,
+    "covered": 201,
+    "percent": 91.8
+  },
+  "Core\\FenUI.lua": {
+    "lines": 152,
+    "covered": 110,
+    "percent": 72.4
+  },
+  "Core\\Fonts.lua": {
+    "lines": 8,
+    "covered": 5,
+    "percent": 62.5
+  },
+  "Core\\ThemeManager.lua": {
+    "lines": 97,
+    "covered": 88,
+    "percent": 90.7
+  },
+  "Core\\Tokens.lua": {
+    "lines": 232,
+    "covered": 213,
+    "percent": 91.8
+  },
+  "Settings\\ThemePicker.lua": {
+    "lines": 170,
+    "covered": 139,
+    "percent": 81.8
+  },
+  "Utils\\Colors.lua": {
+    "lines": 30,
+    "covered": 30,
+    "percent": 100.0
+  },
+  "Utils\\Environment.lua": {
+    "lines": 54,
+    "covered": 44,
+    "percent": 81.5
+  },
+  "Utils\\Formatting.lua": {
+    "lines": 70,
+    "covered": 53,
+    "percent": 75.7
+  },
+  "Utils\\SafeAPI.lua": {
+    "lines": 198,
+    "covered": 145,
+    "percent": 73.2
+  },
+  "Utils\\SecretValues.lua": {
+    "lines": 26,
+    "covered": 24,
+    "percent": 92.3
+  },
+  "Utils\\Tables.lua": {
+    "lines": 53,
+    "covered": 43,
+    "percent": 81.1
+  },
+  "Utils\\UI.lua": {
+    "lines": 215,
+    "covered": 170,
+    "percent": 79.1
+  },
+  "Utils\\Utils.lua": {
+    "lines": 6,
+    "covered": 5,
+    "percent": 83.3
+  },
+  "Validation\\DependencyChecker.lua": {
+    "lines": 148,
+    "covered": 122,
+    "percent": 82.4
+  },
+  "Widgets\\Buttons.lua": {
+    "lines": 212,
+    "covered": 161,
+    "percent": 75.9
+  },
+  "Widgets\\Containers.lua": {
+    "lines": 150,
+    "covered": 113,
+    "percent": 75.3
+  },
+  "Widgets\\Dropdown.lua": {
+    "lines": 63,
+    "covered": 57,
+    "percent": 90.5
+  },
+  "Widgets\\EmptyState.lua": {
+    "lines": 142,
+    "covered": 123,
+    "percent": 86.6
+  },
+  "Widgets\\Grid.lua": {
+    "lines": 196,
+    "covered": 150,
+    "percent": 76.5
+  },
+  "Widgets\\Group.lua": {
+    "lines": 271,
+    "covered": 235,
+    "percent": 86.7
+  },
+  "Widgets\\Image.lua": {
+    "lines": 210,
+    "covered": 153,
+    "percent": 72.9
+  },
+  "Widgets\\ImageButton.lua": {
+    "lines": 104,
+    "covered": 86,
+    "percent": 82.7
+  },
+  "Widgets\\InfoPanel.lua": {
+    "lines": 94,
+    "covered": 85,
+    "percent": 90.4
+  },
+  "Widgets\\Input.lua": {
+    "lines": 57,
+    "covered": 51,
+    "percent": 89.5
+  },
+  "Widgets\\Layout.lua": {
+    "lines": 620,
+    "covered": 481,
+    "percent": 77.6
+  },
+  "Widgets\\MultiLineEditBox.lua": {
+    "lines": 128,
+    "covered": 102,
+    "percent": 79.7
+  },
+  "Widgets\\Panel.lua": {
+    "lines": 397,
+    "covered": 291,
+    "percent": 73.3
+  },
+  "Widgets\\ScrollBar.lua": {
+    "lines": 48,
+    "covered": 38,
+    "percent": 79.2
+  },
+  "Widgets\\Section.lua": {
+    "lines": 53,
+    "covered": 47,
+    "percent": 88.7
+  },
+  "Widgets\\SectionHeader.lua": {
+    "lines": 27,
+    "covered": 26,
+    "percent": 96.3
+  },
+  "Widgets\\SplitLayout.lua": {
+    "lines": 169,
+    "covered": 127,
+    "percent": 75.1
+  },
+  "Widgets\\Stack.lua": {
+    "lines": 387,
+    "covered": 276,
+    "percent": 71.3
+  },
+  "Widgets\\StatusRow.lua": {
+    "lines": 70,
+    "covered": 65,
+    "percent": 92.9
+  },
+  "Widgets\\Tabs.lua": {
+    "lines": 233,
+    "covered": 186,
+    "percent": 79.8
+  },
+  "Widgets\\Toolbar.lua": {
+    "lines": 91,
+    "covered": 85,
+    "percent": 93.4
+  },
+  "Widgets\\Tree.lua": {
+    "lines": 62,
+    "covered": 58,
+    "percent": 93.5
+  },
+  "_total": {
+    "lines": 5462,
+    "covered": 4388,
+    "percent": 80.3
+  }
+}

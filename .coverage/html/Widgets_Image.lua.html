@@ -1,0 +1,2462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coverage Report: ADDON_DEV_LOCAL/Libs/FenUI - Widgets\Image.lua</title>
+    <style>
+        :root {
+            --bg: #1e1e2e;
+            --surface: #313244;
+            --text: #cdd6f4;
+            --subtext: #a6adc8;
+            --green: #a6e3a1;
+            --yellow: #f9e2af;
+            --red: #f38ba8;
+            --blue: #89b4fa;
+            --border: #45475a;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 {
+            color: var(--blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.75rem;
+        }
+        .timestamp {
+            color: var(--subtext);
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+        }
+        .summary-card {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        .stat-label {
+            color: var(--subtext);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .coverage-high { color: var(--green); }
+        .coverage-medium { color: var(--yellow); }
+        .coverage-low { color: var(--red); }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--surface);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 0.875rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: rgba(0,0,0,0.2);
+            font-weight: 600;
+            color: var(--subtext);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+        tr:hover { background: rgba(255,255,255,0.02); }
+        tr:last-child td { border-bottom: none; }
+        .file-link {
+            color: var(--blue);
+            text-decoration: none;
+        }
+        .file-link:hover { text-decoration: underline; }
+        .progress-bar {
+            width: 100px;
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        .text-right { text-align: right; }
+        .file-detail {
+            background: var(--surface);
+            border-radius: 12px;
+            margin-top: 2rem;
+            overflow: hidden;
+        }
+        .file-header {
+            padding: 1rem 1.5rem;
+            background: rgba(0,0,0,0.2);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .file-name {
+            font-family: 'Consolas', 'Monaco', monospace;
+            color: var(--blue);
+        }
+        .code-view {
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+        }
+        .code-line {
+            display: flex;
+            min-height: 1.5rem;
+        }
+        .line-number {
+            width: 50px;
+            padding: 0 0.75rem;
+            text-align: right;
+            color: var(--subtext);
+            user-select: none;
+            flex-shrink: 0;
+            background: rgba(0,0,0,0.1);
+        }
+        .line-content {
+            flex: 1;
+            padding: 0 1rem;
+            white-space: pre;
+        }
+        .line-covered {
+            background: rgba(166, 227, 161, 0.1);
+        }
+        .line-uncovered {
+            background: rgba(243, 139, 168, 0.15);
+        }
+        .line-uncovered .line-number {
+            background: rgba(243, 139, 168, 0.2);
+            color: var(--red);
+        }
+        .nav { margin-bottom: 1rem; }
+        .nav a {
+            color: var(--blue);
+            text-decoration: none;
+            margin-right: 1rem;
+        }
+        .nav a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="nav">
+            <a href="index.html">← Back to Summary</a>
+        </div>
+        
+        <div class="file-detail">
+            <div class="file-header">
+                <span class="file-name">Widgets\Image.lua</span>
+                <span class="coverage-medium">72.9% (153/210 lines)</span>
+            </div>
+            <div class="code-view">
+    
+                <div class="code-line ">
+                    <span class="line-number">1</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">2</span>
+                    <span class="line-content">-- FenUI v2 - Image Widget</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">3</span>
+                    <span class="line-content">--</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">4</span>
+                    <span class="line-content">-- Full-featured image component with:</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">5</span>
+                    <span class="line-content">-- - Conditional variants (faction, class, race, spec, custom resolver)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">6</span>
+                    <span class="line-content">-- - Sizing modes (fit, fill, contain, cover)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">7</span>
+                    <span class="line-content">-- - Fill mode (fill = true) - stretches to parent bounds</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">8</span>
+                    <span class="line-content">-- - Fallback/placeholder handling</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">9</span>
+                    <span class="line-content">-- - Tinting with token colors</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">10</span>
+                    <span class="line-content">-- - Interactive handlers (onClick, onEnter, onLeave)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">11</span>
+                    <span class="line-content">-- - Masking (circle, rounded, custom)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">12</span>
+                    <span class="line-content">-- - Atlas texture support</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">13</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">14</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">15</span>
+                    <span class="line-content">local FenUI = FenUI</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">16</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">17</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">18</span>
+                    <span class="line-content">-- Built-in Condition Resolvers</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">19</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">20</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">21</span>
+                    <span class="line-content">local CONDITION_RESOLVERS = {</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">22</span>
+                    <span class="line-content">	faction = function()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">23</span>
+                    <span class="line-content">		return UnitFactionGroup(&quot;player&quot;) or &quot;Neutral&quot;</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">24</span>
+                    <span class="line-content">	end,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">25</span>
+                    <span class="line-content">	class = function()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">26</span>
+                    <span class="line-content">		return select(2, UnitClass(&quot;player&quot;))</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">27</span>
+                    <span class="line-content">	end,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">28</span>
+                    <span class="line-content">	race = function()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">29</span>
+                    <span class="line-content">		return select(2, UnitRace(&quot;player&quot;))</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">30</span>
+                    <span class="line-content">	end,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">31</span>
+                    <span class="line-content">	spec = function()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">32</span>
+                    <span class="line-content">		return C_SpecializationInfo.GetSpecialization() or 1</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">33</span>
+                    <span class="line-content">	end,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">34</span>
+                    <span class="line-content">}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">35</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">36</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">37</span>
+                    <span class="line-content">-- Sizing Mode Implementations</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">38</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">39</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">40</span>
+                    <span class="line-content">-- Calculate texture coords and size for sizing modes</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">41</span>
+                    <span class="line-content">-- Returns: width, height, texCoords (or nil for full texture)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">42</span>
+                    <span class="line-content">local function CalculateSizing(mode, frameWidth, frameHeight, texWidth, texHeight)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">43</span>
+                    <span class="line-content">	if not texWidth or texWidth == 0 or not texHeight or texHeight == 0 then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">44</span>
+                    <span class="line-content">		return frameWidth, frameHeight, nil</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">45</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">46</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">47</span>
+                    <span class="line-content">	local frameAspect = frameWidth / frameHeight</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">48</span>
+                    <span class="line-content">	local texAspect = texWidth / texHeight</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">49</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">50</span>
+                    <span class="line-content">	if mode == &quot;fill&quot; then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">51</span>
+                    <span class="line-content">		-- Stretch to fill exactly (no aspect preservation)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">52</span>
+                    <span class="line-content">		return frameWidth, frameHeight, nil</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">53</span>
+                    <span class="line-content">	elseif mode == &quot;fit&quot; then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">54</span>
+                    <span class="line-content">		-- Scale to fit within bounds, preserve aspect, may have gaps</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">55</span>
+                    <span class="line-content">		if texAspect &gt; frameAspect then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">56</span>
+                    <span class="line-content">			-- Texture is wider, fit to width</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">57</span>
+                    <span class="line-content">			local h = frameWidth / texAspect</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">58</span>
+                    <span class="line-content">			return frameWidth, h, nil</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">59</span>
+                    <span class="line-content">		else</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">60</span>
+                    <span class="line-content">			-- Texture is taller, fit to height</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">61</span>
+                    <span class="line-content">			local w = frameHeight * texAspect</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">62</span>
+                    <span class="line-content">			return w, frameHeight, nil</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">63</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">64</span>
+                    <span class="line-content">	elseif mode == &quot;contain&quot; then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">65</span>
+                    <span class="line-content">		-- Same as fit - scale to fit, preserve aspect</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">66</span>
+                    <span class="line-content">		if texAspect &gt; frameAspect then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">67</span>
+                    <span class="line-content">			local h = frameWidth / texAspect</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">68</span>
+                    <span class="line-content">			return frameWidth, h, nil</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">69</span>
+                    <span class="line-content">		else</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">70</span>
+                    <span class="line-content">			local w = frameHeight * texAspect</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">71</span>
+                    <span class="line-content">			return w, frameHeight, nil</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">72</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">73</span>
+                    <span class="line-content">	elseif mode == &quot;cover&quot; then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">74</span>
+                    <span class="line-content">		-- Scale to cover bounds, preserve aspect, crop if needed</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">75</span>
+                    <span class="line-content">		if texAspect &gt; frameAspect then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">76</span>
+                    <span class="line-content">			-- Texture is wider, fit to height and crop width</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">77</span>
+                    <span class="line-content">			local scale = frameHeight / texHeight</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">78</span>
+                    <span class="line-content">			local scaledWidth = texWidth * scale</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">79</span>
+                    <span class="line-content">			local cropX = (scaledWidth - frameWidth) / 2 / scaledWidth</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">80</span>
+                    <span class="line-content">			return frameWidth, frameHeight, { cropX, 0, 1 - cropX, 1 }</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">81</span>
+                    <span class="line-content">		else</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">82</span>
+                    <span class="line-content">			-- Texture is taller, fit to width and crop height</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">83</span>
+                    <span class="line-content">			local scale = frameWidth / texWidth</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">84</span>
+                    <span class="line-content">			local scaledHeight = texHeight * scale</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">85</span>
+                    <span class="line-content">			local cropY = (scaledHeight - frameHeight) / 2 / scaledHeight</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">86</span>
+                    <span class="line-content">			return frameWidth, frameHeight, { 0, cropY, 1, 1 - cropY }</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">87</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">88</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">89</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">90</span>
+                    <span class="line-content">	-- Default: fill</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">91</span>
+                    <span class="line-content">	return frameWidth, frameHeight, nil</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">92</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">93</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">94</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">95</span>
+                    <span class="line-content">-- Mask Textures</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">96</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">97</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">98</span>
+                    <span class="line-content">local MASK_TEXTURES = {</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">99</span>
+                    <span class="line-content">	circle = &quot;Interface\\CHARACTERFRAME\\TempPortraitAlphaMask&quot;,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">100</span>
+                    <span class="line-content">	rounded = &quot;Interface\\BUTTONS\\WHITE8X8&quot;, -- Fallback, WoW doesn&#x27;t have built-in rounded</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">101</span>
+                    <span class="line-content">}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">102</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">103</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">104</span>
+                    <span class="line-content">-- Image Mixin</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">105</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">106</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">107</span>
+                    <span class="line-content">local ImageMixin = {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">108</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">109</span>
+                    <span class="line-content">function ImageMixin:Init(config)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">110</span>
+                    <span class="line-content">	self:InitImage(config)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">111</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">112</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">113</span>
+                    <span class="line-content">function ImageMixin:InitImage(config)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">114</span>
+                    <span class="line-content">	self.config = config or {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">115</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">116</span>
+                    <span class="line-content">	-- Create main texture</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">117</span>
+                    <span class="line-content">	if not self.texture then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">118</span>
+                    <span class="line-content">		self.texture = self:CreateTexture(nil, config.drawLayer or &quot;ARTWORK&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">119</span>
+                    <span class="line-content">		self.texture:SetAllPoints()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">120</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">121</span>
+                    <span class="line-content">		-- Improve sharpness for small icons</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">122</span>
+                    <span class="line-content">		if self.texture.SetFilterMode then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">123</span>
+                    <span class="line-content">			self.texture:SetFilterMode(&quot;TRILINEAR&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">124</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">125</span>
+                    <span class="line-content">		if self.texture.SetTexelSnappingBias then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">126</span>
+                    <span class="line-content">			self.texture:SetTexelSnappingBias(0.0)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">127</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">128</span>
+                    <span class="line-content">		if self.texture.SetSnapToPixelGrid then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">129</span>
+                    <span class="line-content">			self.texture:SetSnapToPixelGrid(true)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">130</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">131</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">132</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">133</span>
+                    <span class="line-content">	-- Frame sizing - fill mode vs explicit size</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">134</span>
+                    <span class="line-content">	if config.fill then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">135</span>
+                    <span class="line-content">		-- Fill mode: anchor to all parent edges</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">136</span>
+                    <span class="line-content">		self:ClearAllPoints()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">137</span>
+                    <span class="line-content">		self:SetPoint(&quot;TOPLEFT&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">138</span>
+                    <span class="line-content">		self:SetPoint(&quot;BOTTOMRIGHT&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">139</span>
+                    <span class="line-content">		self.isFillMode = true</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">140</span>
+                    <span class="line-content">	else</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">141</span>
+                    <span class="line-content">		-- Explicit size mode</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">142</span>
+                    <span class="line-content">		local size = config.size or 64</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">143</span>
+                    <span class="line-content">		local width = config.width or size</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">144</span>
+                    <span class="line-content">		local height = config.height or width</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">145</span>
+                    <span class="line-content">		self:SetSize(width, height)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">146</span>
+                    <span class="line-content">		self.isFillMode = false</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">147</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">148</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">149</span>
+                    <span class="line-content">	-- Store sizing mode</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">150</span>
+                    <span class="line-content">	self.sizingMode = config.sizing or &quot;fill&quot;</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">151</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">152</span>
+                    <span class="line-content">	-- Apply mask if specified</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">153</span>
+                    <span class="line-content">	if config.mask then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">154</span>
+                    <span class="line-content">		self:SetMask(config.mask)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">155</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">156</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">157</span>
+                    <span class="line-content">	-- Interactive setup</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">158</span>
+                    <span class="line-content">	if config.onClick or config.onEnter or config.onLeave or config.tooltip then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">159</span>
+                    <span class="line-content">		self:EnableMouse(true)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">160</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">161</span>
+                    <span class="line-content">		if config.onClick then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">162</span>
+                    <span class="line-content">			self:SetScript(&quot;OnMouseUp&quot;, function(_, button)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">163</span>
+                    <span class="line-content">				if button == &quot;LeftButton&quot; then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">164</span>
+                    <span class="line-content">					config.onClick(self)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">165</span>
+                    <span class="line-content">				end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">166</span>
+                    <span class="line-content">			end)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">167</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">168</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">169</span>
+                    <span class="line-content">		self:SetScript(&quot;OnEnter&quot;, function()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">170</span>
+                    <span class="line-content">			if config.onEnter then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">171</span>
+                    <span class="line-content">				config.onEnter(self)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">172</span>
+                    <span class="line-content">			end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">173</span>
+                    <span class="line-content">			if config.tooltip then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">174</span>
+                    <span class="line-content">				GameTooltip:SetOwner(self, &quot;ANCHOR_RIGHT&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">175</span>
+                    <span class="line-content">				GameTooltip:SetText(config.tooltip)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">176</span>
+                    <span class="line-content">				GameTooltip:Show()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">177</span>
+                    <span class="line-content">			end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">178</span>
+                    <span class="line-content">		end)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">179</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">180</span>
+                    <span class="line-content">		self:SetScript(&quot;OnLeave&quot;, function()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">181</span>
+                    <span class="line-content">			if config.onLeave then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">182</span>
+                    <span class="line-content">				config.onLeave(self)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">183</span>
+                    <span class="line-content">			end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">184</span>
+                    <span class="line-content">			if config.tooltip then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">185</span>
+                    <span class="line-content">				GameTooltip:Hide()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">186</span>
+                    <span class="line-content">			end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">187</span>
+                    <span class="line-content">		end)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">188</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">189</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">190</span>
+                    <span class="line-content">	-- Apply alpha</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">191</span>
+                    <span class="line-content">	if config.alpha then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">192</span>
+                    <span class="line-content">		self.texture:SetAlpha(config.alpha)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">193</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">194</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">195</span>
+                    <span class="line-content">	-- Resolve and apply texture</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">196</span>
+                    <span class="line-content">	self:Refresh()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">197</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">198</span>
+                    <span class="line-content">	-- Apply tint after texture is set</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">199</span>
+                    <span class="line-content">	if config.tint then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">200</span>
+                    <span class="line-content">		self:SetTint(config.tint)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">201</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">202</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">203</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">204</span>
+                    <span class="line-content">--- Resolve the texture path based on condition or direct config</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">205</span>
+                    <span class="line-content">---@return string|nil texturePath</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">206</span>
+                    <span class="line-content">function ImageMixin:ResolveTexture()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">207</span>
+                    <span class="line-content">	local config = self.config</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">208</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">209</span>
+                    <span class="line-content">	-- Conditional resolution</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">210</span>
+                    <span class="line-content">	if config.condition or config.resolver then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">211</span>
+                    <span class="line-content">		local resolver = config.resolver</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">212</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">213</span>
+                    <span class="line-content">		-- Use built-in resolver if condition name provided</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">214</span>
+                    <span class="line-content">		if config.condition and CONDITION_RESOLVERS[config.condition] then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">215</span>
+                    <span class="line-content">			resolver = CONDITION_RESOLVERS[config.condition]</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">216</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">217</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">218</span>
+                    <span class="line-content">		if resolver and config.variants then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">219</span>
+                    <span class="line-content">			local key = resolver()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">220</span>
+                    <span class="line-content">			local texture = config.variants[key]</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">221</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">222</span>
+                    <span class="line-content">			if texture then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">223</span>
+                    <span class="line-content">				return texture, false -- not atlas</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">224</span>
+                    <span class="line-content">			end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">225</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">226</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">227</span>
+                    <span class="line-content">		-- Fallback</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">228</span>
+                    <span class="line-content">		return config.fallback, false</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">229</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">230</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">231</span>
+                    <span class="line-content">	-- Direct texture</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">232</span>
+                    <span class="line-content">	if config.texture then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">233</span>
+                    <span class="line-content">		return config.texture, false</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">234</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">235</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">236</span>
+                    <span class="line-content">	-- Atlas texture</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">237</span>
+                    <span class="line-content">	if config.atlas then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">238</span>
+                    <span class="line-content">		return config.atlas, true</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">239</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">240</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">241</span>
+                    <span class="line-content">	-- Fallback</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">242</span>
+                    <span class="line-content">	return config.fallback, false</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">243</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">244</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">245</span>
+                    <span class="line-content">--- Refresh the image (re-resolve conditional and apply)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">246</span>
+                    <span class="line-content">function ImageMixin:Refresh()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">247</span>
+                    <span class="line-content">	local texturePath, isAtlas = self:ResolveTexture()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">248</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">249</span>
+                    <span class="line-content">	if not texturePath then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">250</span>
+                    <span class="line-content">		-- No texture, hide</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">251</span>
+                    <span class="line-content">		self.texture:Hide()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">252</span>
+                    <span class="line-content">		return</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">253</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">254</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">255</span>
+                    <span class="line-content">	self.texture:Show()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">256</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">257</span>
+                    <span class="line-content">	if isAtlas then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">258</span>
+                    <span class="line-content">		self.texture:SetAtlas(texturePath)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">259</span>
+                    <span class="line-content">	else</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">260</span>
+                    <span class="line-content">		self.texture:SetTexture(texturePath)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">261</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">262</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">263</span>
+                    <span class="line-content">	-- Apply sizing mode</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">264</span>
+                    <span class="line-content">	self:ApplySizing()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">265</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">266</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">267</span>
+                    <span class="line-content">--- Set the sizing mode</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">268</span>
+                    <span class="line-content">---@param mode string &quot;fill&quot;, &quot;fit&quot;, &quot;contain&quot;, &quot;cover&quot;</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">269</span>
+                    <span class="line-content">function ImageMixin:SetSizing(mode)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">270</span>
+                    <span class="line-content">	self.sizingMode = mode</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">271</span>
+                    <span class="line-content">	self:ApplySizing()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">272</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">273</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">274</span>
+                    <span class="line-content">--- Apply sizing mode calculations</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">275</span>
+                    <span class="line-content">function ImageMixin:ApplySizing()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">276</span>
+                    <span class="line-content">	local frameWidth, frameHeight = self:GetSize()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">277</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">278</span>
+                    <span class="line-content">	-- For now, we can&#x27;t easily get texture dimensions in WoW</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">279</span>
+                    <span class="line-content">	-- So sizing modes are simplified:</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">280</span>
+                    <span class="line-content">	-- - fill: stretch to frame size</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">281</span>
+                    <span class="line-content">	-- - fit/contain: assume square texture, scale proportionally</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">282</span>
+                    <span class="line-content">	-- - cover: fill and potentially use SetTexCoord for cropping</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">283</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">284</span>
+                    <span class="line-content">	local mode = self.sizingMode</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">285</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">286</span>
+                    <span class="line-content">	if mode == &quot;fill&quot; then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">287</span>
+                    <span class="line-content">		self.texture:SetAllPoints()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">288</span>
+                    <span class="line-content">		self.texture:SetTexCoord(0, 1, 0, 1)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">289</span>
+                    <span class="line-content">	elseif mode == &quot;fit&quot; or mode == &quot;contain&quot; then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">290</span>
+                    <span class="line-content">		-- For custom aspect ratio handling, would need texture dimension callback</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">291</span>
+                    <span class="line-content">		-- Default to fill behavior</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">292</span>
+                    <span class="line-content">		self.texture:SetAllPoints()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">293</span>
+                    <span class="line-content">		self.texture:SetTexCoord(0, 1, 0, 1)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">294</span>
+                    <span class="line-content">	elseif mode == &quot;cover&quot; then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">295</span>
+                    <span class="line-content">		self.texture:SetAllPoints()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">296</span>
+                    <span class="line-content">		self.texture:SetTexCoord(0, 1, 0, 1)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">297</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">298</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">299</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">300</span>
+                    <span class="line-content">--- Set a new texture directly</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">301</span>
+                    <span class="line-content">---@param path string Texture path</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">302</span>
+                    <span class="line-content">function ImageMixin:SetTexture(path)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">303</span>
+                    <span class="line-content">	self.config.texture = path</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">304</span>
+                    <span class="line-content">	self.config.atlas = nil</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">305</span>
+                    <span class="line-content">	self.config.condition = nil</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">306</span>
+                    <span class="line-content">	self.config.variants = nil</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">307</span>
+                    <span class="line-content">	self:Refresh()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">308</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">309</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">310</span>
+                    <span class="line-content">--- Set an Atlas texture</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">311</span>
+                    <span class="line-content">---@param atlasName string Atlas name</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">312</span>
+                    <span class="line-content">function ImageMixin:SetAtlas(atlasName)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">313</span>
+                    <span class="line-content">	self.config.atlas = atlasName</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">314</span>
+                    <span class="line-content">	self.config.texture = nil</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">315</span>
+                    <span class="line-content">	self.config.condition = nil</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">316</span>
+                    <span class="line-content">	self.config.variants = nil</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">317</span>
+                    <span class="line-content">	self:Refresh()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">318</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">319</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">320</span>
+                    <span class="line-content">--- Set conditional variants</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">321</span>
+                    <span class="line-content">---@param condition string Condition name (&quot;faction&quot;, &quot;class&quot;, &quot;race&quot;, &quot;spec&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">322</span>
+                    <span class="line-content">---@param variants table&lt;string, string&gt; Variant textures</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">323</span>
+                    <span class="line-content">function ImageMixin:SetConditional(condition, variants)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">324</span>
+                    <span class="line-content">	self.config.condition = condition</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">325</span>
+                    <span class="line-content">	self.config.variants = variants</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">326</span>
+                    <span class="line-content">	self.config.texture = nil</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">327</span>
+                    <span class="line-content">	self.config.atlas = nil</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">328</span>
+                    <span class="line-content">	self:Refresh()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">329</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">330</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">331</span>
+                    <span class="line-content">--- Apply tinting to the image</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">332</span>
+                    <span class="line-content">---@param tokenOrColor string|table Token name or {r, g, b, a} table</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">333</span>
+                    <span class="line-content">function ImageMixin:SetTint(tokenOrColor)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">334</span>
+                    <span class="line-content">	if type(tokenOrColor) == &quot;string&quot; then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">335</span>
+                    <span class="line-content">		-- Token name</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">336</span>
+                    <span class="line-content">		local r, g, b, a = FenUI:GetColor(tokenOrColor)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">337</span>
+                    <span class="line-content">		self.texture:SetVertexColor(r, g, b, a)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">338</span>
+                    <span class="line-content">	elseif type(tokenOrColor) == &quot;table&quot; then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">339</span>
+                    <span class="line-content">		-- Direct color</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">340</span>
+                    <span class="line-content">		self.texture:SetVertexColor(</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">341</span>
+                    <span class="line-content">			tokenOrColor[1] or 1,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">342</span>
+                    <span class="line-content">			tokenOrColor[2] or 1,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">343</span>
+                    <span class="line-content">			tokenOrColor[3] or 1,</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">344</span>
+                    <span class="line-content">			tokenOrColor[4] or 1</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">345</span>
+                    <span class="line-content">		)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">346</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">347</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">348</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">349</span>
+                    <span class="line-content">--- Clear tinting (reset to white)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">350</span>
+                    <span class="line-content">function ImageMixin:ClearTint()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">351</span>
+                    <span class="line-content">	self.texture:SetVertexColor(1, 1, 1, 1)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">352</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">353</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">354</span>
+                    <span class="line-content">--- Apply a mask to the image</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">355</span>
+                    <span class="line-content">---@param maskType string &quot;circle&quot;, &quot;rounded&quot;, or texture path</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">356</span>
+                    <span class="line-content">function ImageMixin:SetMask(maskType)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">357</span>
+                    <span class="line-content">	local maskTexture = MASK_TEXTURES[maskType] or maskType</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">358</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">359</span>
+                    <span class="line-content">	if maskTexture and maskTexture ~= &quot;Interface\\BUTTONS\\WHITE8X8&quot; then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">360</span>
+                    <span class="line-content">		-- Create mask frame if needed</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">361</span>
+                    <span class="line-content">		if not self.maskTexture then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">362</span>
+                    <span class="line-content">			self.maskTexture = self:CreateMaskTexture()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">363</span>
+                    <span class="line-content">			self.maskTexture:SetAllPoints()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">364</span>
+                    <span class="line-content">		end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">365</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">366</span>
+                    <span class="line-content">		self.maskTexture:SetTexture(maskTexture)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">367</span>
+                    <span class="line-content">		self.texture:AddMaskTexture(self.maskTexture)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">368</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">369</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">370</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">371</span>
+                    <span class="line-content">--- Clear mask</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">372</span>
+                    <span class="line-content">function ImageMixin:ClearMask()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">373</span>
+                    <span class="line-content">	if self.maskTexture then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">374</span>
+                    <span class="line-content">		self.texture:RemoveMaskTexture(self.maskTexture)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">375</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">376</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">377</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">378</span>
+                    <span class="line-content">--- Get the underlying texture object</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">379</span>
+                    <span class="line-content">---@return Texture</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">380</span>
+                    <span class="line-content">function ImageMixin:GetTexture()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">381</span>
+                    <span class="line-content">	return self.texture</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">382</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">383</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">384</span>
+                    <span class="line-content">--- Set image alpha</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">385</span>
+                    <span class="line-content">---@param alpha number 0-1</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">386</span>
+                    <span class="line-content">function ImageMixin:SetImageAlpha(alpha)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">387</span>
+                    <span class="line-content">	self.texture:SetAlpha(alpha)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">388</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">389</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">390</span>
+                    <span class="line-content">--- Set fill mode (stretch to parent bounds)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">391</span>
+                    <span class="line-content">---@param enabled boolean</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">392</span>
+                    <span class="line-content">function ImageMixin:SetFill(enabled)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">393</span>
+                    <span class="line-content">	if enabled then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">394</span>
+                    <span class="line-content">		self:ClearAllPoints()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">395</span>
+                    <span class="line-content">		self:SetPoint(&quot;TOPLEFT&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">396</span>
+                    <span class="line-content">		self:SetPoint(&quot;BOTTOMRIGHT&quot;)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">397</span>
+                    <span class="line-content">		self.isFillMode = true</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">398</span>
+                    <span class="line-content">	else</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">399</span>
+                    <span class="line-content">		-- Restore explicit size from config</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">400</span>
+                    <span class="line-content">		self:ClearAllPoints()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">401</span>
+                    <span class="line-content">		local width = self.config.width or 64</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">402</span>
+                    <span class="line-content">		local height = self.config.height or width</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">403</span>
+                    <span class="line-content">		self:SetSize(width, height)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">404</span>
+                    <span class="line-content">		self.isFillMode = false</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">405</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">406</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">407</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">408</span>
+                    <span class="line-content">--- Get whether fill mode is active</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">409</span>
+                    <span class="line-content">---@return boolean</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">410</span>
+                    <span class="line-content">function ImageMixin:GetFill()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">411</span>
+                    <span class="line-content">	return self.isFillMode or false</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">412</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">413</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">414</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">415</span>
+                    <span class="line-content">-- Factory</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">416</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">417</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">418</span>
+                    <span class="line-content">--- Create an image component</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">419</span>
+                    <span class="line-content">---@param parent Frame Parent frame</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">420</span>
+                    <span class="line-content">---@param config table Configuration</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">421</span>
+                    <span class="line-content">---@return Frame image</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">422</span>
+                    <span class="line-content">function FenUI:CreateImage(parent, config)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">423</span>
+                    <span class="line-content">	local image = CreateFrame(&quot;Frame&quot;, nil, parent)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">424</span>
+                    <span class="line-content">	FenUI.Mixin(image, ImageMixin)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">425</span>
+                    <span class="line-content">	image:Init(config or {})</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">426</span>
+                    <span class="line-content">	return image</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">427</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">428</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">429</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">430</span>
+                    <span class="line-content">-- Register Condition Resolver</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">431</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">432</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">433</span>
+                    <span class="line-content">--- Register a custom condition resolver</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">434</span>
+                    <span class="line-content">---@param name string Condition name</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">435</span>
+                    <span class="line-content">---@param resolver function Resolver function returning a variant key</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">436</span>
+                    <span class="line-content">function FenUI:RegisterImageCondition(name, resolver)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">437</span>
+                    <span class="line-content">	if type(resolver) == &quot;function&quot; then</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">438</span>
+                    <span class="line-content">		CONDITION_RESOLVERS[name] = resolver</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">439</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">440</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">441</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">442</span>
+                    <span class="line-content">--- Get available condition names</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">443</span>
+                    <span class="line-content">---@return table&lt;string, function&gt; resolvers</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">444</span>
+                    <span class="line-content">function FenUI:GetImageConditions()</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">445</span>
+                    <span class="line-content">	local conditions = {}</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">446</span>
+                    <span class="line-content">	for name, _ in pairs(CONDITION_RESOLVERS) do</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">447</span>
+                    <span class="line-content">		table.insert(conditions, name)</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">448</span>
+                    <span class="line-content">	end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">449</span>
+                    <span class="line-content">	return conditions</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">450</span>
+                    <span class="line-content">end</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">451</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">452</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">453</span>
+                    <span class="line-content">-- Export Mixin</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">454</span>
+                    <span class="line-content">--------------------------------------------------------------------------------</span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">455</span>
+                    <span class="line-content"></span>
+                </div>
+        
+                <div class="code-line ">
+                    <span class="line-number">456</span>
+                    <span class="line-content">FenUI.ImageMixin = ImageMixin</span>
+                </div>
+        
+            </div>
+        </div>
+    
+    </div>
+</body>
+</html>

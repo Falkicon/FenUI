@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coverage Report: ADDON_DEV_LOCAL/Libs/FenUI</title>
+    <style>
+        :root {
+            --bg: #1e1e2e;
+            --surface: #313244;
+            --text: #cdd6f4;
+            --subtext: #a6adc8;
+            --green: #a6e3a1;
+            --yellow: #f9e2af;
+            --red: #f38ba8;
+            --blue: #89b4fa;
+            --border: #45475a;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 {
+            color: var(--blue);
+            margin-bottom: 0.5rem;
+            font-size: 1.75rem;
+        }
+        .timestamp {
+            color: var(--subtext);
+            font-size: 0.875rem;
+            margin-bottom: 2rem;
+        }
+        .summary-card {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        .stat-label {
+            color: var(--subtext);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .coverage-high { color: var(--green); }
+        .coverage-medium { color: var(--yellow); }
+        .coverage-low { color: var(--red); }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--surface);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 0.875rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: rgba(0,0,0,0.2);
+            font-weight: 600;
+            color: var(--subtext);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+        tr:hover { background: rgba(255,255,255,0.02); }
+        tr:last-child td { border-bottom: none; }
+        .file-link {
+            color: var(--blue);
+            text-decoration: none;
+        }
+        .file-link:hover { text-decoration: underline; }
+        .progress-bar {
+            width: 100px;
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        .text-right { text-align: right; }
+        .file-detail {
+            background: var(--surface);
+            border-radius: 12px;
+            margin-top: 2rem;
+            overflow: hidden;
+        }
+        .file-header {
+            padding: 1rem 1.5rem;
+            background: rgba(0,0,0,0.2);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .file-name {
+            font-family: 'Consolas', 'Monaco', monospace;
+            color: var(--blue);
+        }
+        .code-view {
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+        }
+        .code-line {
+            display: flex;
+            min-height: 1.5rem;
+        }
+        .line-number {
+            width: 50px;
+            padding: 0 0.75rem;
+            text-align: right;
+            color: var(--subtext);
+            user-select: none;
+            flex-shrink: 0;
+            background: rgba(0,0,0,0.1);
+        }
+        .line-content {
+            flex: 1;
+            padding: 0 1rem;
+            white-space: pre;
+        }
+        .line-covered {
+            background: rgba(166, 227, 161, 0.1);
+        }
+        .line-uncovered {
+            background: rgba(243, 139, 168, 0.15);
+        }
+        .line-uncovered .line-number {
+            background: rgba(243, 139, 168, 0.2);
+            color: var(--red);
+        }
+        .nav { margin-bottom: 1rem; }
+        .nav a {
+            color: var(--blue);
+            text-decoration: none;
+            margin-right: 1rem;
+        }
+        .nav a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <h1>📊 Coverage Report</h1>
+        <p class="timestamp">ADDON_DEV_LOCAL/Libs/FenUI · Generated 2025-12-27 03:25:08</p>
+        
+        <div class="summary-card">
+            <div class="stat">
+                <div class="stat-value coverage-high">80.3%</div>
+                <div class="stat-label">Total Coverage</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">4388</div>
+                <div class="stat-label">Lines Covered</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">5462</div>
+                <div class="stat-label">Total Lines</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">37</div>
+                <div class="stat-label">Files</div>
+            </div>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>File</th>
+                    <th class="text-right">Lines</th>
+                    <th class="text-right">Covered</th>
+                    <th class="text-right">Coverage</th>
+                    <th>Progress</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+                <tr>
+                    <td><a href="Core_BlizzardBridge.lua.html" class="file-link">Core\BlizzardBridge.lua</a></td>
+                    <td class="text-right">219</td>
+                    <td class="text-right">201</td>
+                    <td class="text-right coverage-high">91.8%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-high" style="width: 91.8%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Core_FenUI.lua.html" class="file-link">Core\FenUI.lua</a></td>
+                    <td class="text-right">152</td>
+                    <td class="text-right">110</td>
+                    <td class="text-right coverage-medium">72.4%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-medium" style="width: 72.4%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Core_Fonts.lua.html" class="file-link">Core\Fonts.lua</a></td>
+                    <td class="text-right">8</td>
+                    <td class="text-right">5</td>
+                    <td class="text-right coverage-medium">62.5%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-medium" style="width: 62.5%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Core_ThemeManager.lua.html" class="file-link">Core\ThemeManager.lua</a></td>
+                    <td class="text-right">97</td>
+                    <td class="text-right">88</td>
+                    <td class="text-right coverage-high">90.7%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-high" style="width: 90.7%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Core_Tokens.lua.html" class="file-link">Core\Tokens.lua</a></td>
+                    <td class="text-right">232</td>
+                    <td class="text-right">213</td>
+                    <td class="text-right coverage-high">91.8%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-high" style="width: 91.8%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Settings_ThemePicker.lua.html" class="file-link">Settings\ThemePicker.lua</a></td>
+                    <td class="text-right">170</td>
+                    <td class="text-right">139</td>
+                    <td class="text-right coverage-high">81.8%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-high" style="width: 81.8%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Utils_Colors.lua.html" class="file-link">Utils\Colors.lua</a></td>
+                    <td class="text-right">30</td>
+                    <td class="text-right">30</td>
+                    <td class="text-right coverage-high">100.0%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-high" style="width: 100.0%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Utils_Environment.lua.html" class="file-link">Utils\Environment.lua</a></td>
+                    <td class="text-right">54</td>
+                    <td class="text-right">44</td>
+                    <td class="text-right coverage-high">81.5%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-high" style="width: 81.5%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Utils_Formatting.lua.html" class="file-link">Utils\Formatting.lua</a></td>
+                    <td class="text-right">70</td>
+                    <td class="text-right">53</td>
+                    <td class="text-right coverage-medium">75.7%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-medium" style="width: 75.7%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Utils_SafeAPI.lua.html" class="file-link">Utils\SafeAPI.lua</a></td>
+                    <td class="text-right">198</td>
+                    <td class="text-right">145</td>
+                    <td class="text-right coverage-medium">73.2%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-medium" style="width: 73.2%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Utils_SecretValues.lua.html" class="file-link">Utils\SecretValues.lua</a></td>
+                    <td class="text-right">26</td>
+                    <td class="text-right">24</td>
+                    <td class="text-right coverage-high">92.3%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-high" style="width: 92.3%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Utils_Tables.lua.html" class="file-link">Utils\Tables.lua</a></td>
+                    <td class="text-right">53</td>
+                    <td class="text-right">43</td>
+                    <td class="text-right coverage-high">81.1%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-high" style="width: 81.1%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Utils_UI.lua.html" class="file-link">Utils\UI.lua</a></td>
+                    <td class="text-right">215</td>
+                    <td class="text-right">170</td>
+                    <td class="text-right coverage-medium">79.1%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-medium" style="width: 79.1%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Utils_Utils.lua.html" class="file-link">Utils\Utils.lua</a></td>
+                    <td class="text-right">6</td>
+                    <td class="text-right">5</td>
+                    <td class="text-right coverage-high">83.3%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-high" style="width: 83.3%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Validation_DependencyChecker.lua.html" class="file-link">Validation\DependencyChecker.lua</a></td>
+                    <td class="text-right">148</td>
+                    <td class="text-right">122</td>
+                    <td class="text-right coverage-high">82.4%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-high" style="width: 82.4%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Widgets_Buttons.lua.html" class="file-link">Widgets\Buttons.lua</a></td>
+                    <td class="text-right">212</td>
+                    <td class="text-right">161</td>
+                    <td class="text-right coverage-medium">75.9%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-medium" style="width: 75.9%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Widgets_Containers.lua.html" class="file-link">Widgets\Containers.lua</a></td>
+                    <td class="text-right">150</td>
+                    <td class="text-right">113</td>
+                    <td class="text-right coverage-medium">75.3%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-medium" style="width: 75.3%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Widgets_Dropdown.lua.html" class="file-link">Widgets\Dropdown.lua</a></td>
+                    <td class="text-right">63</td>
+                    <td class="text-right">57</td>
+                    <td class="text-right coverage-high">90.5%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-high" style="width: 90.5%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Widgets_EmptyState.lua.html" class="file-link">Widgets\EmptyState.lua</a></td>
+                    <td class="text-right">142</td>
+                    <td class="text-right">123</td>
+                    <td class="text-right coverage-high">86.6%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-high" style="width: 86.6%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Widgets_Grid.lua.html" class="file-link">Widgets\Grid.lua</a></td>
+                    <td class="text-right">196</td>
+                    <td class="text-right">150</td>
+                    <td class="text-right coverage-medium">76.5%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-medium" style="width: 76.5%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Widgets_Group.lua.html" class="file-link">Widgets\Group.lua</a></td>
+                    <td class="text-right">271</td>
+                    <td class="text-right">235</td>
+                    <td class="text-right coverage-high">86.7%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-high" style="width: 86.7%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Widgets_Image.lua.html" class="file-link">Widgets\Image.lua</a></td>
+                    <td class="text-right">210</td>
+                    <td class="text-right">153</td>
+                    <td class="text-right coverage-medium">72.9%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-medium" style="width: 72.9%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Widgets_ImageButton.lua.html" class="file-link">Widgets\ImageButton.lua</a></td>
+                    <td class="text-right">104</td>
+                    <td class="text-right">86</td>
+                    <td class="text-right coverage-high">82.7%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-high" style="width: 82.7%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Widgets_InfoPanel.lua.html" class="file-link">Widgets\InfoPanel.lua</a></td>
+                    <td class="text-right">94</td>
+                    <td class="text-right">85</td>
+                    <td class="text-right coverage-high">90.4%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-high" style="width: 90.4%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Widgets_Input.lua.html" class="file-link">Widgets\Input.lua</a></td>
+                    <td class="text-right">57</td>
+                    <td class="text-right">51</td>
+                    <td class="text-right coverage-high">89.5%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-high" style="width: 89.5%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Widgets_Layout.lua.html" class="file-link">Widgets\Layout.lua</a></td>
+                    <td class="text-right">620</td>
+                    <td class="text-right">481</td>
+                    <td class="text-right coverage-medium">77.6%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-medium" style="width: 77.6%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Widgets_MultiLineEditBox.lua.html" class="file-link">Widgets\MultiLineEditBox.lua</a></td>
+                    <td class="text-right">128</td>
+                    <td class="text-right">102</td>
+                    <td class="text-right coverage-medium">79.7%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-medium" style="width: 79.7%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Widgets_Panel.lua.html" class="file-link">Widgets\Panel.lua</a></td>
+                    <td class="text-right">397</td>
+                    <td class="text-right">291</td>
+                    <td class="text-right coverage-medium">73.3%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-medium" style="width: 73.3%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Widgets_ScrollBar.lua.html" class="file-link">Widgets\ScrollBar.lua</a></td>
+                    <td class="text-right">48</td>
+                    <td class="text-right">38</td>
+                    <td class="text-right coverage-medium">79.2%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-medium" style="width: 79.2%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Widgets_Section.lua.html" class="file-link">Widgets\Section.lua</a></td>
+                    <td class="text-right">53</td>
+                    <td class="text-right">47</td>
+                    <td class="text-right coverage-high">88.7%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-high" style="width: 88.7%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Widgets_SectionHeader.lua.html" class="file-link">Widgets\SectionHeader.lua</a></td>
+                    <td class="text-right">27</td>
+                    <td class="text-right">26</td>
+                    <td class="text-right coverage-high">96.3%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-high" style="width: 96.3%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Widgets_SplitLayout.lua.html" class="file-link">Widgets\SplitLayout.lua</a></td>
+                    <td class="text-right">169</td>
+                    <td class="text-right">127</td>
+                    <td class="text-right coverage-medium">75.1%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-medium" style="width: 75.1%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Widgets_Stack.lua.html" class="file-link">Widgets\Stack.lua</a></td>
+                    <td class="text-right">387</td>
+                    <td class="text-right">276</td>
+                    <td class="text-right coverage-medium">71.3%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-medium" style="width: 71.3%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Widgets_StatusRow.lua.html" class="file-link">Widgets\StatusRow.lua</a></td>
+                    <td class="text-right">70</td>
+                    <td class="text-right">65</td>
+                    <td class="text-right coverage-high">92.9%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-high" style="width: 92.9%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Widgets_Tabs.lua.html" class="file-link">Widgets\Tabs.lua</a></td>
+                    <td class="text-right">233</td>
+                    <td class="text-right">186</td>
+                    <td class="text-right coverage-medium">79.8%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-medium" style="width: 79.8%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Widgets_Toolbar.lua.html" class="file-link">Widgets\Toolbar.lua</a></td>
+                    <td class="text-right">91</td>
+                    <td class="text-right">85</td>
+                    <td class="text-right coverage-high">93.4%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-high" style="width: 93.4%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+                <tr>
+                    <td><a href="Widgets_Tree.lua.html" class="file-link">Widgets\Tree.lua</a></td>
+                    <td class="text-right">62</td>
+                    <td class="text-right">58</td>
+                    <td class="text-right coverage-high">93.5%</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-fill coverage-high" style="width: 93.5%"></div>
+                        </div>
+                    </td>
+                </tr>
+        
+            </tbody>
+        </table>
+    
+    </div>
+</body>
+</html>

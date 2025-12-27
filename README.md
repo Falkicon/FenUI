@@ -16,6 +16,7 @@ FenUI is a **progressive enhancement layer** on top of Blizzard's native UI syst
 - **Blizzard-first**: Uses `NineSliceUtil`, Atlas textures, and native frame templates
 - **Graceful degradation**: Addons work without FenUI installed
 - **Design tokens**: Semantic colors, spacing, and fonts for consistent theming
+- **Responsive Sizing**: Support for percentages (`50%`), viewport units (`10vh`), and auto-updating layouts
 - **Familiar patterns**: CSS Grid-inspired layouts, slot-based composition
 
 ## Features
@@ -24,6 +25,7 @@ FenUI is a **progressive enhancement layer** on top of Blizzard's native UI syst
 |---------|-------------|
 | **Panel** | Window container with title, close button, and content slots |
 | **Tabs** | Tab groups with badges, disabled states, and keyboard navigation |
+| **Stack/Flex** | Flexbox-inspired stacking layouts with alignment and wrapping |
 | **Grid** | CSS Grid-inspired layout with column definitions and data binding |
 | **Toolbar** | Horizontal slot-based layout for buttons and controls |
 | **Buttons** | Standard, icon, and close buttons with consistent styling |
@@ -31,6 +33,7 @@ FenUI is a **progressive enhancement layer** on top of Blizzard's native UI syst
 | **StatusRow** | Standardized icon + label + value row with optional formatting |
 | **Image** | Conditional variants, sizing modes, masking, tinting, Atlas support |
 | **EmptyState** | Slot-based centered overlay for empty content areas |
+| **Animations** | Declarative motion system with transitions, presets, and keyframes |
 | **Containers** | Insets and scroll panels |
 | **Themes** | Multiple built-in themes (TWW, Dragonflight, Dark, etc.) |
 | **Tokens** | Three-tier design token system (primitive → semantic → component) |
@@ -68,6 +71,7 @@ local panel = FenUI:CreatePanel(UIParent, {
     width = 400,
     height = 300,
     movable = true,
+    resizable = true,
     closable = true,
 })
 
@@ -76,8 +80,93 @@ local panel = FenUI.Panel(UIParent)
     :title("My Window")
     :size(400, 300)
     :movable()
+    :resizable()
     :closable()
     :build()
+```
+
+### Create a Stack (Flexbox)
+
+```lua
+-- Vertical stack with spacing and alignment
+local stack = FenUI:CreateStack(parent, {
+    direction = "vertical",
+    gap = "md",
+    align = "stretch",
+    padding = "sm",
+})
+
+stack:AddChild(topButton)
+stack:AddChild(spacer, { grow = 1 }) -- Fills remaining space
+stack:AddChild(bottomButton)
+
+-- Or use the builder pattern for a horizontal flex wrap
+local flex = FenUI.Flex(parent)
+    :gap("xs")
+    :justify("center")
+    :build()
+```
+
+### Constraint System
+
+FenUI components support min/max boundaries and aspect ratio locking to ensure layouts remain usable across different screen sizes.
+
+```lua
+-- Component with min/max boundaries
+local panel = FenUI:CreatePanel(parent, {
+    width = "80%",
+    minWidth = 300,
+    maxWidth = 800,
+    height = "auto",
+    minHeight = 200,
+})
+
+-- Aspect ratio locking (supports "16:9", "4/3", or number)
+local card = FenUI:CreateLayout(parent, {
+    width = "100%",
+    aspectRatio = "16:9",
+})
+
+-- Aspect ratio based on height
+local icon = FenUI:CreateLayout(parent, {
+    height = 64,
+    aspectRatio = 1,
+    aspectBase = "height", -- width will be calculated from height
+})
+```
+
+### Animation & Transitions (v2.8.0+)
+
+FenUI provides a declarative animation system that wraps WoW's native `AnimationGroup` API.
+
+```lua
+-- 1. Property Transitions (automatic animation on SetAlpha, SetScale, etc.)
+local panel = FenUI:CreatePanel(parent, {
+    transitions = {
+        alpha = { duration = 0.2, easing = "ease-out" },
+        scale = { duration = 0.15 },
+    },
+})
+
+panel:SetAlpha(0.5) -- Fades to 0.5 over 0.2s
+
+-- 2. Lifecycle Animations (Show/Hide)
+local dialog = FenUI.Panel(parent)
+    :showAnimation("fadeIn")
+    :hideAnimation("fadeOut")
+    :build()
+
+-- 3. Custom Keyframe Animations
+local bounce = FenUI.Animation:Keyframes({
+    [0] = { scale = 1 },
+    [0.5] = { scale = 1.1 },
+    [1] = { scale = 1 },
+    duration = 0.3,
+})
+bounce:Play(myFrame)
+
+-- 4. Chaining
+FenUI.Animation.Presets.slideUp:Then(FenUI.Animation.Presets.fadeOut):Play(myFrame)
 ```
 
 ### Create Tabs
