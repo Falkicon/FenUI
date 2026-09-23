@@ -2,35 +2,42 @@
 -- FenUI v2 - ScrollBar Widget
 --
 -- A custom scrollbar with FenUI styling (tokens).
--- Initially background colors only, supporting 9-slice later.
+-- Features track background, thumb with padding, and hover states.
 --------------------------------------------------------------------------------
 
 local FenUI = FenUI
+
+-- Thumb padding from track edges (creates visual separation)
+local THUMB_PADDING = 2
 
 local ScrollBarMixin = {}
 
 function ScrollBarMixin:Init(config)
 	self.config = config or {}
 
+	local scrollBarWidth = config.width or FenUI:GetLayout("scrollBarWidth")
+
 	-- Setup Slider properties
 	self:SetOrientation("VERTICAL")
-	self:SetSize(config.width or FenUI:GetLayout("scrollBarWidth"), 0) -- Height set by anchors
+	self:SetSize(scrollBarWidth, 0) -- Height set by anchors
 
-	-- 1. Track (Background)
+	-- 1. Track (Background) - fills entire scrollbar
 	self.track = self:CreateTexture(nil, "BACKGROUND")
 	self.track:SetAllPoints()
 	local r, g, b, a = FenUI:GetColor(config.trackToken or "surfaceScrollTrack")
 	self.track:SetColorTexture(r, g, b, a)
 
-	-- 2. Thumb
+	-- 2. Thumb - narrower than track for visual padding
+	local thumbWidth = scrollBarWidth - (THUMB_PADDING * 2)
 	local thumb = self:CreateTexture(nil, "ARTWORK")
 	local tr, tg, tb, ta = FenUI:GetColor(config.thumbToken or "interactiveScrollThumb")
 	thumb:SetColorTexture(tr, tg, tb, ta)
-	thumb:SetSize(config.width or FenUI:GetLayout("scrollBarWidth"), 32) -- Initial height
+	thumb:SetSize(thumbWidth, 32) -- Initial height, will be updated
 	self:SetThumbTexture(thumb)
 	self.thumb = thumb
+	self.thumbWidth = thumbWidth
 
-	-- 3. Scripts
+	-- 3. Scripts for hover state
 	self:SetScript("OnEnter", function()
 		local hr, hg, hb, ha = FenUI:GetColor(config.thumbHoverToken or "interactiveScrollThumbHover")
 		self.thumb:SetColorTexture(hr, hg, hb, ha)
@@ -61,9 +68,11 @@ function ScrollBarMixin:UpdateThumbSize(visibleHeight, totalHeight)
 	end
 
 	local ratio = visibleHeight / totalHeight
-	local thumbHeight = math.max(16, trackHeight * ratio)
+	-- Account for padding in minimum thumb height
+	local thumbHeight = math.max(20, trackHeight * ratio)
 
-	self.thumb:SetHeight(thumbHeight)
+	-- Update thumb size (width already set in Init, respecting padding)
+	self.thumb:SetSize(self.thumbWidth, thumbHeight)
 	self.thumb:Show() -- Ensure thumb is visible
 
 	-- Update slider range

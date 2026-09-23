@@ -16,8 +16,8 @@ See [Docs/DESIGN_PRINCIPLES.md](Docs/DESIGN_PRINCIPLES.md) for detailed guidelin
 ## Getting Started
 
 1. Fork the repository
-2. Clone to your `Interface/ADDON_DEV/` folder
-3. Use `lib_sync.ps1` to deploy to test addons (Weekly, Strategy)
+2. Clone to your `Interface/_dev_/Libs/` folder
+3. Use `mech libs.sync` to deploy to test addons (!Mechanic, Weekly)
 4. Make your changes
 5. Test in-game
 6. Submit a pull request

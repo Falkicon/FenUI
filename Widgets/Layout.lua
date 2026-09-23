@@ -92,6 +92,19 @@ function LayoutMixin:Init(config)
 	self:CreateShadowLayer()
 	self:CreateContentLayer()
 
+	-- Unified resizing hook
+	-- This handles deferred sizing from anchor-based positioning and child-driven auto-sizing.
+	self:HookScript("OnSizeChanged", function(frame, width, height)
+		if width > 0 and height > 0 then
+			if frame.bgFrame then
+				frame:ApplyBackgroundAnchors()
+			end
+			if frame.cells and #frame.cells > 0 then
+				frame:LayoutCells()
+			end
+		end
+	end)
+
 	-- Apply size (supports responsive strings like "50%" and "auto", and constraints)
 	if
 		config.width
@@ -213,14 +226,6 @@ function LayoutMixin:CreateBackgroundLayer()
 	self.bgTexture:SetAllPoints(self.bgFrame)
 	self.bgTexture:Hide()
 
-	-- Reapply background anchors when frame gets its actual size
-	-- This handles deferred sizing from anchor-based positioning
-	self:SetScript("OnSizeChanged", function(frame, width, height)
-		if width > 0 and height > 0 and frame.bgFrame then
-			frame:ApplyBackgroundAnchors()
-		end
-	end)
-
 	-- Image background frame (for Image component)
 	self.bgImageFrame = nil
 
@@ -242,6 +247,10 @@ function LayoutMixin:ApplyBackgroundAnchors()
 	-- We position bgFrame (not bgTexture) inside the border area.
 	-- bgTexture fills bgFrame via SetAllPoints.
 	-- This avoids NineSlice conflicts by using a dedicated child frame.
+
+	-- GUARD: Prevent re-entrancy during anchor updates which might trigger OnSizeChanged
+	if self.isApplyingBackgroundAnchors then return end
+	self.isApplyingBackgroundAnchors = true
 
 	-- Support both single-value inset (number) and asymmetric inset (table)
 	local inset = self.bgInset or 0
@@ -276,6 +285,8 @@ function LayoutMixin:ApplyBackgroundAnchors()
 		self.bgImageFrame:SetPoint("TOPLEFT", self, "TOPLEFT", left, -top)
 		self.bgImageFrame:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", -right, bottom)
 	end
+
+	self.isApplyingBackgroundAnchors = nil
 end
 
 --- Set the background
@@ -813,6 +824,27 @@ function LayoutMixin:SetContent(frame)
 	frame:Show()
 end
 
+function LayoutMixin:SetupLifecycleAnimations()
+	local config = self.config
+
+	if config.showAnimation then
+		self:HookScript("OnShow", function()
+			FenUI.Animation:Play(self, config.showAnimation)
+		end)
+	end
+
+	if config.hideAnimation then
+		local originalHide = self.Hide
+		self.Hide = function(f)
+			FenUI.Animation:Play(f, config.hideAnimation, {
+				onComplete = function()
+					originalHide(f)
+				end,
+			})
+		end
+	end
+end
+
 --- Get margin values (from config or tokens)
 --- Supports: number (symmetric), string (token), table { top, bottom, left, right }
 --- Individual overrides: marginTop, marginBottom, marginLeft, marginRight
@@ -996,11 +1028,6 @@ function LayoutMixin:CreateCells()
 		self.cells[i] = cell
 	end
 
-	-- Layout cells on size change
-	self:SetScript("OnSizeChanged", function()
-		self:LayoutCells()
-	end)
-
 	-- Initial layout
 	self:LayoutCells()
 end
@@ -1019,10 +1046,18 @@ function LayoutMixin:LayoutCells()
 	local gap = self:ResolveGap()
 	local isVertical = self.orientation == "VERTICAL"
 
-	local totalSize = isVertical and (self:GetHeight() - (p.top + p.bottom)) or (self:GetWidth() - (p.left + p.right))
+	local width = self:GetWidth()
+	local height = self:GetHeight()
+
+	if width <= 0 or height <= 0 then
+		return
+	end
+
+	local totalSize = isVertical and (height - (p.top + p.bottom)) or (width - (p.left + p.right))
+	totalSize = math.max(1, totalSize)
 
 	local totalGaps = gap * (#self.cells - 1)
-	local availableSize = totalSize - totalGaps
+	local availableSize = math.max(0, totalSize - totalGaps)
 
 	-- Calculate fixed and fr sizes
 	local fixedSize = 0
@@ -1054,11 +1089,11 @@ function LayoutMixin:LayoutCells()
 		if isVertical then
 			cell:SetPoint("TOPLEFT", p.left, -offset)
 			cell:SetPoint("TOPRIGHT", -p.right, -offset)
-			cell:SetHeight(math.max(1, cellSize))
+			cell:SetHeight(math.max(1, cellSize), true)
 		else
 			cell:SetPoint("TOPLEFT", offset, -p.top)
 			cell:SetPoint("BOTTOMLEFT", offset, p.bottom)
-			cell:SetWidth(math.max(1, cellSize))
+			cell:SetWidth(math.max(1, cellSize), true)
 		end
 
 		offset = offset + cellSize + gap

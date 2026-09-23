@@ -405,12 +405,12 @@ function Utils:UpdateDynamicSize(frame)
 		end
 	end
 
-	-- 4. Apply to frame
+	-- 4. Apply to frame (instant=true to bypass animation system)
 	if finalW then
-		frame:SetWidth(math.max(1, finalW))
+		frame:SetWidth(math.max(1, finalW), true)
 	end
 	if finalH then
-		frame:SetHeight(math.max(1, finalH))
+		frame:SetHeight(math.max(1, finalH), true)
 	end
 end
 

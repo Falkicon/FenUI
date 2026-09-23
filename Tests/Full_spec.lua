@@ -1,7 +1,7 @@
 -- luacheck: globals describe it before_each after_each setup teardown assert spy stub mock pending FenUI UIParent WoWAPI_MakeSecret
+-- FenUI Full Audit - Tests all widgets and core functionality (standalone)
 describe("FenUI Full Audit", function()
     setup(function()
-        -- Load everything in TOC order
         require("wow_api_midnight")
         require("Core.FenUI")
         require("Utils.Utils")
@@ -10,12 +10,9 @@ describe("FenUI Full Audit", function()
         require("Core.ThemeManager")
         require("Core.Fonts")
         require("Validation.DependencyChecker")
-        require("Utils.Environment")
         require("Utils.Formatting")
         require("Utils.Colors")
-        require("Utils.Tables")
         require("Utils.SafeAPI")
-        require("Utils.SecretValues")
         require("Utils.UI")
         require("Widgets.Image")
         require("Widgets.ImageButton")
@@ -58,20 +55,20 @@ describe("FenUI Full Audit", function()
             assert.is_not_nil(r)
         end)
 
-        it("should format values", function()
-            assert.is_equal("1.0 MB", FenUI.Utils:FormatMemory(1024))
+        it("should format duration", function()
             assert.is_equal("30.0s", FenUI.Utils:FormatDuration(30))
         end)
 
-        it("should handle secrets", function()
+        it("should detect secrets in FormatValue", function()
             local secret = WoWAPI_MakeSecret("shhh")
-            assert.is_true(FenUI.Utils:IsValueSecret(secret))
+            local formatted = FenUI.Utils:FormatValue(secret)
+            assert.is_truthy(formatted:find("SECRET"))
         end)
     end)
 
     describe("Widgets", function()
         it("should create common widgets", function()
-            local layout = FenUI:CreateLayout(UIParent, { 
+            local layout = FenUI:CreateLayout(UIParent, {
                 width = 100, height = 100,
                 rows = { "auto", "1fr" },
                 cells = { [1] = { background = "gray800" } }
@@ -83,7 +80,7 @@ describe("FenUI Full Audit", function()
             assert.is_not_nil(panel)
             panel:SetTitle("New Title")
             panel:SetPadding(10)
-            
+
             local btn = FenUI:CreateButton(panel, { text = "Click Me" })
             assert.is_not_nil(btn)
             btn:Disable()
@@ -94,11 +91,11 @@ describe("FenUI Full Audit", function()
             input:SetText("Hello")
             assert.is_equal("Hello", input:GetText())
 
-            local tabs = FenUI:CreateTabGroup(panel, { 
-                tabs = { 
+            local tabs = FenUI:CreateTabGroup(panel, {
+                tabs = {
                     { key = "1", text = "T1" },
                     { key = "2", text = "T2" }
-                } 
+                }
             })
             assert.is_not_nil(tabs)
             tabs:Select("2")
@@ -109,7 +106,7 @@ describe("FenUI Full Audit", function()
             local group = FenUI:CreateGroup(UIParent, { title = "Group" })
             assert.is_not_nil(group)
 
-            local info = FenUI:CreateInfoPanel(UIParent, { 
+            local info = FenUI:CreateInfoPanel(UIParent, {
                 title = "Info",
                 sections = {
                     { heading = "H1", body = "B1" }
@@ -117,10 +114,10 @@ describe("FenUI Full Audit", function()
             })
             assert.is_not_nil(info)
 
-            local tree = FenUI:CreateTree(UIParent, { 
-                items = { 
-                    { key = "k1", text = "v1", children = { { key = "k1.1", text = "v1.1" } } } 
-                } 
+            local tree = FenUI:CreateTree(UIParent, {
+                items = {
+                    { key = "k1", text = "v1", children = { { key = "k1.1", text = "v1.1" } } }
+                }
             })
             assert.is_not_nil(tree)
             tree:SetData({ { text = "Node 1", value = 1 } })

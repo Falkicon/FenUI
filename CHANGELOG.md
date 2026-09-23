@@ -6,6 +6,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 
 
+## [3.0.0] - 2026-01-03
+
+### Changed
+- **Standalone Library** - FenUI is now fully independent with no external dependencies.
+  - Removed soft dependency on FenCore.
+  - `Utils/Formatting.lua` now uses WoW's `issecretvalue` API directly.
+  - All utility functions are self-contained within FenUI.
+- **Removed Files** - Migrated utility modules to FenCore (separate library):
+  - Removed `Utils/Tables.lua` (use FenCore.Tables if needed)
+  - Removed `Utils/SecretValues.lua` (use FenCore.Secrets if needed)
+  - Removed `Utils/Environment.lua` (use FenCore.Environment if needed)
+
+### Notes
+- FenUI and FenCore are now completely independent libraries.
+- Addons can choose to use FenUI only, FenCore only, or both.
+- No migration required - FenUI widgets work exactly as before.
+
 ## [2.8.0] - 2025-12-27
 
 ### Changed

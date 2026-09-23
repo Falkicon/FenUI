@@ -100,20 +100,11 @@ end
 --------------------------------------------------------------------------------
 -- Custom Border Engine (Intentional Custom)
 --
--- Replaces Blizzard's black-box NineSliceUtil with an explicit 8-texture
--- implementation that provides total control over layering and sub-levels.
+-- Simple solid-color border system using 4 edge textures.
+-- Provides clean, maintainable borders without complex texture assets.
 --------------------------------------------------------------------------------
 
-local BORDER_PIECES = {
-	"TopLeftCorner",
-	"TopRightCorner",
-	"BottomLeftCorner",
-	"BottomRightCorner",
-	"TopEdge",
-	"BottomEdge",
-	"LeftEdge",
-	"RightEdge",
-}
+local BORDER_EDGES = { "Top", "Bottom", "Left", "Right" }
 
 --- Resolve a border key to its pack definition
 ---@param borderKey string The border pack name (e.g., "ModernDark")
@@ -122,10 +113,10 @@ function FenUI:GetBorderPack(borderKey)
 	return self.Tokens.borders and self.Tokens.borders[borderKey]
 end
 
---- Apply a custom 8-texture border to a frame
+--- Apply a solid-color border to a frame
 ---@param frame Frame The target frame
 ---@param borderKey string The border pack key from Tokens.lua
----@param colorToken string|nil Optional color token to tint the border
+---@param colorToken string|nil Optional color token to override the pack's default
 ---@param margin table|nil Optional margin {top, bottom, left, right}
 function FenUI:ApplyBorder(frame, borderKey, colorToken, margin)
 	local pack = self:GetBorderPack(borderKey)
@@ -135,79 +126,78 @@ function FenUI:ApplyBorder(frame, borderKey, colorToken, margin)
 	end
 
 	local m = margin or { top = 0, bottom = 0, left = 0, right = 0 }
+	local edgeSize = pack.edgeSize or 1
 
-	-- 1. Create or clear existing border textures
+	-- Handle "None" border or zero-size edge
+	if edgeSize == 0 then
+		self:HideCustomBorder(frame)
+		frame.borderApplied = true
+		frame.fenUIBorderKey = borderKey
+		return true
+	end
+
+	-- Create or reuse border textures
 	frame.customBorder = frame.customBorder or {}
-	local pieces = frame.customBorder
+	local edges = frame.customBorder
 
-	-- Ensure we have all 8 pieces
-	for _, name in ipairs(BORDER_PIECES) do
-		if not pieces[name] then
-			pieces[name] = frame:CreateTexture(nil, "BORDER", nil, 5)
+	-- Get border color
+	local r, g, b, a = self:GetColor(colorToken or pack.colorToken or "borderDefault")
+
+	-- Create/update each edge
+	for _, edge in ipairs(BORDER_EDGES) do
+		if not edges[edge] then
+			edges[edge] = frame:CreateTexture(nil, "BORDER", nil, 5)
 		end
-		local tex = pieces[name]
-		tex:SetTexture(pack.file)
+		local tex = edges[edge]
+		tex:SetColorTexture(r, g, b, a)
+		tex:ClearAllPoints()
 		tex:Show()
 	end
 
-	-- 2. Setup TexCoords (Slicing)
-	-- The texture is assumed to be a grid where corners are 'slice' pixels square
-	-- and edges are 1px thick between corners.
-	-- We use standard 0-1 normalized coordinates.
-	-- Note: This implementation assumes a square texture atlas for simplicity.
-	local s = pack.slice / 64 -- Standardizing on 64px source textures for now
+	-- Position edges (simple 4-edge layout)
+	-- Top edge
+	edges.Top:SetPoint("TOPLEFT", m.left, -m.top)
+	edges.Top:SetPoint("TOPRIGHT", -m.right, -m.top)
+	edges.Top:SetHeight(edgeSize)
 
-	pieces.TopLeftCorner:SetTexCoord(0, s, 0, s)
-	pieces.TopRightCorner:SetTexCoord(1 - s, 1, 0, s)
-	pieces.BottomLeftCorner:SetTexCoord(0, s, 1 - s, 1)
-	pieces.BottomRightCorner:SetTexCoord(1 - s, 1, 1 - s, 1)
+	-- Bottom edge
+	edges.Bottom:SetPoint("BOTTOMLEFT", m.left, m.bottom)
+	edges.Bottom:SetPoint("BOTTOMRIGHT", -m.right, m.bottom)
+	edges.Bottom:SetHeight(edgeSize)
 
-	pieces.TopEdge:SetTexCoord(s, 1 - s, 0, s)
-	pieces.BottomEdge:SetTexCoord(s, 1 - s, 1 - s, 1)
-	pieces.LeftEdge:SetTexCoord(0, s, s, 1 - s)
-	pieces.RightEdge:SetTexCoord(1 - s, 1, s, 1 - s)
+	-- Left edge
+	edges.Left:SetPoint("TOPLEFT", m.left, -m.top - edgeSize)
+	edges.Left:SetPoint("BOTTOMLEFT", m.left, m.bottom + edgeSize)
+	edges.Left:SetWidth(edgeSize)
 
-	-- 3. Positioning
-	local size = pack.slice
-	pieces.TopLeftCorner:SetSize(size, size)
-	pieces.TopLeftCorner:SetPoint("TOPLEFT", m.left, -m.top)
-
-	pieces.TopRightCorner:SetSize(size, size)
-	pieces.TopRightCorner:SetPoint("TOPRIGHT", -m.right, -m.top)
-
-	pieces.BottomLeftCorner:SetSize(size, size)
-	pieces.BottomLeftCorner:SetPoint("BOTTOMLEFT", m.left, m.bottom)
-
-	pieces.BottomRightCorner:SetSize(size, size)
-	pieces.BottomRightCorner:SetPoint("BOTTOMRIGHT", -m.right, m.bottom)
-
-	pieces.TopEdge:SetPoint("TOPLEFT", pieces.TopLeftCorner, "TOPRIGHT")
-	pieces.TopEdge:SetPoint("TOPRIGHT", pieces.TopRightCorner, "TOPLEFT")
-	pieces.TopEdge:SetHeight(size)
-
-	pieces.BottomEdge:SetPoint("BOTTOMLEFT", pieces.BottomLeftCorner, "BOTTOMRIGHT")
-	pieces.BottomEdge:SetPoint("BOTTOMRIGHT", pieces.BottomRightCorner, "BOTTOMLEFT")
-	pieces.BottomEdge:SetHeight(size)
-
-	pieces.LeftEdge:SetPoint("TOPLEFT", pieces.TopLeftCorner, "BOTTOMLEFT")
-	pieces.LeftEdge:SetPoint("BOTTOMLEFT", pieces.BottomLeftCorner, "TOPLEFT")
-	pieces.LeftEdge:SetWidth(size)
-
-	pieces.RightEdge:SetPoint("TOPRIGHT", pieces.TopRightCorner, "BOTTOMRIGHT")
-	pieces.RightEdge:SetPoint("BOTTOMRIGHT", pieces.BottomRightCorner, "TOPRIGHT")
-	pieces.RightEdge:SetWidth(size)
-
-	-- 4. Theming (Coloring)
-	local r, g, b, a = self:GetColor(colorToken or "borderDefault")
-	for _, tex in pairs(pieces) do
-		tex:SetVertexColor(r, g, b, a)
-	end
+	-- Right edge
+	edges.Right:SetPoint("TOPRIGHT", -m.right, -m.top - edgeSize)
+	edges.Right:SetPoint("BOTTOMRIGHT", -m.right, m.bottom + edgeSize)
+	edges.Right:SetWidth(edgeSize)
 
 	-- Store state
 	frame.borderApplied = true
 	frame.fenUIBorderKey = borderKey
 
 	return true
+end
+
+--- Update the color of an existing border
+---@param frame Frame The frame with a border
+---@param colorToken string The color token to apply
+function FenUI:SetBorderColor(frame, colorToken)
+	if not frame.customBorder then
+		return
+	end
+
+	local r, g, b, a = self:GetColor(colorToken)
+	for _, tex in pairs(frame.customBorder) do
+		if tex.SetColorTexture then
+			tex:SetColorTexture(r, g, b, a)
+		elseif tex.SetVertexColor then
+			tex:SetVertexColor(r, g, b, a)
+		end
+	end
 end
 
 --- Hide the custom border

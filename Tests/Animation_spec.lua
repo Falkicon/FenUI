@@ -17,8 +17,8 @@ describe("FenUI Animation", function()
 								SetOrder = function() end,
 								SetFromAlpha = function() end,
 								SetToAlpha = function() end,
-								SetFromScale = function() end,
-								SetToScale = function() end,
+								SetScaleFrom = function() end,
+								SetScaleTo = function() end,
 								SetOffset = function() end,
 							}
 							table.insert(this.animations, anim)

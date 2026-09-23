@@ -239,19 +239,38 @@ function PanelMixin:CreateCloseButton()
 		return
 	end
 
-	-- Create custom close button using FenUI components
-	-- This avoids the "UIPanelCloseButton" template which has forced textures
-	self.closeButton = FenUI:CreateImageButton(self, {
-		texture = [[Interface\AddOns\FenUI\Assets\icon-close]], -- We'll need this asset
-		size = 16,
-		tooltip = "Close",
-		onClick = function()
-			self:Hide()
-		end,
-	})
+	-- Create a visible close button frame
+	self.closeButton = CreateFrame("Button", nil, self)
+	self.closeButton:SetSize(24, 24)
+	self.closeButton:SetPoint("TOPRIGHT", self, "TOPRIGHT", -4, -4)
+	self.closeButton:SetFrameStrata("DIALOG")
+	self.closeButton:SetFrameLevel(self:GetFrameLevel() + 100)
 
-	self.closeButton:ClearAllPoints()
-	self.closeButton:SetPoint("TOPRIGHT", self, "TOPRIGHT", -8, -8)
+	-- Add a background for visibility
+	local bg = self.closeButton:CreateTexture(nil, "BACKGROUND")
+	bg:SetAllPoints()
+	bg:SetColorTexture(0.3, 0.3, 0.3, 0.8)
+	self.closeButton.bg = bg
+
+	-- Create X text using a clear, visible font
+	local closeText = self.closeButton:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
+	closeText:SetPoint("CENTER", 0, 1)
+	closeText:SetText("x")
+	closeText:SetTextColor(1, 1, 1)
+	self.closeButton.text = closeText
+
+	-- Hover highlight
+	self.closeButton:SetScript("OnEnter", function(btn)
+		btn.bg:SetColorTexture(0.6, 0.2, 0.2, 0.9)
+		btn.text:SetTextColor(1, 1, 1)
+	end)
+	self.closeButton:SetScript("OnLeave", function(btn)
+		btn.bg:SetColorTexture(0.3, 0.3, 0.3, 0.8)
+		btn.text:SetTextColor(1, 1, 1)
+	end)
+	self.closeButton:SetScript("OnClick", function()
+		self:Hide()
+	end)
 end
 
 --------------------------------------------------------------------------------

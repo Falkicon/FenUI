@@ -191,27 +191,37 @@ FenUI.Tokens.semantic = {
 }
 
 --------------------------------------------------------------------------------
--- Border Packs (Visual Asset Definitions)
--- These define the geometry and assets for custom NineSlice borders.
+-- Border Packs (Visual Definitions)
+-- Simple solid-color borders for clean, maintainable styling.
+-- These use SetColorTexture instead of complex texture assets.
 --------------------------------------------------------------------------------
 
 FenUI.Tokens.borders = {
 	-- Clean, sharp dark border (matches modern Blizzard Settings UI)
 	ModernDark = {
-		file = [[Interface\AddOns\FenUI\Assets\border-modern-dark]],
-		slice = 8, -- Corner size in the source texture
+		colorOnly = true, -- Use solid color borders (no texture file needed)
 		edgeSize = 1, -- Visual thickness of the edge lines
 		contentInset = 2, -- Space between border edge and content
 		bgInset = 1, -- Space between border edge and background
+		colorToken = "borderDefault", -- Token for border color
 	},
 
-	-- Recessed inset style
+	-- Recessed inset style (for inputs, scroll areas)
 	Inset = {
-		file = [[Interface\AddOns\FenUI\Assets\border-inset]],
-		slice = 4,
+		colorOnly = true,
 		edgeSize = 1,
 		contentInset = 1,
 		bgInset = 0,
+		colorToken = "borderSubtle",
+	},
+
+	-- No border (for borderless containers)
+	None = {
+		colorOnly = true,
+		edgeSize = 0,
+		contentInset = 0,
+		bgInset = 0,
+		colorToken = "transparent",
 	},
 }
 

@@ -39,31 +39,59 @@ function TabButtonMixin:GetDisabled()
 	return self.isDisabled
 end
 
-function TabButtonMixin:UpdateVisual()
-	local r, g, b = FenUI:GetColorRGB("textDefault")
-
-	if self.isDisabled then
-		r, g, b = FenUI:GetColorRGB("interactiveDisabled")
-		if self.highlight then
-			self.highlight:Hide()
-		end
-	elseif self.isSelected then
-		r, g, b = FenUI:GetColorRGB("interactiveSelected")
-		if self.highlight then
-			self.highlight:Show()
-		end
-	elseif self.isFocused then
-		r, g, b = FenUI:GetColorRGB("interactiveHover")
-		if self.highlight then
-			self.highlight:Hide()
-		end
-	else
-		if self.highlight then
-			self.highlight:Hide()
+function TabButtonMixin:UpdateVisual(state)
+	-- Determine state if not explicitly provided
+	if not state then
+		if self.isDisabled then
+			state = "disabled"
+		elseif self.isSelected then
+			state = "selected"
+		elseif self.isHovered then
+			state = "hover"
+		else
+			state = "normal"
 		end
 	end
 
+	local textColor, bgAlpha, showHighlight
+
+	if state == "disabled" then
+		textColor = "interactiveDisabled"
+		bgAlpha = 0
+		showHighlight = false
+	elseif state == "selected" then
+		textColor = "interactiveSelected"
+		bgAlpha = 1.0 -- Full background for selected
+		showHighlight = true
+	elseif state == "hover" then
+		textColor = "interactiveHover"
+		bgAlpha = 0.5 -- Semi-transparent background for hover
+		showHighlight = false
+	else -- normal
+		textColor = "textDefault"
+		bgAlpha = 0
+		showHighlight = false
+	end
+
+	-- Apply text color
+	local r, g, b = FenUI:GetColorRGB(textColor)
 	self.text:SetTextColor(r, g, b)
+
+	-- Apply background
+	if self.bg then
+		if bgAlpha > 0 then
+			local bgR, bgG, bgB = FenUI:GetColorRGB("surfaceElevated")
+			self.bg:SetColorTexture(bgR, bgG, bgB, bgAlpha)
+			self.bg:Show()
+		else
+			self.bg:Hide()
+		end
+	end
+
+	-- Show/hide underline highlight
+	if self.highlight then
+		self.highlight:SetShown(showHighlight)
+	end
 
 	-- Update badge visual
 	if self.badge then
@@ -202,23 +230,29 @@ function TabGroupMixin:AddTab(key, text, icon)
 
 	tab.key = key
 
+	-- Create background (for hover/selected states)
+	tab.bg = tab:CreateTexture(nil, "BACKGROUND")
+	tab.bg:SetAllPoints()
+	tab.bg:Hide() -- Hidden by default (normal state has no background)
+
 	-- Create text
 	tab.text = tab:CreateFontString(nil, "OVERLAY")
 	tab.text:SetFontObject(FenUI:GetFont("fontButton"))
-	tab.text:SetPoint("CENTER")
+	tab.text:SetPoint("CENTER", 0, 0)
 
-	-- Create highlight/underline
-	tab.highlight = tab:CreateTexture(nil, "HIGHLIGHT")
-	tab.highlight:SetColorTexture(FenUI:GetColorRGB("interactiveSelected"))
+	-- Create underline highlight (for selected state)
+	tab.highlight = tab:CreateTexture(nil, "ARTWORK")
+	local hr, hg, hb = FenUI:GetColorRGB("interactiveSelected")
+	tab.highlight:SetColorTexture(hr, hg, hb, 1)
 	tab.highlight:SetHeight(2)
 
 	-- Position highlight based on group position
 	if self.config.position == "bottom" then
-		tab.highlight:SetPoint("TOPLEFT", 4, 0)
-		tab.highlight:SetPoint("TOPRIGHT", -4, 0)
+		tab.highlight:SetPoint("TOPLEFT", 0, 0)
+		tab.highlight:SetPoint("TOPRIGHT", 0, 0)
 	else
-		tab.highlight:SetPoint("BOTTOMLEFT", 4, 0)
-		tab.highlight:SetPoint("BOTTOMRIGHT", -4, 0)
+		tab.highlight:SetPoint("BOTTOMLEFT", 0, 0)
+		tab.highlight:SetPoint("BOTTOMRIGHT", 0, 0)
 	end
 	tab.highlight:Hide()
 
@@ -229,12 +263,13 @@ function TabGroupMixin:AddTab(key, text, icon)
 
 	tab:SetScript("OnEnter", function(btn)
 		if not btn.isDisabled and not btn.isSelected then
-			local r, g, b = FenUI:GetColorRGB("interactiveHover")
-			btn.text:SetTextColor(r, g, b)
+			btn.isHovered = true
+			btn:UpdateVisual("hover")
 		end
 	end)
 
 	tab:SetScript("OnLeave", function(btn)
+		btn.isHovered = false
 		btn:UpdateVisual()
 	end)
 
@@ -245,7 +280,7 @@ function TabGroupMixin:AddTab(key, text, icon)
 
 	-- Set text and size
 	tab:SetTabText(text)
-	tab:SetHeight(self.config.height or 28)
+	tab:SetHeight(self.config.height or FenUI:GetLayout("tabHeight"))
 
 	-- Store
 	self.tabs[key] = tab

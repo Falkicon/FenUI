@@ -44,7 +44,6 @@ function AnimationMixin:Play(frame, options)
 	local config = self.config
 	
 	-- Create or reuse AnimationGroup
-	-- We use different groups for different "names" to allow overlapping animations if needed
 	local animName = options.name or "default"
 	frame.fenUIAnims = frame.fenUIAnims or {}
 	local ag = frame.fenUIAnims[animName]
@@ -59,10 +58,7 @@ function AnimationMixin:Play(frame, options)
 		ag:Stop()
 	end
 	
-	-- Note: We can't easily clear animations from a group.
-	-- If the group already has animations, we might need to recreate it
-	-- or just assume the caller knows what they're doing.
-	-- For a robust system, we should probably recreate the group if it's dirty.
+	-- Recreate animations if group was previously used (WoW has no RemoveAnimation)
 	if ag.isDirty then
 		ag = frame:CreateAnimationGroup()
 		frame.fenUIAnims[animName] = ag
@@ -87,13 +83,13 @@ function AnimationMixin:Play(frame, options)
 			local to = endVals.scale
 			
 			if from then
-				if type(from) == "table" then anim:SetFromScale(from.x or 1, from.y or 1)
-				else anim:SetFromScale(from, from) end
+				if type(from) == "table" then anim:SetScaleFrom(from.x or 1, from.y or 1)
+				else anim:SetScaleFrom(from, from) end
 			end
 			
 			if to then
-				if type(to) == "table" then anim:SetToScale(to.x or 1, to.y or 1)
-				else anim:SetToScale(to, to) end
+				if type(to) == "table" then anim:SetScaleTo(to.x or 1, to.y or 1)
+				else anim:SetScaleTo(to, to) end
 			end
 			
 			anim:SetDuration(duration)
@@ -104,10 +100,18 @@ function AnimationMixin:Play(frame, options)
 		-- Translation
 		if startVals.offset ~= nil or endVals.offset ~= nil then
 			local anim = ag:CreateAnimation("Translation")
+			local from = startVals.offset
 			local to = endVals.offset
+			
+			-- Translation only supports a single target offset natively.
+			-- It animates from the frame's current position to the specified offset.
 			if to then
 				anim:SetOffset(to.x or 0, to.y or 0)
+			elseif from then
+				-- If only 'from' is provided, we treat it as the target (relative movement)
+				anim:SetOffset(from.x or 0, from.y or 0)
 			end
+			
 			anim:SetDuration(duration)
 			anim:SetSmoothing(self.smoothing)
 			anim:SetOrder(order)
@@ -130,7 +134,6 @@ function AnimationMixin:Play(frame, options)
 			from.alpha = from.alpha or config.alpha.from
 			to.alpha = to.alpha or config.alpha.to
 		end
-		-- ... repeat for other props if needed, but 'from'/'to' is cleaner
 		
 		AddSegment(from, to, self.duration, 1)
 	end
@@ -207,16 +210,12 @@ end
 ---@param config table Keyframe configuration
 ---@return table Animation object
 function Animation:Keyframes(config)
-	-- Keyframes are handled by creating multiple ordered animations
-	-- For simplicity in v1, we'll transform keyframes into a sequence
 	local anim = {}
 	FenUI.Mixin(anim, AnimationMixin)
 	
-	-- Extract duration and easing from config
 	local duration = config.duration or DEFAULTS.duration
 	local easing = config.easing or DEFAULTS.easing
 	
-	-- Sort keyframe times
 	local times = {}
 	for k, v in pairs(config) do
 		if type(k) == "number" then
@@ -225,7 +224,6 @@ function Animation:Keyframes(config)
 	end
 	table.sort(times)
 	
-	-- Store processed keyframes
 	anim.isKeyframes = true
 	anim.keyframes = {}
 	for i, t in ipairs(times) do
@@ -256,7 +254,6 @@ function Animation:ApplyTransitions(frame, transitions)
 		if frame[setter] and frame[getter] then
 			local originalSetter = frame[setter]
 			
-			-- Wrap the setter
 			frame[setter] = function(self, value, instant)
 				if instant then
 					originalSetter(self, value)
@@ -264,7 +261,7 @@ function Animation:ApplyTransitions(frame, transitions)
 				end
 				
 				local currentValue = self[getter](self)
-				if currentValue == value then return end
+				if math.abs(currentValue - value) < 0.1 then return end
 				
 				local anim = Animation:Define({
 					from = { [prop] = currentValue },
@@ -276,7 +273,6 @@ function Animation:ApplyTransitions(frame, transitions)
 				anim:Play(self, { 
 					name = "transition_" .. prop,
 					onComplete = function()
-						-- Ensure final value is set (WoW animations are visual only)
 						originalSetter(self, value)
 					end
 				})
@@ -303,4 +299,3 @@ Animation.Presets = {
 		duration = 0.3,
 	}),
 }
-

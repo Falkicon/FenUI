@@ -74,10 +74,35 @@ function WidgetMixin:GetRow()
 		row = CreateFrame("Button", nil, self.content)
 		row:SetHeight(20)
 
+		-- Background for hover state
+		row.bg = row:CreateTexture(nil, "BACKGROUND")
+		row.bg:SetAllPoints()
+		row.bg:Hide()
+
+		-- Hover highlight using HIGHLIGHT layer (auto-shown on hover)
+		row.hover = row:CreateTexture(nil, "HIGHLIGHT")
+		row.hover:SetAllPoints()
+		local hR, hG, hB = FenUI:GetColorRGB("surfaceRowHover")
+		row.hover:SetColorTexture(hR, hG, hB, 1)
+
+		-- Text
 		row.text = row:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
 		row.text:SetPoint("LEFT", 4, 0)
+		row.text:SetPoint("RIGHT", -4, 0)
+		row.text:SetJustifyH("LEFT")
+		local tR, tG, tB = FenUI:GetColorRGB("textDefault")
+		row.text:SetTextColor(tR, tG, tB)
 
 		row:SetScript("OnClick", function(r)
+			-- Update selected state
+			if self.selectedRow and self.selectedRow ~= r then
+				self.selectedRow.bg:Hide()
+			end
+			self.selectedRow = r
+			local selR, selG, selB = FenUI:GetColorRGB("surfaceRowSelected")
+			r.bg:SetColorTexture(selR, selG, selB, 1)
+			r.bg:Show()
+
 			if self.config.onSelect then
 				self.config.onSelect(r.value)
 			end

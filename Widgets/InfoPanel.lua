@@ -91,17 +91,23 @@ end
 
 function InfoPanelMixin:LayoutSections()
 	local yOffset = 0
-	local sectionGap = FenUI:GetSpacing("md") -- 16px between sections
+	local sectionGap = 20 -- Fixed 20px gap between sections for better readability
 
+	-- First pass: set widths and update heights
+	local scrollChildWidth = self.scrollChild:GetWidth()
+	for i, section in ipairs(self.sectionFrames) do
+		-- Set explicit width first so text wrapping calculates correctly
+		section:SetWidth(scrollChildWidth)
+		section:UpdateHeight()
+	end
+
+	-- Second pass: position sections with proper heights
 	for i, section in ipairs(self.sectionFrames) do
 		section:ClearAllPoints()
 		section:SetPoint("TOPLEFT", self.scrollChild, "TOPLEFT", 0, -yOffset)
-		section:SetPoint("TOPRIGHT", self.scrollChild, "TOPRIGHT", 0, -yOffset)
 
-		-- Trigger height recalculation
-		section:UpdateHeight()
+		-- Get the calculated height from the section's content
 		local sectionHeight = section:GetHeight()
-
 		yOffset = yOffset + sectionHeight + sectionGap
 	end
 
@@ -160,6 +166,13 @@ function FenUI:CreateInfoPanel(parent, config)
 	-- Apply InfoPanel mixin
 	FenUI.Mixin(panel, InfoPanelMixin)
 	panel:InitInfoPanel(config)
+
+	-- Re-layout sections when panel is shown to ensure proper text wrapping
+	panel:HookScript("OnShow", function(self)
+		C_Timer.After(0, function()
+			self:LayoutSections()
+		end)
+	end)
 
 	-- Hide by default (caller shows when ready)
 	panel:Hide()
