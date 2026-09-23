@@ -50,7 +50,15 @@ function Utils:GetActionCooldownSafe(actionID)
 	if self.IS_MIDNIGHT and _G.C_ActionBar and _G.C_ActionBar.GetActionCooldown then
 		local ok, info = pcall(_G.C_ActionBar.GetActionCooldown, actionID)
 		if ok and info then
-			return info.startTime or 0, info.duration or 0, info.isEnabled, info.modRate or 1
+			-- Preserve secret values - don't use "or 0" which breaks secrets
+			local startTime = info.startTime
+			local duration = info.duration
+			local modRate = info.modRate
+			-- Only default to 0/1 if nil (not if secret)
+			if startTime == nil then startTime = 0 end
+			if duration == nil then duration = 0 end
+			if modRate == nil then modRate = 1 end
+			return startTime, duration, info.isEnabled, modRate
 		end
 	end
 
@@ -307,11 +315,16 @@ function Utils:SetCooldownSafe(cdFrame, startOrDuration, duration)
 	end
 	local start = duration and startOrDuration or 0
 	local dur = duration or startOrDuration or 0
-	if self:IsValueSecret(start) or self:IsValueSecret(dur) then
-		return
+	-- Secret values should be passed through - SetCooldown handles them natively
+	-- Only convert to number if NOT secret (secrets must pass through unchanged)
+	if not self:IsValueSecret(start) then
+		start = _G.tonumber(start) or 0
+	end
+	if not self:IsValueSecret(dur) then
+		dur = _G.tonumber(dur) or 0
 	end
 	if cdFrame.SetCooldown then
-		cdFrame:SetCooldown(_G.tonumber(start) or 0, _G.tonumber(dur) or 0)
+		cdFrame:SetCooldown(start, dur)
 	end
 end
 

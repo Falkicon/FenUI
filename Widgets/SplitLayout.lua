@@ -27,18 +27,17 @@ function SplitLayoutMixin:InitSplit(config)
 	-- Navigation Background
 	-- We use a dedicated texture on the navigation cell to provide visual depth.
 	-- FenUI:GetColor resolves the "surfaceInset" semantic token to its primitive RGBA values.
-	-- We then override the alpha (0.4) to create a semi-transparent "sunken" sidebar look
+	-- Alpha at 0.6 provides a clear visual distinction for the sidebar
 	-- that matches modern Blizzard UI (e.g., Settings Panel) without needing an explicit border.
 	self.navBackground = navCell:CreateTexture(nil, "BACKGROUND")
 	self.navBackground:SetAllPoints()
-	local r, g, b, a = FenUI:GetColor("surfaceInset")
-	self.navBackground:SetColorTexture(r, g, b, 0.1)
+	self.navBackground:SetColorTexture(FenUI:GetColor("surfaceInset"))
 
 	-- Navigation Border (Right edge separator)
 	self.navSeparator = navCell:CreateTexture(nil, "BORDER")
 	self.navSeparator:SetPoint("TOPRIGHT")
 	self.navSeparator:SetPoint("BOTTOMRIGHT")
-	self.navSeparator:SetWidth(1)
+	self.navSeparator:SetWidth(FenUI:GetPixelSize(self))
 	self.navSeparator:SetColorTexture(FenUI:GetColorRGB("borderSubtle"))
 
 	-- Navigation Scroll Frame
@@ -52,7 +51,7 @@ function SplitLayoutMixin:InitSplit(config)
 
 	-- Sync navContent width
 	self.navScroll:SetScript("OnSizeChanged", function(frame, width)
-		self.navContent:SetWidth(width)
+		self.navContent:SetWidth(width, true)
 		self:RefreshNav()
 	end)
 
@@ -159,20 +158,29 @@ function SplitLayoutMixin:GetOrCreateButton(index)
 	local btn = CreateFrame("Button", nil, self.navContent)
 	btn:SetHeight(24)
 
-	-- Background highlight (selected)
+	-- Selected state: gold wash + 2px gold leading edge (matches FenUI list rows)
 	local highlight = btn:CreateTexture(nil, "BACKGROUND")
 	highlight:SetAllPoints()
-	highlight:SetColorTexture(1, 1, 1, 0.1)
+	highlight:SetColorTexture(FenUI:GetColor("surfaceRowSelected"))
 	highlight:Hide()
 	btn.highlight = highlight
 
-	-- Hover highlight
+	local accent = btn:CreateTexture(nil, "ARTWORK")
+	accent:SetPoint("TOPLEFT")
+	accent:SetPoint("BOTTOMLEFT")
+	accent:SetWidth(FenUI:GetPixelSize(btn, 2))
+	accent:SetColorTexture(FenUI:GetColor("accentBar"))
+	accent:Hide()
+	btn.accent = accent
+
+	-- Hover wash (translucent, reads over the selection too)
 	local hover = btn:CreateTexture(nil, "HIGHLIGHT")
 	hover:SetAllPoints()
-	hover:SetColorTexture(1, 1, 1, 0.05)
+	hover:SetColorTexture(FenUI:GetColor("surfaceRowHover"))
 
 	-- Text
-	local text = btn:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+	local text = btn:CreateFontString(nil, "OVERLAY", FenUI:GetFont("fontBody"))
+	text:SetWordWrap(false)
 	text:SetPoint("LEFT", 8, 0)
 	text:SetPoint("RIGHT", -8, 0)
 	text:SetJustifyH("LEFT")
@@ -211,13 +219,10 @@ end
 function SplitLayoutMixin:UpdateButtonStates()
 	for _, btn in ipairs(self.buttons) do
 		if btn:IsShown() then
-			if btn.key == self.selectedKey then
-				btn.highlight:Show()
-				btn.text:SetTextColor(1, 1, 1)
-			else
-				btn.highlight:Hide()
-				btn.text:SetTextColor(1, 0.82, 0)
-			end
+			local selected = btn.key == self.selectedKey
+			btn.highlight:SetShown(selected)
+			btn.accent:SetShown(selected)
+			btn.text:SetTextColor(FenUI:GetColorRGB(selected and "textStrong" or "textDefault"))
 		end
 	end
 end
@@ -247,6 +252,11 @@ function SplitLayoutMixin:Select(key, force)
 end
 
 function SplitLayoutMixin:GetContentFrame(key)
+	-- Layout internals (SetContent, auto-sizing) call this without a key;
+	-- a nil table index would error, so hand back the content area itself.
+	if key == nil then
+		return self.contentArea
+	end
 	if not self.contentFrames[key] then
 		local frame = CreateFrame("Frame", nil, self.contentArea)
 		frame:SetAllPoints()
@@ -276,6 +286,14 @@ function FenUI:CreateSplitLayout(parent, config)
 	-- SplitLayout is a 2-column Layout
 	local layout = self:CreateLayout(parent, {
 		name = config.name,
+		width = config.width,
+		height = config.height,
+		minWidth = config.minWidth,
+		maxWidth = config.maxWidth,
+		minHeight = config.minHeight,
+		maxHeight = config.maxHeight,
+		aspectRatio = config.aspectRatio,
+		aspectBase = config.aspectBase,
 		cols = { config.navWidth or 200, "fr" },
 		gap = config.gap or 4,
 		padding = config.padding or 0,

@@ -1,22 +1,12 @@
 --------------------------------------------------------------------------------
 -- FenUI.Utils.Formatting
--- Memory, duration, and complex value formatting.
+-- FenUI-specific formatting utilities (standalone, no external dependencies).
 --------------------------------------------------------------------------------
 
 local Utils = FenUI.Utils
 
---- Formats memory usage in KB or MB.
----@param kb number Memory in KB
----@return string formatted
-function Utils:FormatMemory(kb)
-	if kb >= 1024 then
-		return string.format("%.1f MB", kb / 1024)
-	else
-		return string.format("%.0f KB", kb)
-	end
-end
-
 --- Formats a duration in seconds to "Xm Ys" or more robust formats.
+--- Uses WoW's SecondsFormatter when available.
 ---@param seconds number
 ---@param useRoyal boolean? If true, tries to use Midnight SecondsFormatter
 ---@return string formatted
@@ -25,7 +15,7 @@ function Utils:FormatDuration(seconds, useRoyal)
 		return ""
 	end
 
-	if useRoyal and self.Cap.HasSecondsFormatter then
+	if useRoyal and self.Cap and self.Cap.HasSecondsFormatter then
 		if not self.formatter then
 			self.formatter = _G.CreateSecondsFormatter()
 			if self.formatter then
@@ -37,6 +27,7 @@ function Utils:FormatDuration(seconds, useRoyal)
 		end
 	end
 
+	-- Standard formatting
 	if seconds >= 3600 then
 		return string.format("%dh %dm", math.floor(seconds / 3600), math.floor((seconds % 3600) / 60))
 	elseif seconds >= 60 then
@@ -63,35 +54,8 @@ function Utils:SanitizeText(text, fallback)
 	return tostring(text)
 end
 
---- Strips Blizzard color codes (|c...|r) from a string.
----@param text string
----@return string plainText
-function Utils:StripColors(text)
-	if type(text) ~= "string" then
-		return text
-	end
-	return text:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", "")
-end
-
---- Alias for StripColors
----@param text string
----@return string plainText
-function Utils:StripColorCodes(text)
-	return self:StripColors(text)
-end
-
---- Truncates a string to a max length with ellipsis.
----@param text string
----@param maxLength number
----@return string truncated
-function Utils:TruncateText(text, maxLength)
-	if type(text) ~= "string" or #text <= maxLength then
-		return text
-	end
-	return text:sub(1, maxLength) .. "..."
-end
-
---- Formats a value for display, handling secrets and tables.
+--- Formats a value for display, handling tables with color codes.
+--- Secret detection uses WoW's issecretvalue API when available.
 ---@param value any The value to format
 ---@param options table? {fields: string[], plain: boolean, maxDepth: number, maxItems: number}
 ---@return string formatted
@@ -100,13 +64,22 @@ function Utils:FormatValue(value, options)
 	local maxDepth = options.maxDepth or 3
 	local maxItems = options.maxItems or 20
 
+	-- Use WoW's issecretvalue API if available (Midnight+)
+	local function isSecret(val)
+		if _G.issecretvalue then
+			local ok, secret = pcall(_G.issecretvalue, val)
+			return ok and (secret == true)
+		end
+		return false
+	end
+
 	local function serialize(val, depth)
 		if val == nil then
 			return "nil"
 		end
 
-		local isSecret = self:IsValueSecret(val)
-		local secretTag = isSecret and (options.plain and " (SECRET)" or " |cffaa00ff(SECRET)|r") or ""
+		local valIsSecret = isSecret(val)
+		local secretTag = valIsSecret and (options.plain and " (SECRET)" or " |cffaa00ff(SECRET)|r") or ""
 
 		if type(val) == "table" then
 			if next(val) == nil then
@@ -130,7 +103,7 @@ function Utils:FormatValue(value, options)
 					break
 				end
 
-				local fieldSecret = self:IsValueSecret(v)
+				local fieldSecret = isSecret(v)
 				local fieldSecretTag = fieldSecret and (options.plain and " (SECRET)" or " |cffaa00ff(SECRET)|r") or ""
 				table.insert(parts, string.format("  .%s = %s%s", tostring(k), serialize(v, depth + 1), fieldSecretTag))
 			end

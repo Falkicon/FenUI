@@ -6,20 +6,19 @@ Technical reference for AI agents modifying this UI library.
 
 ### Development Documentation
 
-- **[ADDON_DEV/AGENTS.md](../../AGENTS.md)** – Build versions, standard patterns, index
-- **[Library Reference](../../AGENTS_reference/libraries.md)** – Library index, automation scripts, dependency chains
-- **[Blizzard UI Reference](../../AGENTS_reference/blizzard-ui.md)** – Source paths and usage guides
-- **[Addon Development Guide](../../Addon_Dev_Guide/)** – Full documentation covering:
+For addon development guidance, refer to the Mechanic hub documentation:
+
+- **Addon Development Guide** (`Mechanic/docs/addon-dev-guide/`) – Full documentation covering:
   - Core principles, project structure, TOC best practices
   - UI engineering, configuration UI, combat lockdown
   - Performance optimization, API resilience
   - Debugging, packaging/release workflow
   - Midnight (12.0) compatibility and secret values
+- **Library Reference** (`Mechanic/docs/integration/libraries.md`) – Library management via `mech libs.sync`
 
 ### Blizzard UI Source Code
 
-- **[wow-ui-source-live](../../_retail_/Interface/wow-ui-source-live/wow-ui-source-live/)** – Official Blizzard UI addon code (Live)
-- **[wow-ui-source-beta](../../_beta_/Interface/wow-ui-source-beta/wow-ui-source-beta/)** – Official Blizzard UI addon code (Beta)
+- **wow-ui-source** – Official Blizzard UI addon code
   - Essential for understanding `NineSliceUtil`, `NineSliceLayouts`, and Atlas textures
   - Reference for native frame templates and widget implementations
   - Use when building new widgets or debugging layout issues
@@ -42,18 +41,18 @@ A Blizzard-first UI widget library for World of Warcraft addon development.
 - **Graceful degradation** – addons work without FenUI installed
 
 ## Constraints
----
 
 ## Source of Truth
 
-This directory is the **primary source of truth** for FenUI.
+This directory (`_dev_/Libs/FenUI/`) is the **primary source of truth** for FenUI.
 
 - **Development**: All new features, bug fixes, and widget enhancements must be made here.
-- **Distribution**: Changes are propagated to consuming addons (!Mechanic, Weekly, etc.) via the lib_sync.ps1 toolchain.
+- **Distribution**: Changes are propagated to consuming addons (!Mechanic, Weekly, etc.) via `mech libs.sync`.
 - **Enforcement**: Consuming addons have Libs/ ignored by agents to prevent accidental direct edits.
+- **Independence**: FenUI is standalone with no external dependencies (does not require FenCore).
 
-- Must work on Retail 11.0+
-- **Interface Version**: Currently targeting **120001** (Midnight expansion, due January 20th, 2026)
+- Must work on Retail 12.0+
+- **Interface Version**: Currently targeting **120001** (Midnight expansion, released January 20th, 2026)
 - No external dependencies (standalone library)
 - Addons consuming FenUI must remain functional if FenUI is missing
 
@@ -354,8 +353,8 @@ FenUI is used by:
 
 | Addon | Usage |
 |-------|-------|
+| **!Mechanic** | Development hub UI |
 | **Weekly** | Journal window, tabs, grid, empty states |
-| **Strategy** | *(Planned)* Strategy panel UI |
 
 When modifying FenUI, test these addons to ensure compatibility.
 
@@ -363,8 +362,8 @@ When modifying FenUI, test these addons to ensure compatibility.
 
 1. **Token Everything** – Never hardcode colors or pixel values
 2. **Provide Fallbacks** – Consuming addons must work without FenUI
-3. **Test Integration** – Load Weekly after any widget changes
-4. **Sync ADDON_DEV** – Copy changes to `Libs/FenUI/`
+3. **Test Integration** – Load Weekly or !Mechanic after any widget changes
+4. **Sync Libraries** – Use `mech libs.sync` to deploy changes to consuming addons
 5. **Follow Patterns** – Use existing widget patterns (Mixin + Factory + Builder)
 
 ## Documentation Requirements
@@ -405,11 +404,12 @@ Update when:
 
 ### Midnight (12.0) Compatibility
 
-Secret values may affect:
-- Font string sizing calculations
-- Dynamic layout measurements
+FenUI handles secret values internally:
+- `Utils/Formatting.lua` uses WoW's `issecretvalue()` API directly
+- Secret values are detected and formatted as `(SECRET)` in debug output
+- Font string sizing and layout measurements account for secret values
 
-Mitigation: Use `issecretvalue()` checks where numeric comparisons are critical.
+No additional configuration required - FenUI is Midnight-ready out of the box.
 
 ### Planned Components
 
@@ -438,17 +438,29 @@ table.insert(self.rowPool, row)  -- return to pool
 
 ## Library Management
 
-FenUI is developed in `ADDON_DEV/Libs/FenUI/` and deployed to consuming addons via `lib_sync.ps1`.
+FenUI is developed in `_dev_/Libs/FenUI/` and deployed to consuming addons via the Mechanic CLI.
 
-**Source of Truth:** `Libs/FenUI/`
+**Source of Truth:** `_dev_/Libs/FenUI/`
+
+**Independence:** FenUI is a standalone library with no external dependencies:
+- Does NOT require FenCore
+- Can be used independently or alongside FenCore
+- Addons choose which libraries to include via `libs.json`
 
 **Deployment:** FenUI is embedded in consuming addons (not a standalone addon):
+- `!Mechanic/Libs/FenUI/`
 - `Weekly/Libs/FenUI/`
-- `Strategy/Libs/FenUI/`
 
 **To deploy changes:**
-```powershell
-powershell -File "c:\Program Files (x86)\World of Warcraft\_dev_\ADDON_DEV\Tools\LibrarySync\lib_sync.ps1"
+```bash
+mech libs.sync
+```
+
+**Addon Configuration:** Addons specify libraries in `libs.json`:
+```json
+{
+  "FenUI": "latest"
+}
 ```
 
 **Load Order:** Consuming addons include FenUI via `embeds.xml`:

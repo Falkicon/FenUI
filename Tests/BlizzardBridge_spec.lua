@@ -41,18 +41,34 @@ describe("FenUI BlizzardBridge", function()
             local success = FenUI:ApplyBorder(frame, "ModernDark")
             assert.is_true(success)
             assert.is_true(frame.borderApplied)
-            assert.is_not_nil(frame.customBorder.TopLeftCorner)
-            assert.is_true(frame.customBorder.TopLeftCorner:IsShown())
+            -- New 4-edge border system uses Top, Bottom, Left, Right
+            assert.is_not_nil(frame.customBorder.Top)
+            assert.is_true(frame.customBorder.Top:IsShown())
 
             FenUI:HideCustomBorder(frame)
             assert.is_false(frame.borderApplied)
-            assert.is_false(frame.customBorder.TopLeftCorner:IsShown())
+            assert.is_false(frame.customBorder.Top:IsShown())
         end)
 
         it("should handle missing border packs", function()
             local frame = CreateFrame("Frame")
             local success = FenUI:ApplyBorder(frame, "NonExistentPack")
             assert.is_false(success)
+        end)
+
+        it("should update border color", function()
+            local frame = CreateFrame("Frame")
+            FenUI:ApplyBorder(frame, "ModernDark")
+            FenUI:SetBorderColor(frame, "interactiveHover")
+            -- Just ensure it doesn't error; color values are internal
+            assert.is_true(frame.borderApplied)
+        end)
+
+        it("should handle None border pack", function()
+            local frame = CreateFrame("Frame")
+            local success = FenUI:ApplyBorder(frame, "None")
+            assert.is_true(success)
+            assert.is_true(frame.borderApplied)
         end)
     end)
 

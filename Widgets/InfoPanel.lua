@@ -23,7 +23,6 @@ function InfoPanelMixin:InitInfoPanel(config)
 	local content = self:GetContentFrame()
 
 	-- Create scroll panel for content
-	local scrollBarWidth = FenUI:GetLayout("scrollBarWidth") or 20
 	local scrollPanel = FenUI:CreateScrollPanel(content, {
 		padding = 0,
 		showScrollBar = true,
@@ -52,11 +51,9 @@ function InfoPanelMixin:InitInfoPanel(config)
 				self:Hide()
 			end,
 		})
-		closeBtn:SetPoint("BOTTOM", 0, 8)
+		closeBtn:SetPoint("BOTTOM", 0, FenUI:GetSpacing("spacingElement"))
 		self.closeBtn = closeBtn
-
-		-- Adjust scroll frame to leave room for the button if it's shown
-		self.scrollFrame:SetPoint("BOTTOMRIGHT", -scrollBarWidth, 40)
+		-- (Room for the button is already reserved by raising scrollPanel above)
 	end
 
 	-- Initialize sections if provided
@@ -91,17 +88,23 @@ end
 
 function InfoPanelMixin:LayoutSections()
 	local yOffset = 0
-	local sectionGap = FenUI:GetSpacing("md") -- 16px between sections
+	local sectionGap = 20 -- Fixed 20px gap between sections for better readability
 
+	-- First pass: set widths and update heights
+	local scrollChildWidth = self.scrollChild:GetWidth()
+	for i, section in ipairs(self.sectionFrames) do
+		-- Set explicit width first so text wrapping calculates correctly
+		section:SetWidth(scrollChildWidth)
+		section:UpdateHeight()
+	end
+
+	-- Second pass: position sections with proper heights
 	for i, section in ipairs(self.sectionFrames) do
 		section:ClearAllPoints()
 		section:SetPoint("TOPLEFT", self.scrollChild, "TOPLEFT", 0, -yOffset)
-		section:SetPoint("TOPRIGHT", self.scrollChild, "TOPRIGHT", 0, -yOffset)
 
-		-- Trigger height recalculation
-		section:UpdateHeight()
+		-- Get the calculated height from the section's content
 		local sectionHeight = section:GetHeight()
-
 		yOffset = yOffset + sectionHeight + sectionGap
 	end
 
@@ -160,6 +163,13 @@ function FenUI:CreateInfoPanel(parent, config)
 	-- Apply InfoPanel mixin
 	FenUI.Mixin(panel, InfoPanelMixin)
 	panel:InitInfoPanel(config)
+
+	-- Re-layout sections when panel is shown to ensure proper text wrapping
+	panel:HookScript("OnShow", function(self)
+		C_Timer.After(0, function()
+			self:LayoutSections()
+		end)
+	end)
 
 	-- Hide by default (caller shows when ready)
 	panel:Hide()

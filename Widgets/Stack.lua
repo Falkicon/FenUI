@@ -1,8 +1,8 @@
 --------------------------------------------------------------------------------
 -- FenUI v2 - Stack/Flex Layout Widget
 --
--- A Flexbox-inspired layout system that provides declarative horizontal
--- and vertical stacking with alignment, justification, gap control,
+-- A Flexbox-inspired layout system that provides declarative horizontal 
+-- and vertical stacking with alignment, justification, gap control, 
 -- and optional wrapping.
 --------------------------------------------------------------------------------
 
@@ -45,15 +45,18 @@ function StackMixin:Init(config)
 	self.wrap = config.wrap or false
 	self.rowGap = config.rowGap or self.gap
 
-	-- Initialize Layout layers (inherited via factory)
-	if self.InitLayout then
-		self:InitLayout(config)
-	end
+	-- Layout layers (background, border, shadow) were already initialized by
+	-- CreateLayout in the factory. Initializing them again would stack a second
+	-- background frame and double the inner shadow's opacity.
 
 	-- Hook for layout updates
 	-- We use a wrapper to ensure we don't break Layout's own OnSizeChanged
 	-- which is responsible for updating background anchors.
 	self:HookScript("OnSizeChanged", function()
+		if self.isLayouting then
+			self.layoutPending = true
+			return
+		end
 		self:Layout()
 	end)
 
@@ -77,6 +80,11 @@ function StackMixin:AddChild(frame, config)
 		return
 	end
 
+	-- Ensure parent is set directly to self (the stack container)
+	-- This avoids coordinate system confusion with Layout's internal contentFrame.
+	-- We do this BEFORE measuring to stabilize the coordinate system.
+	frame:SetParent(self)
+
 	local childData = {
 		frame = frame,
 		config = config or {},
@@ -84,31 +92,31 @@ function StackMixin:AddChild(frame, config)
 		baseHeight = frame:GetHeight(),
 	}
 
-	table.insert(self.children, childData)
+	-- Sanity check for base sizes (discard garbage values > 10,000)
+	if childData.baseWidth > 10000 then childData.baseWidth = 0 end
+	if childData.baseHeight > 10000 then childData.baseHeight = 0 end
 
-	-- Ensure parent is set directly to self (the stack container)
-	-- This avoids coordinate system confusion with Layout's internal contentFrame.
-	frame:SetParent(self)
+	table.insert(self.children, childData)
 
 	-- Auto-show children when added to a stack
 	frame:Show()
 
-	-- Hook child size and visibility changes
-	if not frame.stackHooked then
-		frame:HookScript("OnSizeChanged", function()
-			if self.Layout then
-				self:Layout()
-			end
+	-- Hook child size and visibility changes (only for Frames, FontStrings don't support these)
+	if not frame.stackHooked and frame.HookScript then
+		pcall(function()
+			frame:HookScript("OnSizeChanged", function()
+				if self.Layout then self:Layout() end
+			end)
 		end)
-		frame:HookScript("OnShow", function()
-			if self.Layout then
-				self:Layout()
-			end
+		pcall(function()
+			frame:HookScript("OnShow", function()
+				if self.Layout then self:Layout() end
+			end)
 		end)
-		frame:HookScript("OnHide", function()
-			if self.Layout then
-				self:Layout()
-			end
+		pcall(function()
+			frame:HookScript("OnHide", function()
+				if self.Layout then self:Layout() end
+			end)
 		end)
 		frame.stackHooked = true
 	end
@@ -146,55 +154,57 @@ function StackMixin:Layout()
 	local rowGap = self:ResolveGap(self.rowGap)
 	local padding = self.GetPadding and self:GetPadding() or { top = 0, bottom = 0, left = 0, right = 0 }
 
-	-- Use config values as primary source of truth for size
-	local initialWidth = tonumber(self.config.width)
-		or (self.dynamicSize and tonumber(self.dynamicSize.width))
-		or self:GetWidth()
-	local initialHeight = tonumber(self.config.height)
-		or (self.dynamicSize and tonumber(self.dynamicSize.height))
-		or self:GetHeight()
+	-- Resolve source-of-truth dimensions
+	local isAutoWidth = self.config.width == "auto"
+	local isAutoHeight = self.config.height == "auto"
 
-	local totalWidth = initialWidth - (padding.left + padding.right)
-	local totalHeight = initialHeight - (padding.top + padding.bottom)
+	local initialWidth = tonumber(self.config.width) or (self.dynamicSize and tonumber(self.dynamicSize.width)) or self:GetWidth()
+	local initialHeight = tonumber(self.config.height) or (self.dynamicSize and tonumber(self.dynamicSize.height)) or self:GetHeight()
+
+	-- Sanity check for container dimensions
+	if initialWidth > 10000 then initialWidth = 0 end
+	if initialHeight > 10000 then initialHeight = 0 end
 
 	-- Measure Phase: Collect visible children and their sizes
 	local childrenToLayout = {}
 	local maxCrossSize = 0
-	local totalMainSize = 0
+	local totalIntrinsicSize = 0
 	local totalGrow = 0
 	local needsDeferredLayout = false
 
 	for _, childData in ipairs(self.children) do
 		local frame = childData.frame
 		if frame:IsShown() then
-			local w, h = childData.baseWidth, childData.baseHeight
+			-- Robust dimension resolution
+			local w = tonumber(childData.config.width) or (frame.dynamicSize and tonumber(frame.dynamicSize.width)) or 0
+			local h = tonumber(childData.config.height) or (frame.dynamicSize and tonumber(frame.dynamicSize.height)) or 0
 
-			-- If base size is 0, try to get current size as fallback
-			if w <= 0 or h <= 0 then
-				local fw, fh = frame:GetSize()
-				if w <= 0 then w = fw end
-				if h <= 0 then h = fh end
+			if w <= 0 and childData.baseWidth and childData.baseWidth > 0 and childData.baseWidth <= 10000 then
+				w = childData.baseWidth
+			end
+			if h <= 0 and childData.baseHeight and childData.baseHeight > 0 and childData.baseHeight <= 10000 then
+				h = childData.baseHeight
 			end
 
-			-- If still 0 size, try fallbacks
-			if w <= 0 then
-				if frame.config and frame.config.width and tonumber(frame.config.width) then
-					w = tonumber(frame.config.width)
-				elseif frame.dynamicSize and frame.dynamicSize.width and tonumber(frame.dynamicSize.width) then
-					w = tonumber(frame.dynamicSize.width)
-				elseif frame:IsObjectType("Button") then
-					w = 100
-				end
+			if w <= 0 or w > 10000 then
+				local fw = frame:GetWidth()
+				w = (fw > 0 and fw <= 10000) and fw or 0
+			end
+			if h <= 0 or h > 10000 then
+				local fh = frame:GetHeight()
+				h = (fh > 0 and fh <= 10000) and fh or 0
 			end
 
-			if h <= 0 then
-				if frame.config and frame.config.height and tonumber(frame.config.height) then
-					h = tonumber(frame.config.height)
-				elseif frame.dynamicSize and frame.dynamicSize.height and tonumber(frame.dynamicSize.height) then
-					h = tonumber(frame.dynamicSize.height)
-				elseif frame:IsObjectType("Button") then
-					h = 24
-				end
+			-- Fallbacks for objects that might report 0 size before rendering
+			if w <= 0 and frame:IsObjectType("Button") then w = 100 end
+			if h <= 0 and frame:IsObjectType("Button") then h = 24 end
+			if h <= 0 and frame:IsObjectType("FontString") then
+				h = frame:GetStringHeight()
+				if h <= 0 then h = 14 end -- Default font height fallback
+			end
+			if w <= 0 and frame:IsObjectType("FontString") then
+				w = frame:GetStringWidth()
+				if w <= 0 then w = 100 end
 			end
 
 			local grow = childData.config.grow or 0
@@ -215,22 +225,12 @@ function StackMixin:Layout()
 
 			if isVertical then
 				maxCrossSize = math.max(maxCrossSize, w)
-				totalMainSize = totalMainSize + h
+				totalIntrinsicSize = totalIntrinsicSize + h
 			else
 				maxCrossSize = math.max(maxCrossSize, h)
-				totalMainSize = totalMainSize + w
+				totalIntrinsicSize = totalIntrinsicSize + w
 			end
 		end
-	end
-
-	if needsDeferredLayout and not self.hasDeferredOnce then
-		self.hasDeferredOnce = true
-		C_Timer.After(0, function()
-			self.isLayouting = nil
-			self:Layout()
-		end)
-		self.isLayouting = nil
-		return
 	end
 
 	local numChildren = #childrenToLayout
@@ -239,31 +239,40 @@ function StackMixin:Layout()
 		return
 	end
 
-	totalMainSize = totalMainSize + (gap * (numChildren - 1))
+	-- Calculate base size requirements (children + gaps)
+	local totalMainSize = totalIntrinsicSize + (gap * (numChildren - 1))
 
-	-- Auto-sizing support
-	local isAutoWidth = self.config.width == "auto" or (not self.config.width and initialWidth <= 0)
-	local isAutoHeight = self.config.height == "auto" or (not self.config.height and initialHeight <= 0)
-
+	-- Auto-sizing: Resize container to fit content BEFORE layout pass
 	if isVertical then
 		if isAutoHeight then
-			totalHeight = totalMainSize
-			self:SetHeight(totalHeight + padding.top + padding.bottom)
+			initialHeight = totalMainSize + padding.top + padding.bottom
+			if math.abs(self:GetHeight() - initialHeight) > 0.1 then
+				self:SetHeight(math.max(1, initialHeight), true)
+			end
 		end
 		if isAutoWidth then
-			totalWidth = maxCrossSize
-			self:SetWidth(totalWidth + padding.left + padding.right)
+			initialWidth = maxCrossSize + padding.left + padding.right
+			if math.abs(self:GetWidth() - initialWidth) > 0.1 then
+				self:SetWidth(math.max(1, initialWidth), true)
+			end
 		end
 	else
 		if isAutoWidth then
-			totalWidth = totalMainSize
-			self:SetWidth(totalWidth + padding.left + padding.right)
+			initialWidth = totalMainSize + padding.left + padding.right
+			if math.abs(self:GetWidth() - initialWidth) > 0.1 then
+				self:SetWidth(math.max(1, initialWidth), true)
+			end
 		end
 		if isAutoHeight then
-			totalHeight = maxCrossSize
-			self:SetHeight(totalHeight + padding.top + padding.bottom)
+			initialHeight = maxCrossSize + padding.top + padding.bottom
+			if math.abs(self:GetHeight() - initialHeight) > 0.1 then
+				self:SetHeight(math.max(1, initialHeight), true)
+			end
 		end
 	end
+
+	local totalWidth = initialWidth - (padding.left + padding.right)
+	local totalHeight = initialHeight - (padding.top + padding.bottom)
 
 	if totalWidth <= 0 or totalHeight <= 0 then
 		self.isLayouting = nil
@@ -275,14 +284,36 @@ function StackMixin:Layout()
 	self.debug_totalHeight = totalHeight
 	self.debug_numChildren = numChildren
 	self.debug_totalGrow = totalGrow
+	self.debug_totalIntrinsicSize = totalIntrinsicSize
 
 	if self.wrap then
 		self:LayoutWrapped(childrenToLayout, totalWidth, totalHeight, padding, gap, rowGap, isVertical)
 	else
-		self:LayoutStandard(childrenToLayout, totalWidth, totalHeight, padding, gap, isVertical, totalGrow, totalMainSize)
+		self:LayoutStandard(childrenToLayout, totalWidth, totalHeight, padding, gap, isVertical, totalGrow, totalIntrinsicSize)
 	end
 
 	self.isLayouting = nil
+
+	-- Handle deferred layout if some children had 0 size
+	if needsDeferredLayout and not self.deferredPending then
+		self.deferredPending = true
+		C_Timer.After(0, function()
+			self.deferredPending = nil
+			self:Layout()
+		end)
+	end
+
+	if self.layoutPending then
+		self.layoutPending = nil
+		self.layoutDepth = (self.layoutDepth or 0) + 1
+		if self.layoutDepth < 5 then
+			self:Layout()
+		else
+			self.layoutDepth = 0
+		end
+	else
+		self.layoutDepth = 0
+	end
 end
 
 function StackMixin:LayoutStandard(
@@ -293,11 +324,12 @@ function StackMixin:LayoutStandard(
 	gap,
 	isVertical,
 	totalGrow,
-	totalFixedSize
+	totalIntrinsicSize
 )
 	local numChildren = #childrenToLayout
 	local availableSize = (isVertical and totalHeight or totalWidth)
-	local remainingSize = availableSize - totalFixedSize
+	-- totalIntrinsicSize already includes the sum of all children's main-axis sizes
+	local remainingSize = availableSize - totalIntrinsicSize - (gap * (numChildren - 1))
 	local flexUnit = totalGrow > 0 and math.max(0, remainingSize / totalGrow) or 0
 
 	-- Justification Setup
@@ -318,7 +350,7 @@ function StackMixin:LayoutStandard(
 	end
 
 	local currentOffset = startOffset
-	for _, layoutData in ipairs(childrenToLayout) do
+	for i, layoutData in ipairs(childrenToLayout) do
 		local frame = layoutData.frame
 		local childConfig = layoutData.config
 		local align = childConfig.align or self.align
@@ -337,8 +369,10 @@ function StackMixin:LayoutStandard(
 
 		frame:ClearAllPoints()
 
-		-- Ensure child is above container background
-		frame:SetFrameLevel(self:GetFrameLevel() + 2)
+		-- Ensure child is above container background (only for frames)
+		if frame.SetFrameLevel then
+			frame:SetFrameLevel(self:GetFrameLevel() + 2)
+		end
 
 		if isVertical then
 			if align == "start" then
@@ -352,11 +386,11 @@ function StackMixin:LayoutStandard(
 				childWidth = totalWidth
 			end
 
-			frame:SetWidth(math.max(1, childWidth))
-			frame:SetHeight(math.max(1, childHeight))
+			frame:SetWidth(math.max(1, childWidth), true)
+			frame:SetHeight(math.max(1, childHeight), true)
 
 			-- Debug info
-			self["debug_child" .. _ .. "_pos"] = string.format("%.1f, %.1f (%.1f x %.1f)", padding.left, -(padding.top + currentOffset), childWidth, childHeight)
+			self["debug_child" .. i .. "_pos"] = string.format("%.1f, %.1f (%.1f x %.1f)", padding.left, -(padding.top + currentOffset), childWidth, childHeight)
 
 			currentOffset = currentOffset + childHeight + justifiedGap
 		else
@@ -371,11 +405,11 @@ function StackMixin:LayoutStandard(
 				childHeight = totalHeight
 			end
 
-			frame:SetWidth(math.max(1, childWidth))
-			frame:SetHeight(math.max(1, childHeight))
+			frame:SetWidth(math.max(1, childWidth), true)
+			frame:SetHeight(math.max(1, childHeight), true)
 
 			-- Debug info
-			self["debug_child" .. _ .. "_pos"] = string.format("%.1f, %.1f (%.1f x %.1f)", padding.left + currentOffset, -padding.top, childWidth, childHeight)
+			self["debug_child" .. i .. "_pos"] = string.format("%.1f, %.1f (%.1f x %.1f)", padding.left + currentOffset, -padding.top, childWidth, childHeight)
 
 			currentOffset = currentOffset + childWidth + justifiedGap
 		end
@@ -442,6 +476,11 @@ function StackMixin:LayoutWrapped(childrenToLayout, totalWidth, totalHeight, pad
 
 			frame:ClearAllPoints()
 
+			-- Ensure child is above container background (only for frames)
+			if frame.SetFrameLevel then
+				frame:SetFrameLevel(self:GetFrameLevel() + 2)
+			end
+
 			if isVertical then
 				-- Vertical Wrap: Columns
 				if align == "start" then
@@ -467,8 +506,8 @@ function StackMixin:LayoutWrapped(childrenToLayout, totalWidth, totalHeight, pad
 					childWidth = line.maxSize
 				end
 
-				frame:SetWidth(math.max(1, childWidth))
-				frame:SetHeight(math.max(1, childHeight))
+				frame:SetWidth(math.max(1, childWidth), true)
+				frame:SetHeight(math.max(1, childHeight), true)
 				mainOffset = mainOffset + childHeight + justifiedGap
 			else
 				-- Horizontal Wrap: Rows
@@ -495,8 +534,8 @@ function StackMixin:LayoutWrapped(childrenToLayout, totalWidth, totalHeight, pad
 					childHeight = line.maxSize
 				end
 
-				frame:SetWidth(math.max(1, childWidth))
-				frame:SetHeight(math.max(1, childHeight))
+				frame:SetWidth(math.max(1, childWidth), true)
+				frame:SetHeight(math.max(1, childHeight), true)
 				mainOffset = mainOffset + childWidth + justifiedGap
 			end
 		end
@@ -534,11 +573,8 @@ function FenUI:CreateStack(parent, config)
 	-- Inherit from Layout for border/background support
 	local stack = self:CreateLayout(parent, config)
 
-	-- Mix in Stack properties
-	stack.InitLayout = stack.Init -- Save Layout:Init
+	-- Mix in Stack properties and initialize the stack behavior
 	FenUI.Mixin(stack, StackMixin)
-
-	-- Re-initialize as Stack
 	stack:Init(config)
 
 	return stack
